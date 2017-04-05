@@ -12,6 +12,21 @@ CREATE TABLE Usuari(
     PRIMARY KEY (login, mail)
 );
 
+CREATE TABLE Partida(
+	id_partida BIGINT UNSIGNED auto_increment,
+	data_partida DATE,
+    PRIMARY KEY (id_partida)
+);
+
+CREATE TABLE Usuari_partida(
+	id_jugador VARCHAR(255),
+    id_partida BIGINT UNSIGNED,
+    puntuacio INT,
+    FOREIGN KEY (id_jugador) REFERENCES Usuari(login)
+    FOREIGN KEY (id_partida) REFERENCES Partida(id_partida),
+);
+
+
 
     
     
