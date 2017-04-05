@@ -1,9 +1,9 @@
-package Controlador;
+package Model;
 
 /**
- * Created by sullivan on 30/03/2017.
+ * Created by Marc on 05/04/2017.
  */
-public class Usuari {
+public class Model_usuari {
     private String login;
     private String mail;
     private String password;
