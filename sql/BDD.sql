@@ -8,8 +8,8 @@ CREATE TABLE Usuari(
     contrasenya VARCHAR(511),
     punts INT,
     data_registre DATE,
-    data_ultimacces DATE,
-    PRIMARY KEY (login, mail)
+    data_ultimacces DATE
+    --PRIMARY KEY (login, mail)
 );
 
 
