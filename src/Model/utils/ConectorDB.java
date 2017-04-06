@@ -40,7 +40,8 @@ public class ConectorDB {
         }
 
     }
-    
+
+    //metdoe per inseri dades
     public void insertQuery(String query){
         try {
             s =(Statement) conn.createStatement();
@@ -50,7 +51,8 @@ public class ConectorDB {
             System.out.println("Problema al Inserir --> " + ex.getSQLState());
         }
     }
-    
+
+    //metode per actualitzar dades
     public void updateQuery(String query){
     	 try {
              s =(Statement) conn.createStatement();
@@ -60,7 +62,8 @@ public class ConectorDB {
              System.out.println("Problema al Modificar --> " + ex.getSQLState());
          }
     }
-    
+
+    // metode per eleiminar tuples
     public void deleteQuery(String query){
     	 try {
              s =(Statement) conn.createStatement();
