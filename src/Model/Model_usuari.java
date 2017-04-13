@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.ResultSet;
+import Model.utils.ConectorDB;
 
 /**
  * Created by Marc on 05/04/2017.
@@ -81,18 +82,39 @@ public class Model_usuari {
 
     //Aquest metode comprova que les dades omplertes per l'usuari no existeixin a la base de dades
     public boolean comprovaDadesInsercio(String nomUsuari, String correu, String contrasenya){
+        return true;
 
     }
 
-    public boolean regitraUsuari(){
+    public void regitraUsuari(){
+
+        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+        conn.connect();
+
+        conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + this.login + this.mail + this.password +")");
+        conn.disconnect();
 
     }
 
     public ResultSet recuperaUsuaris(){
 
+        ResultSet resultats;
+
+        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+        conn.connect();
+
+        resultats = conn.selectQuery("SELECT id_jugador, login, mail FROM usuari");
+        conn.disconnect();
+
+        return  resultats;
     }
 
-    public boolean eliminaUsuari(){
+    public void eliminaUsuari(String login){
+        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+        conn.connect();
+
+        conn.deleteQuery("DELETE FROM usuari WHERE login =" + login );
+        conn.disconnect();
 
     }
 }
