@@ -13,3 +13,4 @@ public abstract class Controlador {
     public abstract void eliminaUsuari();
 
 }
+
