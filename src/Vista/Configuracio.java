@@ -40,7 +40,7 @@ public class Configuracio extends JFrame {
         jpAtras.add (jlTitle, BorderLayout.CENTER);
         jpPort.add (jlPort, BorderLayout.LINE_START);
         jpPort.add (jtPort, BorderLayout.CENTER);
-
+        
     }
 
 }
