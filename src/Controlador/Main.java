@@ -1,9 +1,6 @@
 package Controlador;
 
-import Vista.Configuracio;
-import Vista.Gestionar;
-import Vista.Registrar;
-import Vista.VistaServidor;
+import Vista.*;
 
 import javax.swing.*;
 
@@ -19,7 +16,8 @@ public class Main {
                 /*VistaServidor vista = new VistaServidor();
                 vista.setVisible(true);*/
 
-                Gestionar vista = new Gestionar();
+                Ranquing vista = new Ranquing();
+               // Gestionar vista = new Gestionar();
                 vista.setVisible(true);
             }
         });
