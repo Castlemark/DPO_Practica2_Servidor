@@ -1,6 +1,7 @@
 package Vista;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -16,7 +17,7 @@ public class Configuracio extends JFrame {
     private JLabel jlTitle;
     private JTextField jtPort;
     private JButton jbIniciar;
-    private JButton JbAturar;
+    private JButton jbAturar;
 
     public Configuracio () {
         this.setTitle ("Configuració");
@@ -29,18 +30,25 @@ public class Configuracio extends JFrame {
         jpButtons = new JPanel(new BorderLayout());
 
         jbAtras = new JButton("<-");
-        jlTitle = new JLabel("Configuració");
-        jlPort = new JLabel("Port");
+        jlTitle = new JLabel("            Configuració");
+        jlPort = new JLabel("Port         ");
         jtPort = new JTextField();
         jbIniciar = new JButton("Iniciar");
-        jbIniciar = new JButton("Aturar");
+        jbAturar = new JButton("Aturar");
 
         jpConfiguracio.setLayout(new GridLayout(3,1));
         jpAtras.add (jbAtras, BorderLayout.LINE_START);
         jpAtras.add (jlTitle, BorderLayout.CENTER);
         jpPort.add (jlPort, BorderLayout.LINE_START);
         jpPort.add (jtPort, BorderLayout.CENTER);
-        
+        jpButtons.add (jbIniciar, BorderLayout.CENTER);
+        jpButtons.add (jbAturar, BorderLayout.LINE_END);
+
+        jpConfiguracio.add(jpAtras, BorderLayout.CENTER);
+        jpConfiguracio.add(jpPort);
+        jpConfiguracio.add(jpButtons, BorderLayout.LINE_END);
+
+        this.getContentPane().add(jpConfiguracio,BorderLayout.PAGE_START);
     }
 
 }

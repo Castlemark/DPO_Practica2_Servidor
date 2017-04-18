@@ -1,5 +1,6 @@
 package Controlador;
 
+import Vista.Configuracio;
 import Vista.Gestionar;
 import Vista.Registrar;
 import Vista.VistaServidor;

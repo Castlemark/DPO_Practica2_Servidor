@@ -68,7 +68,7 @@ public class Gestionar extends JFrame {
         jpGestionar.add(jpTitle, BorderLayout.PAGE_START);
         jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
-        this.getContentPane().add(jpGestionar, BorderLayout.LINE_START);
+        this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
     }
 
 }
