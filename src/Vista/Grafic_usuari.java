@@ -1,5 +1,7 @@
 package Vista;
 
+import org.jfree.chart.JFreeChart;
+
 import javax.swing.*;
 import java.awt.*;
 
