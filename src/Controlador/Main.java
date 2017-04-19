@@ -16,7 +16,7 @@ public class Main {
                 /*VistaServidor vista = new VistaServidor();
                 vista.setVisible(true);*/
 
-                Missatge vista = new Missatge ();
+                Graphic vista = new Graphic ();
                 vista.setVisible(true);
             }
         });
