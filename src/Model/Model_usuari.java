@@ -1,6 +1,9 @@
 package Model;
 
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+
 import Model.utils.ConectorDB;
 
 /**
@@ -81,18 +84,42 @@ public class Model_usuari {
     }
 
     //Aquest metode comprova que les dades omplertes per l'usuari no existeixin a la base de dades
-    public boolean comprovaDadesInsercio(String nomUsuari, String correu, String contrasenya){
+    public boolean comprovaDadesInsercio(String nomUsuari, String correu, String contrasenya) throws SQLException{
+
+        long id_jugador;
+        String us;
+        String ma;
+
+        ResultSet rs;
+        rs = recuperaUsuaris();
+        System.out.println("recuperat");
+
+        while (rs.next()){
+            id_jugador = rs.getLong(1);
+            us = rs.getString(2);
+            ma = rs.getString(3);
+
+            if (us.equals(nomUsuari) || ma.equals(correu)){
+                System.out.println("fals");
+                return false;
+            }
+        }
+        System.out.println("cert");
         return true;
 
     }
 
-    public void regitraUsuari(){
+    public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws  SQLException{
 
-        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
-        conn.connect();
+        if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
 
-        conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + this.login + this.mail + this.password +")");
-        conn.disconnect();
+            ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+            conn.connect();
+
+            System.out.println("inserint");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + this.login + this.mail + this.password +")");
+            conn.disconnect();
+        }
 
     }
 
@@ -104,7 +131,7 @@ public class Model_usuari {
         conn.connect();
 
         resultats = conn.selectQuery("SELECT id_jugador, login, mail FROM usuari");
-        conn.disconnect();
+        //conn.disconnect();
 
         return  resultats;
     }

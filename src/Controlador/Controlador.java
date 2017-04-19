@@ -5,11 +5,11 @@ package Controlador;
  */
 public abstract class Controlador {
 
-    public Usuari usuari;
+    //public Usuari usuari;
 
-    public abstract void registreUsuari();
-    public abstract void repRegistre();
-    public abstract void comprovaRegistre();
-    public abstract void eliminaUsuari();
+    //public abstract void registreUsuari();
+    //public abstract void repRegistre();
+    //public abstract void comprovaRegistre();
+    //public abstract void eliminaUsuari();
 
 }
