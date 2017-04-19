@@ -26,7 +26,7 @@ public class Main {
 
                 Graphic vista = new Graphic ();
                 vista.setVisible(true);
-*/
+
                 try {
                     sockets = new LinkedList<>();
                     ServerSocket sServer = new ServerSocket(10000);
