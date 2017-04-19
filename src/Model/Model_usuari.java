@@ -145,3 +145,6 @@ public class Model_usuari {
 
     }
 }
+
+
+
