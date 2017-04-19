@@ -7,7 +7,6 @@ import java.awt.*;
  * Created by sullivan on 11/04/2017.
  */
 public class Registrar extends JFrame {
-    private JButton jbGrafic;
     private JPanel jpButtons;
     private JPanel jpAtras;
     private JPanel jpLogin;
@@ -41,8 +40,15 @@ public class Registrar extends JFrame {
 
         jbAtras = new JButton("<-");
         jPassword = new JPasswordField();
+        jlTitle = new JLabel("          Registrar usuari");
         jtMail = new JTextField();
         jbRegistrar = new JButton("Registrar");
+        jlLogin = new JLabel("Login               ");
+        jlMail = new JLabel("Mail                  ");
+        jlPassword = new JLabel("Password      ");
+        jtLogin = new JTextField();
+
+
 
         jpButtons.setLayout(new GridLayout(5,1));
         jpAtras.add(jbAtras, BorderLayout.LINE_START);
@@ -61,7 +67,7 @@ public class Registrar extends JFrame {
         jpButtons.add(jpMail);
         jpButtons.add(jpRegistrar);
 
-        this.getContentPane().add(jpButtons, BorderLayout.CENTER);
+        this.getContentPane().add(jpButtons, BorderLayout.PAGE_START);
     }
 
 }

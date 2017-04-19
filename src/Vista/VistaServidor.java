@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by sullivan on 11/04/2017.
+ * Classe de la vista del menú principal del servidor
+ * Created by Grup 6 on 11/04/2017.
  */
 public class VistaServidor extends JFrame {
     private JButton jbRegistrar;
@@ -14,6 +15,9 @@ public class VistaServidor extends JFrame {
     private JButton jbGrafic;
     private JPanel jpButtons;
 
+    /**
+     * Constructor de la vista del menú del servidor. Inicialitza els elements a mostrar
+     */
     public VistaServidor (){
         this.setTitle("Servidor Troner");
         this.setSize (350, 350);
