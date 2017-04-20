@@ -28,7 +28,7 @@ public class Main {
                 //VistaServidor vista = new VistaServidor();
                 //vista.setVisible(true);
 
-                Graphic vista = new Graphic ();
+                Grafic_usuari vista = new Grafic_usuari ();
                 vista.setVisible(true);
 
                 try {
