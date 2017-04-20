@@ -22,11 +22,11 @@ public class Main {
 
     public static void main (String[] args) {
 
-        SwingUtilities.invokeLater(new Runnable() {
+        /*SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                /*VistaServidor vista = new VistaServidor();
-                vista.setVisible(true);*/
+                //VistaServidor vista = new VistaServidor();
+                //vista.setVisible(true);
 
                 Graphic vista = new Graphic ();
                 vista.setVisible(true);
@@ -44,12 +44,13 @@ public class Main {
                 }
             }
         });
-    }
+    }*/
 
         try {
             Model_usuari usuari = new Model_usuari();
 
-            usuari.registraUsuari("marc","hola@gmail.com","1234asdf");
+            //usuari.registraUsuari("marrc","holla@gmail.com","1234asdf");
+            usuari.eliminaUsuari("marc");
         }
         catch (SQLException e){
             e.getMessage();

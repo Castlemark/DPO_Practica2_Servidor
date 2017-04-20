@@ -14,6 +14,8 @@ public class Model_usuari {
     private String mail;
     private String password;
 
+    ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+
     public Model_usuari (){
     }
 
@@ -111,15 +113,15 @@ public class Model_usuari {
 
     public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws  SQLException{
 
+        conn.connect();
+
         if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
 
-            ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
-            conn.connect();
-
             System.out.println("inserint");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + this.login + this.mail + this.password +")");
-            conn.disconnect();
+            System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
         }
+        conn.disconnect();
 
     }
 
@@ -127,20 +129,17 @@ public class Model_usuari {
 
         ResultSet resultats;
 
-        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
-        conn.connect();
-
         resultats = conn.selectQuery("SELECT id_jugador, login, mail FROM usuari");
-        //conn.disconnect();
 
         return  resultats;
     }
 
-    public void eliminaUsuari(String login){
-        ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+    public void eliminaUsuari(String nomUsuari) throws SQLException{
         conn.connect();
 
-        conn.deleteQuery("DELETE FROM usuari WHERE login =" + login );
+        System.out.println("DELETE FROM usuari WHERE login =" + "'" + nomUsuari + "'");
+        conn.deleteQuery("DELETE FROM usuari WHERE login =" + "'" + nomUsuari + "'");
+
         conn.disconnect();
 
     }
