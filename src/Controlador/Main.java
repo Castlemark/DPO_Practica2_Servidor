@@ -16,8 +16,7 @@ public class Main {
                 /*VistaServidor vista = new VistaServidor();
                 vista.setVisible(true);*/
 
-                Ranquing vista = new Ranquing();
-               // Gestionar vista = new Gestionar();
+                Missatge vista = new Missatge ();
                 vista.setVisible(true);
             }
         });
