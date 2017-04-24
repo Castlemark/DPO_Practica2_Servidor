@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * Created by sullivan on 18/04/2017.
  */
-public class Configuracio extends JFrame {
+public class Configuracio extends JPanel {
     private JPanel jpConfiguracio;
     private JPanel jpAtras;
     private JLabel jlPort;
@@ -20,9 +20,7 @@ public class Configuracio extends JFrame {
     private JButton jbAturar;
 
     public Configuracio () {
-        this.setTitle ("Configuració");
         this.setSize (350,350);
-        this.setResizable(true);
 
         jpConfiguracio = new JPanel();
         jpAtras = new JPanel(new BorderLayout());
@@ -48,7 +46,6 @@ public class Configuracio extends JFrame {
         jpConfiguracio.add(jpPort);
         jpConfiguracio.add(jpButtons, BorderLayout.LINE_END);
 
-        this.getContentPane().add(jpConfiguracio,BorderLayout.PAGE_START);
     }
 
 }
