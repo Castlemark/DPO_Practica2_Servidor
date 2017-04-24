@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
@@ -49,8 +50,8 @@ public class Main {
         try {
             Model_usuari usuari = new Model_usuari();
 
-            //usuari.registraUsuari("marrc","holla@gmail.com","1234asdf");
-            usuari.eliminaUsuari("marc");
+            usuari.registraUsuari("marrc","holla@gmail.com","1234asdf");
+            //usuari.eliminaUsuari("marrc");
         }
         catch (SQLException e){
             e.getMessage();

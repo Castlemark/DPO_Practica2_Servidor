@@ -3,6 +3,7 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import Model.utils.ConectorDB;
 
@@ -119,7 +120,7 @@ public class Model_usuari {
 
             System.out.println("inserint");
             System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
         }
         conn.disconnect();
 
