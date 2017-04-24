@@ -16,7 +16,8 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
- * Created by Marc on 30/03/2017.
+ * Main del Servidor
+ * Created by Grup 6 on 30/03/2017.
  */
 public class Main {
     private static LinkedList<Socket> sockets;
