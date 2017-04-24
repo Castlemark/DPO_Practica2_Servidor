@@ -16,10 +16,14 @@ public class Main {
                 /*VistaServidor vista = new VistaServidor();
                 vista.setVisible(true);*/
 
-                Graphic vista = new Graphic ();
+                Gestionar vista = new Gestionar ();
                 vista.setVisible(true);
             }
         });
     }
 
 }
+
+
+
+

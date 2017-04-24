@@ -22,7 +22,11 @@ public class Grafic_usuari extends JFrame {
 
         jpGrafic.setLayout(new GridLayout(2,1));
         jlTitle = new JLabel(login);
-        jfPuntacio = ;
+        //jfPuntacio = ;
 
+        jpGrafic.add(jlTitle, BorderLayout.CENTER);
+
+
+        this.getContentPane().add(jpGrafic, BorderLayout.PAGE_START);
     }
 }
