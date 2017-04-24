@@ -1,10 +1,7 @@
 package Model;
 
 import java.sql.ResultSet;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
 import Model.utils.ConectorDB;
 
 /**

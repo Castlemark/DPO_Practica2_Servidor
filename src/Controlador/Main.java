@@ -30,7 +30,7 @@ public class Main {
                 //VistaServidor vista = new VistaServidor();
                 //vista.setVisible(true);
 
-                Grafic_usuari vista = new Grafic_usuari();
+                VistaServidor vista = new VistaServidor();
                 vista.setVisible(true);
             }
                /* try {
