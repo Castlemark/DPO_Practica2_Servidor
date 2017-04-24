@@ -1,4 +1,6 @@
+/*
 package Vista;
+ */
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -10,8 +12,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by sullivan on 19/04/2017.
- */
+ * Classe de la vista del Gràfic a mostrar en l'apartat de gràfic del servidor
+ *
+ * Created by Grup 6 on 19/04/2017.
+
 public class Grafic_usuari extends JFrame {
     private JPanel jpGrafic;
     private JLabel jlTitle;
@@ -52,3 +56,4 @@ public class Grafic_usuari extends JFrame {
         this.getContentPane().add(jpGrafic, BorderLayout.CENTER);
     }
 }
+*/

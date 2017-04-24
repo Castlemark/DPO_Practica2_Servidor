@@ -23,16 +23,16 @@ public class Main {
 
     public static void main (String[] args) {
 
-        /*SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 //VistaServidor vista = new VistaServidor();
                 //vista.setVisible(true);
 
-                Grafic_usuari vista = new Grafic_usuari ();
+                Configuracio vista = new Configuracio();
                 vista.setVisible(true);
-
-                try {
+            }
+               /* try {
                     sockets = new LinkedList<>();
                     ServerSocket sServer = new ServerSocket(10000);
                     while (true) {
@@ -43,11 +43,11 @@ public class Main {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+            }*/
         });
-    }*/
+    }
 
-        try {
+        /*try {
             Model_usuari usuari = new Model_usuari();
 
             usuari.registraUsuari("marrc","holla@gmail.com","1234asdf");
@@ -56,6 +56,6 @@ public class Main {
         catch (SQLException e){
             e.getMessage();
         }
-
+*/
     }
-}
+//}
