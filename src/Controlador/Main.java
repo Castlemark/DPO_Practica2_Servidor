@@ -16,7 +16,8 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
- * Created by Marc on 30/03/2017.
+ * Main del Servidor
+ * Created by Grup 6 on 30/03/2017.
  */
 public class Main {
     private static LinkedList<Socket> sockets;
@@ -29,7 +30,7 @@ public class Main {
                 //VistaServidor vista = new VistaServidor();
                 //vista.setVisible(true);
 
-                Configuracio vista = new Configuracio();
+                Grafic_usuari vista = new Grafic_usuari();
                 vista.setVisible(true);
             }
                /* try {
