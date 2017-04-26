@@ -7,7 +7,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 /**
- * Created by sullivan on 19/04/2017.
+ * Panell de l'opció de gràfic del la Vista del Servidor
+ * Created by Grup 6 on 19/04/2017.
  */
 public class Graphic extends JPanel {
     private JPanel jpGraphic;
@@ -43,7 +44,7 @@ public class Graphic extends JPanel {
         jcLogin = new JComboBox();
         jcMode = new JComboBox(mode);
 
-        jpGraphic.setLayout(new GridLayout(3,1));
+        jpGraphic.setLayout(new GridLayout(4,1));
         jpLogin.add(jlLogin, BorderLayout.LINE_START);
         jpLogin.add(jcLogin, BorderLayout.CENTER);
         jpMode.add(jlMode, BorderLayout.LINE_START);
@@ -52,8 +53,15 @@ public class Graphic extends JPanel {
         jpGraphic.add(jlTitle, BorderLayout.CENTER);
         jpGraphic.add(jpLogin);
         jpGraphic.add(jpMode);
+        Grafic_usuari gu = new Grafic_usuari();
+      //  jpGraphic.add(gu);
 
         this.add(jpGraphic, BorderLayout.LINE_START);
+
+
+        this.add(gu,BorderLayout.LINE_START);
+
+
         //this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
     }
 

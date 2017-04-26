@@ -26,10 +26,10 @@ public class Grafic_usuari extends JPanel {
 
     public Grafic_usuari() {
 
-        this.setSize (350,350);
+       // this.setSize (350,350);
 
 
-        jpGrafic = new JPanel();
+       // jpGrafic = new JPanel();
         jpGrafic.setLayout(new GridLayout(2,1));
         jlTitle = new JLabel("Login");
         //jfPuntacio = ;
@@ -43,18 +43,18 @@ public class Grafic_usuari extends JPanel {
         line_chart_dataset.addValue(2400, "visitas", "Noviembre");
 
         // Creando el Grafico
-        JFreeChart chart= ChartFactory.createLineChart("Trafico en el Blog",
-                "Mes","Visitas",line_chart_dataset, PlotOrientation.VERTICAL,
+        JFreeChart chart= ChartFactory.createLineChart("Gràfic de l'usuari",
+                "Partida","Punts",line_chart_dataset, PlotOrientation.VERTICAL,
                 true,true,false);
 
         // Mostrar Grafico
         ChartPanel chartPanel = new ChartPanel(chart);
 
-        jpGrafic.add(jlTitle, BorderLayout.CENTER);
+       // jpGrafic.add(jlTitle, BorderLayout.CENTER);
 
-        jpGrafic.add(chartPanel);
+        this.add(chartPanel);
 
-        //this.getContentPane().add(jpGrafic, BorderLayout.CENTER);
+        //this.add(jpGrafic, BorderLayout.CENTER);
     }
 
     public void registerController(Controlador c){
