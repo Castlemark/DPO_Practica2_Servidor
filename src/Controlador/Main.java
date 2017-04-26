@@ -27,10 +27,8 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                //VistaServidor vista = new VistaServidor();
-                //vista.setVisible(true);
 
-                VistaServidor vista = new VistaServidor();
+              VistaServidor vista = new VistaServidor();
                 Model_usuari model = new Model_usuari();
                 Controlador controlador = new Controlador(vista, model);
 
