@@ -2,6 +2,9 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.utils.ConectorDB;
 
 /**
@@ -167,6 +170,30 @@ public class Model_usuari {
         resultats = conn.selectQuery("SELECT id_jugador, login, mail FROM usuari");
 
         return  resultats;
+    }
+
+    public ArrayList<String> recuperaLogins(){
+
+        ArrayList<String> list = new ArrayList<String>();
+
+        try {
+            conn.connect();
+
+            ResultSet rs;
+            rs = recuperaUsuaris();
+
+            while (rs.next()){
+                list.add(rs.getString(2));
+            }
+
+            conn.disconnect();
+
+            return list;
+        }
+        catch (SQLException e){
+            e.getMessage();
+            return list;
+        }
     }
 
     /**

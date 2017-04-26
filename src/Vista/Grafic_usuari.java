@@ -30,6 +30,7 @@ public class Grafic_usuari extends JPanel {
 
 
        // jpGrafic = new JPanel();
+        jpGrafic = new JPanel();
         jpGrafic.setLayout(new GridLayout(2,1));
         jlTitle = new JLabel("Login");
         //jfPuntacio = ;

@@ -4,6 +4,7 @@ import Controlador.Controlador;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Classe de la vista del menú principal del servidor
@@ -35,7 +36,7 @@ public class VistaServidor extends JFrame {
      */
     public VistaServidor (){
         this.setTitle("Servidor Troner");
-        this.setSize (600, 350);
+        this.setSize (700, 600);
         this.setResizable(true);
 
         layout = new CardLayout();
@@ -118,5 +119,9 @@ public class VistaServidor extends JFrame {
 
     public String getPort(){
         return config.getPort();
+    }
+
+    public void updateLoginList(ArrayList<String> logins){
+        graf.setLlistaLogin(logins);
     }
 }

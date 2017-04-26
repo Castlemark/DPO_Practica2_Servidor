@@ -26,6 +26,9 @@ public class Controlador implements ActionListener{
 
         if (event.getSource() instanceof JMenuItem){
             System.out.println(event.getActionCommand() + " - pestaña");
+
+            //Modificar per que nomes s'actualitzi si es selecciona la finaestra grafic
+            vista.updateLoginList(model.recuperaLogins());
             vista.changePanel(event.getActionCommand());
         }
         else if (event.getSource() instanceof JButton){
@@ -35,6 +38,9 @@ public class Controlador implements ActionListener{
                 model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
             }
 
+        }
+        else if (event.getSource() instanceof JComboBox){
+            System.out.println(event.getActionCommand() + " - combobox");
         }
     }
 }

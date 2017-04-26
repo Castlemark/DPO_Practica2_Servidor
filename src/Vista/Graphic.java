@@ -5,6 +5,8 @@ import Controlador.Controlador;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * Panell de l'opció de gràfic del la Vista del Servidor
@@ -66,6 +68,19 @@ public class Graphic extends JPanel {
     }
 
     public void registerController(Controlador c){
+        jcLogin.setActionCommand("LOGIN");
+        jcMode.setActionCommand("MODE");
+
+        jcLogin.addActionListener(c);
+        jcMode.addActionListener(c);
+    }
+
+    public void setLlistaLogin(ArrayList<String> logins){
+        jcLogin.removeAllItems();
+
+        for (String s:logins){
+            jcLogin.addItem(s);
+        }
 
     }
 }
