@@ -42,7 +42,7 @@ public class Configuracio extends JPanel {
         jpConfiguracio.add(jpPort);
         jpConfiguracio.add(jpButtons, BorderLayout.LINE_END);
 
-        this.add(jpConfiguracio, BorderLayout.LINE_START);
+        this.add(jpConfiguracio, BorderLayout.SOUTH);
     }
 
     public void registerController(ActionListener c){

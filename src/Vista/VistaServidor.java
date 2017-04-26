@@ -16,18 +16,25 @@ public class VistaServidor extends JFrame {
     private Configuracio config;
     private Gestionar gest;
     private Registrar reg;
-    private Grafic_usuari graf;
+    private Graphic graf;
 
     private  CardLayout layout;
 
-    /*private JMenuBar jmbbarraMenu;
+    private JToolBar toolBar;
+    private JButton jbRegistrar;
+    private JButton jbConfiguracio;
+    private JButton jbGestionar;
+    private JButton jbRanquing;
+    private JButton jbGrafic;
+
+    private JMenuBar jmbbarraMenu;
     private JMenu jmRegistrar;
     private JMenu jmGestionar;
     private JMenu jmConfiguracio;
     private JMenu jmRanquing;
     private JMenu jmGrafic;
 
-    private JTextField jtproba;*/
+    private JTextField jtproba;
 
     /**
      * Constructor de la vista del menú del servidor. Inicialitza els elements a mostrar
@@ -43,9 +50,10 @@ public class VistaServidor extends JFrame {
         config = new Configuracio();
         gest = new Gestionar();
         reg = new Registrar();
-        graf = new Grafic_usuari();
+        graf = new Graphic();
 
-        /*jmbbarraMenu = new JMenuBar();
+
+        jmbbarraMenu = new JMenuBar();
         jmRegistrar = new JMenu("Registrar");
         jmGestionar = new JMenu("Gestionar");
         jmConfiguracio = new JMenu("Configuració");
@@ -59,7 +67,7 @@ public class VistaServidor extends JFrame {
         jmbbarraMenu.add(jmGrafic);
 
         jmbbarraMenu.setBackground(blau_cel);
-        this.setJMenuBar(jmbbarraMenu);*/
+        this.setJMenuBar(jmbbarraMenu);
 
         this.getContentPane().add("CONFIGURACIO", config);
         this.getContentPane().add("REGISTRAR", reg);
@@ -71,7 +79,7 @@ public class VistaServidor extends JFrame {
 
     public void registerController(Controlador c){
 
-        /*jmConfiguracio.setActionCommand("CONFIGURACIO");
+        jmConfiguracio.setActionCommand("CONFIGURACIO");
         jmRegistrar.setActionCommand("REGISTRAR");
         jmGestionar.setActionCommand("GESTIONAR");
         jmRanquing.setActionCommand("RANQUING");
@@ -81,7 +89,7 @@ public class VistaServidor extends JFrame {
         jmRegistrar.addMenuListener(c);
         jmGestionar.addMenuListener(c);
         jmRanquing.addMenuListener(c);
-        jmGrafic.addMenuListener(c);*/
+        jmGrafic.addMenuListener(c);
 
         reg.registerController(c);
         config.registerController(c);

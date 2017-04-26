@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.Controlador;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.*;
 /**
  * Created by sullivan on 19/04/2017.
  */
-public class Graphic extends JFrame {
+public class Graphic extends JPanel {
     private JPanel jpGraphic;
     private JPanel jpLogin;
     private JPanel jpMode;
@@ -53,5 +55,9 @@ public class Graphic extends JFrame {
 
         this.add(jpGraphic, BorderLayout.LINE_START);
         //this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
+    }
+
+    public void registerController(Controlador c){
+
     }
 }
