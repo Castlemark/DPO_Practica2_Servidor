@@ -10,12 +10,24 @@ import java.awt.*;
  * Created by Grup 6 on 11/04/2017.
  */
 public class VistaServidor extends JFrame {
-    private JMenuBar jmbbarraMenu;
+
+    Color blau_cel = new Color(135, 206, 250);
+
+    private Configuracio config;
+    private Gestionar gest;
+    private Registrar reg;
+    private Grafic_usuari graf;
+
+    private  CardLayout layout;
+
+    /*private JMenuBar jmbbarraMenu;
     private JMenu jmRegistrar;
     private JMenu jmGestionar;
     private JMenu jmConfiguracio;
     private JMenu jmRanquing;
     private JMenu jmGrafic;
+
+    private JTextField jtproba;*/
 
     /**
      * Constructor de la vista del menú del servidor. Inicialitza els elements a mostrar
@@ -25,9 +37,15 @@ public class VistaServidor extends JFrame {
         this.setSize (350, 350);
         this.setResizable(true);
 
-        Color blau_cel = new Color(135, 206, 250);
+        layout = new CardLayout();
+        this.getContentPane().setLayout(layout);
 
-        jmbbarraMenu = new JMenuBar();
+        config = new Configuracio();
+        gest = new Gestionar();
+        reg = new Registrar();
+        graf = new Grafic_usuari();
+
+        /*jmbbarraMenu = new JMenuBar();
         jmRegistrar = new JMenu("Registrar");
         jmGestionar = new JMenu("Gestionar");
         jmConfiguracio = new JMenu("Configuració");
@@ -41,23 +59,37 @@ public class VistaServidor extends JFrame {
         jmbbarraMenu.add(jmGrafic);
 
         jmbbarraMenu.setBackground(blau_cel);
-        this.setJMenuBar(jmbbarraMenu);
+        this.setJMenuBar(jmbbarraMenu);*/
+
+        this.getContentPane().add("CONFIGURACIO", config);
+        this.getContentPane().add("REGISTRAR", reg);
+        this.getContentPane().add("GESTIONAR", gest);
+        this.getContentPane().add("GRAFIC", graf);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public void registerController(Controlador c){
 
-        jmConfiguracio.setActionCommand("CONFIGURACIO");
+        /*jmConfiguracio.setActionCommand("CONFIGURACIO");
         jmRegistrar.setActionCommand("REGISTRAR");
         jmGestionar.setActionCommand("GESTIONAR");
         jmRanquing.setActionCommand("RANQUING");
         jmGrafic.setActionCommand("GRAFIC");
 
-        jmConfiguracio.addActionListener(c);
-        jmRegistrar.addActionListener(c);
-        jmGestionar.addActionListener(c);
-        jmRanquing.addActionListener(c);
-        jmGrafic.addActionListener(c);
+        jmConfiguracio.addMenuListener(c);
+        jmRegistrar.addMenuListener(c);
+        jmGestionar.addMenuListener(c);
+        jmRanquing.addMenuListener(c);
+        jmGrafic.addMenuListener(c);*/
+
+        reg.registerController(c);
+        config.registerController(c);
+        gest.registerController(c);
+        graf.registerController(c);
+    }
+
+    public void changePanel(String which){
+        layout.show(this.getContentPane(), which);
     }
 }

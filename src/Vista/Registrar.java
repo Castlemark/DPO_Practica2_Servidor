@@ -1,12 +1,14 @@
 package Vista;
 
+import Controlador.Controlador;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Created by sullivan on 11/04/2017.
  */
-public class Registrar extends JFrame {
+public class Registrar extends JPanel {
     private JPanel jpButtons;
     private JPanel jpAtras;
     private JPanel jpLogin;
@@ -66,6 +68,10 @@ public class Registrar extends JFrame {
         jpButtons.add(jpRegistrar);
 
         this.add(jpButtons, BorderLayout.PAGE_START);
+    }
+
+    public void registerController(Controlador c){
+
     }
 
 }

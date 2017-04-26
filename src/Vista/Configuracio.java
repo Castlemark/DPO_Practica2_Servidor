@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by sullivan on 18/04/2017.
@@ -47,6 +48,10 @@ public class Configuracio extends JPanel {
         jpConfiguracio.add(jpButtons, BorderLayout.LINE_END);
 
         this.add(jpConfiguracio, BorderLayout.LINE_START);
+    }
+
+    public void registerController(ActionListener c){
+
     }
 
 }

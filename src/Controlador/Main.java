@@ -31,6 +31,11 @@ public class Main {
                 //vista.setVisible(true);
 
                 VistaServidor vista = new VistaServidor();
+                Model_usuari model = new Model_usuari();
+                Controlador controlador = new Controlador(vista, model);
+
+                vista.registerController(controlador);
+
                 vista.setVisible(true);
             }
                /* try {

@@ -2,6 +2,7 @@
 package Vista;
 
 
+import Controlador.Controlador;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -54,5 +55,9 @@ public class Grafic_usuari extends JPanel {
         jpGrafic.add(chartPanel);
 
         //this.getContentPane().add(jpGrafic, BorderLayout.CENTER);
+    }
+
+    public void registerController(Controlador c){
+
     }
 }

@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.Controlador;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -66,6 +68,10 @@ public class Gestionar extends JPanel {
         jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
         //this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
+    }
+
+    public void registerController(Controlador c){
+
     }
 
 }
