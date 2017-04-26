@@ -46,7 +46,7 @@ public class Gestionar extends JPanel {
         JTable jtTaula = new JTable( model );
 
 
-        jlTitle = new JLabel("                             Gestionar Usuari");
+        jlTitle = new JLabel("Gestionar Usuari", SwingConstants.CENTER);
         //jtTaula = new JTable(rows, 5); DESCOMENTAR ???
         taula = new ButtonColumn(jtTaula, delete, 2);
 
@@ -63,7 +63,7 @@ public class Gestionar extends JPanel {
         jpGestionar.add(jlTitle, BorderLayout.PAGE_START);
         jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
-        //this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
+        this.add(jpGestionar, BorderLayout.PAGE_START);
     }
 
     public void registerController(Controlador c){

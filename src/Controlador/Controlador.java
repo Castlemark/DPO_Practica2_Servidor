@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Andreu on 30/03/2017.
  */
-public class Controlador implements ActionListener, MenuListener{
+public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
@@ -24,26 +24,17 @@ public class Controlador implements ActionListener, MenuListener{
 
     public void actionPerformed(ActionEvent event){
 
-    System.out.println("hola1");
-        if (event.getSource() instanceof JMenu){
-            System.out.println("hola");
+        if (event.getSource() instanceof JMenuItem){
+            System.out.println(event.getActionCommand() + " - pestaña");
             vista.changePanel(event.getActionCommand());
         }
-    }
+        else if (event.getSource() instanceof JButton){
+            System.out.println(event.getActionCommand() + " - boto");
 
-    @Override
-    public void menuSelected(MenuEvent e) {
-        vista.changePanel(((JMenu)e.getSource()).getActionCommand());
-        System.out.println(((JMenu)e.getSource()).getActionCommand());
-    }
+            if (event.getActionCommand().equals("REGISTRAR BOTO")){
+                model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
+            }
 
-    @Override
-    public void menuDeselected(MenuEvent e) {
-        System.out.println();
-    }
-
-    @Override
-    public void menuCanceled(MenuEvent e) {
-
+        }
     }
 }

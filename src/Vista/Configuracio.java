@@ -26,9 +26,10 @@ public class Configuracio extends JPanel {
         jpPort = new JPanel(new BorderLayout());
         jpButtons = new JPanel(new BorderLayout());
 
-        jlTitle = new JLabel("            Configuració");
-        jlPort = new JLabel("Port         ");
+        jlTitle = new JLabel("Configuració", SwingConstants.CENTER);
+        jlPort = new JLabel("Port  ");
         jtPort = new JTextField();
+        jtPort.setHorizontalAlignment(SwingConstants.RIGHT);
         jbIniciar = new JButton("Iniciar");
         jbAturar = new JButton("Aturar");
 
@@ -46,7 +47,15 @@ public class Configuracio extends JPanel {
     }
 
     public void registerController(ActionListener c){
+        jbIniciar.setActionCommand("INICIAR");
+        jbAturar.setActionCommand("ATURAR");
 
+        jbIniciar.addActionListener(c);
+        jbAturar.addActionListener(c);
+    }
+
+    public String getPort(){
+        return jtPort.getText();
     }
 
 }

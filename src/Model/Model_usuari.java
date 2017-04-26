@@ -137,17 +137,22 @@ public class Model_usuari {
      * @param contrasenya
      * @throws SQLException introdueix l'usuari nou a la base de dades
      */
-    public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws  SQLException{
+    public void registraUsuari(String nomUsuari, String correu, String contrasenya){
 
-        conn.connect();
+        try {
+            conn.connect();
 
-        if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
+            if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
 
-            System.out.println("inserint");
-            System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
+                System.out.println("inserint");
+                System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
+                conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
+            }
+            conn.disconnect();
         }
-        conn.disconnect();
+        catch (SQLException e){
+            e.getMessage();
+        }
 
     }
 

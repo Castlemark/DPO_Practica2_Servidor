@@ -37,8 +37,8 @@ public class Registrar extends JPanel {
 
 
         jPassword = new JPasswordField();
-        jlTitle = new JLabel("          Registrar usuari");
-        jtMail = new JTextField();
+        jlTitle = new JLabel("Registrar usuari", SwingConstants.CENTER);
+        jtMail = new JTextField(30);
         jbRegistrar = new JButton("Registrar");
         jlLogin = new JLabel("Login               ");
         jlMail = new JLabel("Mail                  ");
@@ -65,7 +65,21 @@ public class Registrar extends JPanel {
     }
 
     public void registerController(Controlador c){
+        jbRegistrar.setActionCommand("REGISTRAR BOTO");
 
+        jbRegistrar.addActionListener(c);
+    }
+
+    public String getLogin(){
+        return jtLogin.getText();
+    }
+
+    public String getMail(){
+        return jtMail.getText();
+    }
+
+    public String getPassword(){
+        return String.valueOf(jPassword.getPassword());
     }
 
 }

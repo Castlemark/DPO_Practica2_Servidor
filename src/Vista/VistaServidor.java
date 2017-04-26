@@ -17,22 +17,16 @@ public class VistaServidor extends JFrame {
     private Gestionar gest;
     private Registrar reg;
     private Graphic graf;
+    private Ranquing rank;
 
     private  CardLayout layout;
 
-    private JToolBar toolBar;
-    private JButton jbRegistrar;
-    private JButton jbConfiguracio;
-    private JButton jbGestionar;
-    private JButton jbRanquing;
-    private JButton jbGrafic;
-
     private JMenuBar jmbbarraMenu;
-    private JMenu jmRegistrar;
-    private JMenu jmGestionar;
-    private JMenu jmConfiguracio;
-    private JMenu jmRanquing;
-    private JMenu jmGrafic;
+    private JMenuItem jmRegistrar;
+    private JMenuItem jmGestionar;
+    private JMenuItem jmConfiguracio;
+    private JMenuItem jmRanquing;
+    private JMenuItem jmGrafic;
 
     private JTextField jtproba;
 
@@ -41,7 +35,7 @@ public class VistaServidor extends JFrame {
      */
     public VistaServidor (){
         this.setTitle("Servidor Troner");
-        this.setSize (350, 350);
+        this.setSize (600, 350);
         this.setResizable(true);
 
         layout = new CardLayout();
@@ -51,14 +45,21 @@ public class VistaServidor extends JFrame {
         gest = new Gestionar();
         reg = new Registrar();
         graf = new Graphic();
+        rank = new Ranquing();
 
 
         jmbbarraMenu = new JMenuBar();
-        jmRegistrar = new JMenu("Registrar");
-        jmGestionar = new JMenu("Gestionar");
-        jmConfiguracio = new JMenu("Configuració");
-        jmRanquing = new JMenu("Ranquing");
-        jmGrafic = new JMenu("Gràfic");
+        jmRegistrar = new JMenuItem("Registrar");
+        jmGestionar = new JMenuItem("Gestionar");
+        jmConfiguracio = new JMenuItem("Configuració");
+        jmRanquing = new JMenuItem("Ranquing");
+        jmGrafic = new JMenuItem("Gràfic");
+
+        jmRegistrar.setBackground(blau_cel);
+        jmGestionar.setBackground(blau_cel);
+        jmConfiguracio.setBackground(blau_cel);
+        jmRanquing.setBackground(blau_cel);
+        jmGrafic.setBackground(blau_cel);
 
         jmbbarraMenu.add(jmRegistrar);
         jmbbarraMenu.add(jmConfiguracio);
@@ -73,6 +74,7 @@ public class VistaServidor extends JFrame {
         this.getContentPane().add("REGISTRAR", reg);
         this.getContentPane().add("GESTIONAR", gest);
         this.getContentPane().add("GRAFIC", graf);
+        this.getContentPane().add("RANQUING", rank);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -85,19 +87,36 @@ public class VistaServidor extends JFrame {
         jmRanquing.setActionCommand("RANQUING");
         jmGrafic.setActionCommand("GRAFIC");
 
-        jmConfiguracio.addMenuListener(c);
-        jmRegistrar.addMenuListener(c);
-        jmGestionar.addMenuListener(c);
-        jmRanquing.addMenuListener(c);
-        jmGrafic.addMenuListener(c);
+        jmConfiguracio.addActionListener(c);
+        jmRegistrar.addActionListener(c);
+        jmGestionar.addActionListener(c);
+        jmRanquing.addActionListener(c);
+        jmGrafic.addActionListener(c);
 
         reg.registerController(c);
         config.registerController(c);
         gest.registerController(c);
         graf.registerController(c);
+        rank.registerController(c);
     }
 
     public void changePanel(String which){
         layout.show(this.getContentPane(), which);
+    }
+
+    public String getLogin(){
+        return reg.getLogin();
+    }
+
+    public String getMail(){
+        return reg.getMail();
+    }
+
+    public String getPassword(){
+        return reg.getPassword();
+    }
+
+    public String getPort(){
+        return config.getPort();
     }
 }

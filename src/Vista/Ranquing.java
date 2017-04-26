@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.Controlador;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,7 +10,7 @@ import java.awt.event.ActionEvent;
 /**
  * Created by Andreu on 26/04/2017.
  */
-public class Ranquing extends JFrame {
+public class Ranquing extends JPanel {
         private JPanel jpGestionar;
         private JPanel jpTitle;
         private JPanel jpTaula;
@@ -20,9 +22,7 @@ public class Ranquing extends JFrame {
 
         public Ranquing () {
 
-            this.setTitle("Ranquing");
             this.setSize (350, 200);
-            this.setResizable(true);
 
             jpGestionar = new JPanel();
             jpTitle = new JPanel(new BorderLayout());
@@ -42,24 +42,24 @@ public class Ranquing extends JFrame {
 
 
             jbAtras = new JButton("<-");
-            jlTitle = new JLabel("                                  Rànquing");
-            //jtTaula = new JTable(rows, 5); DESCOMENTAR ???
+            jlTitle = new JLabel("Rànquing", SwingConstants.CENTER);
 
             jpGestionar.setLayout(new GridLayout(2,1));
-
-            //jpTaula.add(taula, BorderLayout.CENTER);
-            //this.getContentPane().add(new JScrollPane(jtTaula), BorderLayout.CENTER);
 
             jpTaula.add(jtTaula, BorderLayout.CENTER);
 
 
-            jpTitle.add(jbAtras, BorderLayout.LINE_START);
+            //jpTitle.add(jbAtras, BorderLayout.LINE_START);
             jpTitle.add(jlTitle, BorderLayout.CENTER);
 
             jpGestionar.add(jpTitle, BorderLayout.PAGE_START);
             jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
-            this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
+            this.add(jpGestionar, BorderLayout.PAGE_START);
+        }
+
+        public void registerController(Controlador c){
+
         }
 
     }
