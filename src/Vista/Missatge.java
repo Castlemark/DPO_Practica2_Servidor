@@ -11,15 +11,14 @@ public class Missatge extends JFrame {
     private JLabel jlMissatge;
 
     public Missatge () {
-       this.setTitle("Carregant...");
+
        this.setSize(350,350);
-       this.setResizable(false);
 
        //jpMissatge.setLayout(new );
        jlMissatge = new JLabel("Carregant fitxers...");
 
        //jpMissatge.add(jlMissatge);
 
-       this.getContentPane().add(jlMissatge, BorderLayout.CENTER);
+       this.add(jlMissatge, BorderLayout.CENTER);
     }
 }

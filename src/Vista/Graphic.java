@@ -24,9 +24,8 @@ public class Graphic extends JFrame {
     private String[] mode = {"2", "4", "Torneig"};
 
     public Graphic(){
-        this.setTitle ("Graphic");
+
         this.setSize (350,350);
-        this.setResizable(true);
 
       //  mode = new String[];
 
@@ -57,6 +56,7 @@ public class Graphic extends JFrame {
         jpGraphic.add(jpLogin);
         jpGraphic.add(jpMode);
 
-        this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
+        this.add(jpGraphic, BorderLayout.LINE_START);
+        //this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
     }
 }

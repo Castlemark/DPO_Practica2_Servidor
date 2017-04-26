@@ -7,6 +7,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Classe d'eina per connectar el servidor amb la base de dades
+ * Created by Grup 6 on 05/04/2017.
+ */
 public class ConectorDB {
 	static String userName;
 	static String password;
@@ -42,7 +46,7 @@ public class ConectorDB {
 
     }
 
-    //metdoe per inseri dades
+    //metode per inseri dades
     public void insertQuery(String query){
         try {
             s =(Statement) conn.createStatement();

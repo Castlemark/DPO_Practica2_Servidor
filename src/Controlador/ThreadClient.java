@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 /**
- * Created by Propietario on 19/04/2017.
+ * Created by Grup 6 on 19/04/2017.
  */
 public class ThreadClient extends Thread{
     private Socket sClient;

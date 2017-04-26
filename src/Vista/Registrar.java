@@ -26,9 +26,7 @@ public class Registrar extends JFrame {
 
     public Registrar () {
 
-        this.setTitle("Registrar usuaris");
         this.setSize (350, 350);
-        this.setResizable(true);
 
         jpButtons = new JPanel();
         jpAtras = new JPanel(new BorderLayout());
@@ -67,7 +65,7 @@ public class Registrar extends JFrame {
         jpButtons.add(jpMail);
         jpButtons.add(jpRegistrar);
 
-        this.getContentPane().add(jpButtons, BorderLayout.PAGE_START);
+        this.add(jpButtons, BorderLayout.PAGE_START);
     }
 
 }
