@@ -46,7 +46,7 @@ public class ConectorDB {
 
     }
 
-    //metdoe per inseri dades
+    //metode per inseri dades
     public void insertQuery(String query){
         try {
             s =(Statement) conn.createStatement();
