@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
  */
 public class Gestionar extends JPanel {
     private JPanel jpGestionar;
-    private JPanel jpTitle;
     private JPanel jpTaula;
     private JButton jbAtras;
     private JLabel jlTitle;
@@ -32,7 +31,6 @@ public class Gestionar extends JPanel {
         this.setSize (350, 350);
 
         jpGestionar = new JPanel();
-        jpTitle = new JPanel(new BorderLayout());
         jpTaula = new JPanel(new BorderLayout());
 
         String[] columnNames = {"First Name", "Last Name", ""};
@@ -48,7 +46,6 @@ public class Gestionar extends JPanel {
         JTable jtTaula = new JTable( model );
 
 
-        jbAtras = new JButton("<-");
         jlTitle = new JLabel("                             Gestionar Usuari");
         //jtTaula = new JTable(rows, 5); DESCOMENTAR ???
         taula = new ButtonColumn(jtTaula, delete, 2);
@@ -61,10 +58,9 @@ public class Gestionar extends JPanel {
         jpTaula.add(jtTaula, BorderLayout.CENTER);
 
 
-        jpTitle.add(jbAtras, BorderLayout.LINE_START);
-        jpTitle.add(jlTitle, BorderLayout.CENTER);
 
-        jpGestionar.add(jpTitle, BorderLayout.PAGE_START);
+
+        jpGestionar.add(jlTitle, BorderLayout.PAGE_START);
         jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
         //this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);

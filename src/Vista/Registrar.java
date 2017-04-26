@@ -10,7 +10,6 @@ import java.awt.*;
  */
 public class Registrar extends JPanel {
     private JPanel jpButtons;
-    private JPanel jpAtras;
     private JPanel jpLogin;
     private JPanel jpPassword;
     private JPanel jpMail;
@@ -31,14 +30,12 @@ public class Registrar extends JPanel {
         this.setSize (350, 350);
 
         jpButtons = new JPanel();
-        jpAtras = new JPanel(new BorderLayout());
         jpLogin = new JPanel(new BorderLayout());
         jpPassword = new JPanel(new BorderLayout());
         jpMail = new JPanel(new BorderLayout());
         jpRegistrar = new JPanel(new BorderLayout());
 
 
-        jbAtras = new JButton("<-");
         jPassword = new JPasswordField();
         jlTitle = new JLabel("          Registrar usuari");
         jtMail = new JTextField();
@@ -49,10 +46,7 @@ public class Registrar extends JPanel {
         jtLogin = new JTextField();
 
 
-
         jpButtons.setLayout(new GridLayout(5,1));
-        jpAtras.add(jbAtras, BorderLayout.LINE_START);
-        jpAtras.add(jlTitle, BorderLayout.CENTER);
         jpRegistrar.add(jbRegistrar, BorderLayout.LINE_END);
         jpLogin.add(jlLogin, BorderLayout.LINE_START);
         jpLogin.add(jtLogin, BorderLayout.CENTER);
@@ -61,7 +55,7 @@ public class Registrar extends JPanel {
         jpMail.add(jlMail, BorderLayout.LINE_START);
         jpMail.add(jtMail, BorderLayout.CENTER);
 
-        jpButtons.add(jpAtras, BorderLayout.CENTER);
+        jpButtons.add(jlTitle, BorderLayout.CENTER);
         jpButtons.add(jpLogin);
         jpButtons.add(jpPassword);
         jpButtons.add(jpMail);
