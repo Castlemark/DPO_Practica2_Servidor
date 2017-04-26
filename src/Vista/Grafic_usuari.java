@@ -16,7 +16,7 @@ import java.awt.*;
  *
  * Created by Grup 6 on 19/04/2017.
 */
-public class Grafic_usuari extends JFrame {
+public class Grafic_usuari extends JPanel {
     private JPanel jpGrafic;
     private JLabel jlTitle;
     private JFreeChart jfPuntacio;
@@ -24,9 +24,9 @@ public class Grafic_usuari extends JFrame {
     private String login;
 
     public Grafic_usuari() {
-        this.setTitle ("Graphic usuari");
+
         this.setSize (350,350);
-        this.setResizable(true);
+
 
         jpGrafic = new JPanel();
         jpGrafic.setLayout(new GridLayout(2,1));
@@ -53,6 +53,6 @@ public class Grafic_usuari extends JFrame {
 
         jpGrafic.add(chartPanel);
 
-        this.getContentPane().add(jpGrafic, BorderLayout.CENTER);
+        //this.getContentPane().add(jpGrafic, BorderLayout.CENTER);
     }
 }

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 /**
  * Created by sullivan on 18/04/2017.
  */
-public class Gestionar extends JFrame {
+public class Gestionar extends JPanel {
     private JPanel jpGestionar;
     private JPanel jpTitle;
     private JPanel jpTaula;
@@ -27,10 +27,7 @@ public class Gestionar extends JFrame {
     };
 
     public Gestionar () {
-
-        this.setTitle("Gestionar usuaris");
         this.setSize (350, 350);
-        this.setResizable(true);
 
         jpGestionar = new JPanel();
         jpTitle = new JPanel(new BorderLayout());
@@ -68,7 +65,7 @@ public class Gestionar extends JFrame {
         jpGestionar.add(jpTitle, BorderLayout.PAGE_START);
         jpGestionar.add(jpTaula, BorderLayout.CENTER);
 
-        this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
+        //this.getContentPane().add(jpGestionar, BorderLayout.PAGE_START);
     }
 
 }
