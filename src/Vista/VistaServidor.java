@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class VistaServidor extends JFrame {
 
-    Color blau_cel = new Color(135, 206, 250);
+    private Color blau_cel = new Color(135, 206, 250);
 
     private Configuracio config;
     private Gestionar gest;
