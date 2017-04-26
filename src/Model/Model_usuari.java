@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import Model.utils.ConectorDB;
 
 /**
- * Created by Marc on 05/04/2017.
+ * Classe que contorla i gestiona les dades de la base de dades
+ *
+ * Created by Grup 6 on 05/04/2017.
  */
 public class Model_usuari {
     private String login;
@@ -14,11 +16,22 @@ public class Model_usuari {
 
     ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
 
+    /**
+     * Constructor de la classe
+     */
     public Model_usuari (){
     }
 
-    //Aquest metode comprova que les dades omplertes per l'usuari tinguin informació i un format correcte
-    //Si alguna dada no compleix les condicions, retorna fals
+    /**
+     * Aquest metode comprova que les dades omplertes per l'usuari tinguin informació i un format correcte
+     *
+     * @param nomUsuari
+     * @param correu
+     * @param contrasenya
+     * @param confirmacioContra
+     * @return  Si alguna dada no compleix les condicions, retorna fals
+     */
+
     public boolean comprovaDadesFormat(String nomUsuari, String correu, String contrasenya, String confirmacioContra){
         if(nomUsuari.isEmpty()){
             return false;
@@ -83,7 +96,15 @@ public class Model_usuari {
         return false;
     }
 
-    //Aquest metode comprova que les dades omplertes per l'usuari no existeixin a la base de dades
+    /**
+     * Aquest metode comprova que les dades omplertes per l'usuari no existeixin a la base de dades
+     * @param nomUsuari
+     * @param correu
+     * @param contrasenya
+     * @return fals si el correu o el nom d'usuari ja existeix
+     * @throws SQLException ja que ha d'accedir a la base de dades
+     */
+
     public boolean comprovaDadesInsercio(String nomUsuari, String correu, String contrasenya) throws SQLException{
 
         long id_jugador;
@@ -109,6 +130,13 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Registra un nou usuari
+     * @param nomUsuari
+     * @param correu
+     * @param contrasenya
+     * @throws SQLException introdueix l'usuari nou a la base de dades
+     */
     public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws  SQLException{
 
         conn.connect();
@@ -123,6 +151,10 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Mètode que retorna un ResultSet amb els usuaris per gestionar les dades
+     * @return ResultSet amb els elements dela base de dades
+     */
     public ResultSet recuperaUsuaris(){
 
         ResultSet resultats;
@@ -132,6 +164,11 @@ public class Model_usuari {
         return  resultats;
     }
 
+    /**
+     * Aquest mètode esborra un usuari ja registrat
+     * @param nomUsuari
+     * @throws SQLException ja que hem d'esborrar l'usuari de la base de dades
+     */
     public void eliminaUsuari(String nomUsuari) throws SQLException{
         conn.connect();
 
