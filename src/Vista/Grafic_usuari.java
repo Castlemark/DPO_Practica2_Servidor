@@ -26,22 +26,19 @@ public class Grafic_usuari extends JPanel {
 
     public Grafic_usuari() {
 
-       // this.setSize (350,350);
-
 
        // jpGrafic = new JPanel();
-        jpGrafic = new JPanel();
-        jpGrafic.setLayout(new GridLayout(2,1));
+        //jpGrafic.setLayout(new GridLayout(1,1));
         jlTitle = new JLabel("Login");
         //jfPuntacio = ;
 
 
         DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-        line_chart_dataset.addValue(80, "visitas", "Julio");
-        line_chart_dataset.addValue(300, "visitas", "Agosto");
-        line_chart_dataset.addValue(600, "visitas", "Septiembre");
-        line_chart_dataset.addValue(1200, "visitas", "Octubre");
-        line_chart_dataset.addValue(2400, "visitas", "Noviembre");
+        line_chart_dataset.addValue(80, "punts", "Julio");
+        line_chart_dataset.addValue(300, "punts", "Agosto");
+        line_chart_dataset.addValue(600, "punts", "Septiembre");
+        line_chart_dataset.addValue(1200, "punts", "Octubre");
+        line_chart_dataset.addValue(2400, "punts", "Noviembre");
 
         // Creando el Grafico
         JFreeChart chart= ChartFactory.createLineChart("Gràfic de l'usuari",

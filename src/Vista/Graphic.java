@@ -61,7 +61,7 @@ public class Graphic extends JPanel {
         this.add(jpGraphic, BorderLayout.LINE_START);
 
 
-        this.add(gu,BorderLayout.LINE_START);
+        this.add(gu,BorderLayout.PAGE_END);
 
 
         //this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
