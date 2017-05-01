@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Andreu on 30/03/2017.
+ * Classe del controlador
+ *
+ * Created by Grup 6 on 30/03/2017.
  */
 public class Controlador implements ActionListener{
 
