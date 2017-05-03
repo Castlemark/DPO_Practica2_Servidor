@@ -140,22 +140,18 @@ public class Model_usuari {
      * @param contrasenya
      * @throws SQLException introdueix l'usuari nou a la base de dades
      */
-    public void registraUsuari(String nomUsuari, String correu, String contrasenya){
+    public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws SQLException{
 
-        try {
-            conn.connect();
 
-            if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
+        conn.connect();
 
-                System.out.println("inserint");
-                System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
-                conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
-            }
-            conn.disconnect();
+        if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
+
+            System.out.println("inserint");
+            System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
         }
-        catch (SQLException e){
-            e.getMessage();
-        }
+        conn.disconnect();
 
     }
 
@@ -167,33 +163,63 @@ public class Model_usuari {
 
         ResultSet resultats;
 
-        resultats = conn.selectQuery("SELECT id_jugador, login, mail FROM usuari");
+        resultats = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari");
 
         return  resultats;
     }
 
-    public ArrayList<String> recuperaLogins(){
+    public Object[][] rcuperaLlistaUsuaris() throws SQLException{
+        conn.connect();
+
+        ResultSet rs;
+        rs = recuperaUsuaris();
+
+
+        int i = 0;
+        int j = 0;
+        Object[] inserir = new Object[5];
+
+        while (rs.next()){
+            i++;
+        }
+        rs.beforeFirst();
+
+        Object[][] data = new Object[i][5];
+
+        while (rs.next()){
+            inserir[0] = rs.getString(2);
+            inserir[1] = rs.getInt(5);
+            inserir[2] = rs.getDate(6);
+            inserir[3] = rs.getDate(6);
+            inserir[4] = "Delete";
+
+            data [j] = inserir;
+            System.out.println(data[j][0]);
+            j++;
+        }
+
+
+        conn.disconnect();
+
+        return data;
+    }
+
+    public ArrayList<String> recuperaLogins() throws SQLException{
 
         ArrayList<String> list = new ArrayList<String>();
 
-        try {
-            conn.connect();
+        conn.connect();
 
-            ResultSet rs;
-            rs = recuperaUsuaris();
+        ResultSet rs;
+        rs = recuperaUsuaris();
 
-            while (rs.next()){
-                list.add(rs.getString(2));
-            }
-
-            conn.disconnect();
-
-            return list;
+        while (rs.next()){
+            list.add(rs.getString(2));
         }
-        catch (SQLException e){
-            e.getMessage();
-            return list;
-        }
+
+        conn.disconnect();
+
+        return list;
     }
 
     /**

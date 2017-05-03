@@ -21,6 +21,8 @@ public class Gestionar extends JPanel {
     private JTable jtTaula;
     private int rows;
 
+    DefaultTableModel model;
+
     private String[] columnNames = {"Login", "Punts", "Data Registre", "Ultim Acces", ""};
     private Object[][] data =
             {
@@ -44,7 +46,7 @@ public class Gestionar extends JPanel {
 
 
 
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        model = new DefaultTableModel(data, columnNames);
         JTable jtTaula = new JTable( model );
 
 
@@ -72,31 +74,33 @@ public class Gestionar extends JPanel {
 
     }
 
-    public void updateList(ResultSet rs){
-        try {
-            int i = 0;
-            int j = 0;
-            Object[] inserir = new Object[5];
+    public void updateList(Object[][] data) throws SQLException{
 
-            while (rs.next()){
-                i++;
-            }
-            rs.beforeFirst();
-
-            data = new Object[i][5];
-
-            while (rs.next()){
-                inserir[0] = rs.getString(2);
-                inserir[1] = rs.getInt(5);
-                inserir[2] = rs.getDate(6);
-                inserir[3] = rs.getDate(6);
-                inserir[4] = "Delete";
-            }
+        /**int i = 0;
+        int j = 0;
+        Object[] inserir = new Object[5];
+        System.out.println("hola1");
+        while (rs.next()){
+            i++;
         }
-        catch (SQLException e){
-            e.getMessage();
-        }
+        System.out.println("hola2");
+        rs.beforeFirst();
+
+        data = new Object[i][5];
+
+        while (rs.next()){
+            inserir[0] = rs.getString(2);
+            inserir[1] = rs.getInt(5);
+            inserir[2] = rs.getDate(6);
+            inserir[3] = rs.getDate(6);
+            inserir[4] = "Delete";
+
+            data [j] = inserir;
+            j++;
+        }**/
+
+        System.out.println(data[0][0]);
+        System.out.println(data[1][0]);
 
     }
-
 }

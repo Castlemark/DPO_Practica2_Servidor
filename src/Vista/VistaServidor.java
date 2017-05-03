@@ -4,7 +4,11 @@ import Controlador.Controlador;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.FileSystemLoopException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Classe de la vista del menú principal del servidor
@@ -121,7 +125,13 @@ public class VistaServidor extends JFrame {
         return config.getPort();
     }
 
+    //pestaña grafics
     public void updateLoginList(ArrayList<String> logins){
         graf.setLlistaLogin(logins);
+    }
+
+    //pestanya gestionar
+    public void updateList(Object[][] data) throws SQLException{
+        gest.updateList(data);
     }
 }

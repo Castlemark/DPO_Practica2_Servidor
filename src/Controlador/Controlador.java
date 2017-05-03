@@ -8,6 +8,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created by Andreu on 30/03/2017.
@@ -24,23 +25,41 @@ public class Controlador implements ActionListener{
 
     public void actionPerformed(ActionEvent event){
 
-        if (event.getSource() instanceof JMenuItem){
-            System.out.println(event.getActionCommand() + " - pestaña");
+        try {
+            if (event.getSource() instanceof JMenuItem){
+                System.out.println(event.getActionCommand() + " - pestaña");
 
-            //Modificar per que nomes s'actualitzi si es selecciona la finaestra grafic
-            vista.updateLoginList(model.recuperaLogins());
-            vista.changePanel(event.getActionCommand());
-        }
-        else if (event.getSource() instanceof JButton){
-            System.out.println(event.getActionCommand() + " - boto");
+                if (event.getActionCommand().equals("GESTIONAR")){
+                    vista.updateList(model.rcuperaLlistaUsuaris());
+                    vista.changePanel(event.getActionCommand());
 
-            if (event.getActionCommand().equals("REGISTRAR BOTO")){
-                model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
+
+                }
+                else if (event.getActionCommand().equals("GRAFIC")){
+                    vista.updateLoginList(model.recuperaLogins());
+                    vista.changePanel(event.getActionCommand());
+                }
+                else {
+                    vista.changePanel(event.getActionCommand());
+                }
+
+            }
+            else if (event.getSource() instanceof JButton){
+                System.out.println(event.getActionCommand() + " - boto");
+
+                if (event.getActionCommand().equals("REGISTRAR BOTO")){
+                    model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
+                }
+
+            }
+            else if (event.getSource() instanceof JComboBox){
             }
 
         }
-        else if (event.getSource() instanceof JComboBox){
-            System.out.println(event.getActionCommand() + " - combobox");
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
+
     }
 }
