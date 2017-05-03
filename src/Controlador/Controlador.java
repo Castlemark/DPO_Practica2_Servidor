@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
- * Created by Andreu on 30/03/2017.
+ * Classe del controlador
+ *
+ * Created by Grup 6 on 30/03/2017.
  */
 public class Controlador implements ActionListener{
 
