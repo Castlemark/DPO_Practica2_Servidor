@@ -23,6 +23,7 @@ public class VistaServidor extends JFrame {
     private Registrar reg;
     private Graphic graf;
     private Ranquing rank;
+    private Gest gs;
 
     private  CardLayout layout;
 
@@ -51,6 +52,8 @@ public class VistaServidor extends JFrame {
         reg = new Registrar();
         graf = new Graphic();
         rank = new Ranquing();
+        gs = new Gest();
+
 
 
         jmbbarraMenu = new JMenuBar();
@@ -80,6 +83,7 @@ public class VistaServidor extends JFrame {
         this.getContentPane().add("GESTIONAR", gest);
         this.getContentPane().add("GRAFIC", graf);
         this.getContentPane().add("RANQUING", rank);
+        this.getContentPane().add("GEST", gs);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
@@ -88,7 +92,7 @@ public class VistaServidor extends JFrame {
 
         jmConfiguracio.setActionCommand("CONFIGURACIO");
         jmRegistrar.setActionCommand("REGISTRAR");
-        jmGestionar.setActionCommand("GESTIONAR");
+        jmGestionar.setActionCommand("GEST");
         jmRanquing.setActionCommand("RANQUING");
         jmGrafic.setActionCommand("GRAFIC");
 
@@ -103,35 +107,40 @@ public class VistaServidor extends JFrame {
         gest.registerController(c);
         graf.registerController(c);
         rank.registerController(c);
+        gs.registerController(c);
     }
 
     public void changePanel(String which){
         layout.show(this.getContentPane(), which);
     }
 
+    //registre
     public String getLogin(){
         return reg.getLogin();
     }
 
+    //registre
     public String getMail(){
         return reg.getMail();
     }
 
+    //registre
     public String getPassword(){
         return reg.getPassword();
     }
 
+    //configuració
     public String getPort(){
         return config.getPort();
     }
 
     //pestaña grafics
-    public void updateLoginList(ArrayList<String> logins){
+    public void grUupdateLoginList(ArrayList<String> logins){
         graf.setLlistaLogin(logins);
     }
 
     //pestanya gestionar
-    public void updateList(Object[][] data) throws SQLException{
-        gest.updateList(data);
+    public void gsUpdateList(ArrayList<String> logins){
+        gs.setLlistaLogin(logins);
     }
 }

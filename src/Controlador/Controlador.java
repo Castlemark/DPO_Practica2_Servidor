@@ -31,14 +31,14 @@ public class Controlador implements ActionListener{
             if (event.getSource() instanceof JMenuItem){
                 System.out.println(event.getActionCommand() + " - pestaña");
 
-                if (event.getActionCommand().equals("GESTIONAR")){
-                    vista.updateList(model.rcuperaLlistaUsuaris());
+                if (event.getActionCommand().equals("GEST")){
+                    vista.gsUpdateList(model.recuperaLogins());
                     vista.changePanel(event.getActionCommand());
 
 
                 }
                 else if (event.getActionCommand().equals("GRAFIC")){
-                    vista.updateLoginList(model.recuperaLogins());
+                    vista.grUupdateLoginList(model.recuperaLogins());
                     vista.changePanel(event.getActionCommand());
                 }
                 else {
