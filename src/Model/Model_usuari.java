@@ -177,7 +177,6 @@ public class Model_usuari {
 
         int i = 0;
         int j = 0;
-        Object[] inserir = new Object[5];
 
         while (rs.next()){
             i++;
@@ -187,17 +186,14 @@ public class Model_usuari {
         Object[][] data = new Object[i][5];
 
         while (rs.next()){
-            inserir[0] = rs.getString(2);
-            inserir[1] = rs.getInt(5);
-            inserir[2] = rs.getDate(6);
-            inserir[3] = rs.getDate(6);
-            inserir[4] = "Delete";
+            data[j][0] = rs.getString(2);
+            data[j][1] = rs.getInt(5);
+            data[j][2] = rs.getDate(6);
+            data[j][3] = rs.getDate(6);
+            data[j][4] = "Delete";
 
-            data [j] = inserir;
-            System.out.println(data[j][0]);
             j++;
         }
-
 
         conn.disconnect();
 

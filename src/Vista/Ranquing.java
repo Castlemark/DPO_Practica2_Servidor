@@ -62,6 +62,11 @@ public class Ranquing extends JPanel {
 
         }
 
+        public void updateList(Object[][] data){
+
+            //Metode bombolla
+        }
+
     }
 
 
