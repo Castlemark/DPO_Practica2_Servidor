@@ -168,36 +168,32 @@ public class Model_usuari {
         return  resultats;
     }
 
-    public Object[][] rcuperaLlistaUsuaris() throws SQLException{
+    public String recuperaDadesUsuari(String login) throws  SQLException{
+
+        String text ="";
+        ResultSet rs;
+
         conn.connect();
 
-        ResultSet rs;
-        rs = recuperaUsuaris();
-
-
-        int i = 0;
-        int j = 0;
+        rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + login + "'");
 
         while (rs.next()){
-            i++;
-        }
-        rs.beforeFirst();
+            text = "\n";
 
-        Object[][] data = new Object[i][5];
-
-        while (rs.next()){
-            data[j][0] = rs.getString(2);
-            data[j][1] = rs.getInt(5);
-            data[j][2] = rs.getDate(6);
-            data[j][3] = rs.getDate(6);
-            data[j][4] = "Delete";
-
-            j++;
+            text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
+            text += "                                       LOGIN:                                 |             " + rs.getString(2) + "\n";
+            text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
+            text += "                                       PUNTS:                                |             " + rs.getInt(5) + "\n";
+            text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
+            text += "                                       DATA REGISTRE:              |             " + rs.getDate(6) + "\n";
+            text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
+            text += "                                       DATA ULTIM ACCES:        |             " + rs.getDate(6) + "\n";
+            text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
         }
 
         conn.disconnect();
 
-        return data;
+        return text;
     }
 
     public ArrayList<String> recuperaLogins() throws SQLException{

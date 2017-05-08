@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.text.Document;
 
 import Controlador.Controlador;
 import net.miginfocom.swing.*;
@@ -127,5 +128,14 @@ public class Gest extends JPanel {
             comboBox1.addItem(s);
         }
 
+    }
+
+    public void updateInfo(String text){
+        textPane1.setText("");
+        textPane1.replaceSelection(text);
+    }
+
+    public String getSelectedLogin(){
+        return (String) comboBox1.getSelectedItem();
     }
 }

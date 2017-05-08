@@ -52,9 +52,17 @@ public class Controlador implements ActionListener{
                 if (event.getActionCommand().equals("REGISTRAR BOTO")){
                     model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
                 }
+                else if (event.getActionCommand().equals("ELIMINA")){
+                    model.eliminaUsuari(vista.gsGetSelectedLogin());
+                    vista.gsUpdateList(model.recuperaLogins());
+                }
 
             }
             else if (event.getSource() instanceof JComboBox){
+
+                if (event.getActionCommand().equals("TRIA")){
+                    vista.gsUpdateInfo(model.recuperaDadesUsuari(vista.gsGetSelectedLogin()));
+                }
             }
 
         }

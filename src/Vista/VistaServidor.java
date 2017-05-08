@@ -143,4 +143,12 @@ public class VistaServidor extends JFrame {
     public void gsUpdateList(ArrayList<String> logins){
         gs.setLlistaLogin(logins);
     }
+
+    public void gsUpdateInfo(String text){
+        gs.updateInfo(text);
+    }
+
+    public String gsGetSelectedLogin(){
+        return gs.getSelectedLogin();
+    }
 }
