@@ -24,7 +24,7 @@ public class Main {
 
     public static void main (String[] args) {
 
-        SwingUtilities.invokeLater(new Runnable() {
+      /*  SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
 
@@ -36,19 +36,9 @@ public class Main {
 
                 vista.setVisible(true);
             }
-               /* try {
-                    sockets = new LinkedList<>();
-                    ServerSocket sServer = new ServerSocket(10000);
-                    while (true) {
-                        Socket sClient = sServer.accept();
-                        sockets.add(sClient);
-                        (new ThreadClient(sClient, sockets)).start();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }*/
-        });
+
+        });*/
+
     }
 
         /*try {
@@ -60,6 +50,6 @@ public class Main {
         catch (SQLException e){
             e.getMessage();
         }
-*/
-    }
+
+    }*/
 //}
