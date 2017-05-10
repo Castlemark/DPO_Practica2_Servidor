@@ -3,7 +3,9 @@ package Controlador;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -11,8 +13,8 @@ import java.util.LinkedList;
  */
 public class ThreadClient extends Thread{
     private Socket sClient;
-    private LinkedList<Socket> sockets;
-    public ThreadClient(Socket sClient, LinkedList<Socket> sockets) {
+    private ArrayList<Socket> sockets;
+    public ThreadClient(Socket sClient, ArrayList<Socket> sockets) {
         this.sClient = sClient;
         this.sockets = sockets;
     }
@@ -23,6 +25,7 @@ public class ThreadClient extends Thread{
         try {
             DataInputStream diStream = new DataInputStream(sClient.getInputStream());
             DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
+            ObjectOutputStream doStreamO = new ObjectOutputStream(sClient.getOutputStream());
             String message = "";
             name = diStream.readUTF();
             System.out.println("[SERVER]: "+name+" connected  from "+sClient.getRemoteSocketAddress().toString()+" "+sClient.getInetAddress().getHostName());
