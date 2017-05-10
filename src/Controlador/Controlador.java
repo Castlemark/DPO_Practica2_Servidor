@@ -50,7 +50,7 @@ public class Controlador implements ActionListener{
                 System.out.println(event.getActionCommand() + " - boto");
 
                 if (event.getActionCommand().equals("REGISTRAR BOTO")){
-                    model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword());
+                    vista.showMessage(model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword(), vista.getPassword2()));
                 }
                 else if (event.getActionCommand().equals("ELIMINA")){
                     model.eliminaUsuari(vista.gsGetSelectedLogin());

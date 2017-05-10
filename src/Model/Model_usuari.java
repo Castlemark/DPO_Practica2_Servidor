@@ -124,11 +124,9 @@ public class Model_usuari {
             ma = rs.getString(3);
 
             if (us.equals(nomUsuari) || ma.equals(correu)){
-                System.out.println("fals");
                 return false;
             }
         }
-        System.out.println("cert");
         return true;
 
     }
@@ -140,18 +138,23 @@ public class Model_usuari {
      * @param contrasenya
      * @throws SQLException introdueix l'usuari nou a la base de dades
      */
-    public void registraUsuari(String nomUsuari, String correu, String contrasenya) throws SQLException{
+    public boolean registraUsuari(String nomUsuari, String correu, String contrasenya, String contrasenya2) throws SQLException{
 
 
         conn.connect();
 
-        if (comprovaDadesInsercio(nomUsuari, correu, contrasenya)){
+        if (comprovaDadesInsercio(nomUsuari, correu, contrasenya) && comprovaDadesFormat(nomUsuari, correu, contrasenya, contrasenya2)){
 
             System.out.println("inserint");
             System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" +")");
             conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" +nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" +")");
+
+            conn.disconnect();
+            return true;
         }
+
         conn.disconnect();
+        return false;
 
     }
 

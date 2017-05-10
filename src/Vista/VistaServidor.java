@@ -129,6 +129,22 @@ public class VistaServidor extends JFrame {
         return reg.getPassword();
     }
 
+    //registre
+    public String getPassword2(){
+        return reg.getPassword2();
+    }
+
+    //Registre
+    public void showMessage(boolean correcte){
+
+        if (correcte){
+            JOptionPane.showMessageDialog(null, "Registre Correcte");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No s'ha pogut realitzar el registre");
+        }
+    }
+
     //configuració
     public String getPort(){
         return config.getPort();
@@ -144,10 +160,12 @@ public class VistaServidor extends JFrame {
         gs.setLlistaLogin(logins);
     }
 
+    //pestanya gestionar
     public void gsUpdateInfo(String text){
         gs.updateInfo(text);
     }
 
+    //pestanya gestionar
     public String gsGetSelectedLogin(){
         return gs.getSelectedLogin();
     }
