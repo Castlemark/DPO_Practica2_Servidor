@@ -199,6 +199,40 @@ public class Model_usuari {
         return text;
     }
 
+    public boolean comprovaInicia(Inicia inicia) throws SQLException{
+
+        ResultSet rs;
+        conn.connect();
+
+        if (inicia.getOpcio() == 1){
+
+            rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
+
+            if (rs.getString(2).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
+
+                conn.disconnect();
+                return true;
+            }
+
+            conn.disconnect();
+            return false;
+        }
+        else{
+
+            rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE mail =" + "'" + inicia.getNom() + "'");
+
+            if (rs.getString(3).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
+
+                conn.disconnect();
+                return true;
+            }
+
+            conn.disconnect();
+            return false;
+        }
+
+    }
+
     public ArrayList<String> recuperaLogins() throws SQLException{
 
         ArrayList<String> list = new ArrayList<String>();
