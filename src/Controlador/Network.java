@@ -1,5 +1,6 @@
 package Controlador;
 
+import Model.Inicia;
 import Model.Model_usuari;
 import Model.Usuari;
 
@@ -58,11 +59,7 @@ public class Network extends Thread {
                         doStream.writeBoolean(false);
                     }
                 } else{
-                    if(new Model_usuari().comprovaInicia(usuari)){
-                        doStream.writeBoolean(true);
-                    }else{
-                        doStream.writeBoolean(false);
-                    }
+                    doStream.write(new Model_usuari().comprovaInicia((Inicia) usuari));
                 }
 
 

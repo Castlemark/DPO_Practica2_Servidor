@@ -199,36 +199,40 @@ public class Model_usuari {
         return text;
     }
 
-    public boolean comprovaInicia(Inicia inicia) throws SQLException{
+    public int comprovaInicia(Inicia inicia) throws SQLException{
 
         ResultSet rs;
         conn.connect();
 
+        int id;
+
         if (inicia.getOpcio() == 1){
 
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
+            id = rs.getInt(1);
 
             if (rs.getString(2).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
 
                 conn.disconnect();
-                return true;
+                return id;
             }
 
             conn.disconnect();
-            return false;
+            return -1;
         }
         else{
 
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE mail =" + "'" + inicia.getNom() + "'");
+            id = rs.getInt(1);
 
             if (rs.getString(3).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
 
                 conn.disconnect();
-                return true;
+                return id;
             }
 
             conn.disconnect();
-            return false;
+            return -1;
         }
 
     }
