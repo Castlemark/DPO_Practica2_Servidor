@@ -22,6 +22,7 @@ public class Network extends Thread {
     private DataInputStream diStream;
     private ObjectInputStream diStreamO;
     private ArrayList<Socket> sockets;
+    private Socket sClient;
     private Controlador controlador;
     private ServerSocket sServer;
     private boolean running;
@@ -37,17 +38,62 @@ public class Network extends Thread {
             sServer = new ServerSocket(11111);
 
             System.out.println("servidor conectat");
-
+            start();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void disconnect(){
+        running = false;
+        for (Socket s: sockets){
+            if (s != null){
+                try{
+                    s.close();
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+        try {
+
+            if (diStream != null){
+                diStream.close();
+            }
+
+            if (diStreamO != null){
+                diStreamO.close();
+            }
+
+            if (doStream != null){
+                doStream.close();
+            }
+
+            if (doStreamO != null){
+                doStreamO.close();
+            }
+            if (sClient != null){
+                sClient.close();
+            }
+
+            sServer.close();
+
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        System.out.println("diconnect executat");
     }
 
     @Override
     public void run() {
         while (running) {
             try {
-                Socket sClient = sServer.accept();
+                sClient = sServer.accept();
                 diStreamO = new ObjectInputStream(sClient.getInputStream());
                 Object usuari = (Object) diStreamO.readObject();
                 if(usuari instanceof Usuari){
@@ -65,13 +111,15 @@ public class Network extends Thread {
 
 
             }catch (IOException e){
-                e.printStackTrace();
+                //e.printStackTrace();
                 System.out.println(e.getMessage());
             } catch (ClassNotFoundException e) {
             e.printStackTrace();
             } catch (SQLException e){
-                e.printStackTrace();
+                //e.printStackTrace();
             }
+
         }
+        System.out.println("Run acabat");
     }
 }

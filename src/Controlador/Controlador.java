@@ -19,10 +19,12 @@ public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
+    private Network network;
 
     public Controlador(VistaServidor vista, Model_usuari model){
         this.vista = vista;
         this.model = model;
+
     }
 
     public void actionPerformed(ActionEvent event){
@@ -55,6 +57,13 @@ public class Controlador implements ActionListener{
                 else if (event.getActionCommand().equals("ELIMINA")){
                     model.eliminaUsuari(vista.gsGetSelectedLogin());
                     vista.gsUpdateList(model.recuperaLogins());
+                }
+                else if (event.getActionCommand().equals("INICIAR")){
+                    network = new Network(this);
+                    network.connect();
+                }
+                else if (event.getActionCommand().equals("ATURAR")){
+                    network.disconnect();
                 }
 
             }
