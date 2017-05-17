@@ -28,7 +28,7 @@ public class Main {
             @Override
             public void run() {
 
-              VistaServidor vista = new VistaServidor();
+                VistaServidor vista = new VistaServidor();
                 Model_usuari model = new Model_usuari();
                 Controlador controlador = new Controlador(vista, model);
 

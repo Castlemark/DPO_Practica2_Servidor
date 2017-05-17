@@ -95,11 +95,14 @@ public class Network extends Thread {
             try {
                 sClient = sServer.accept();
                 diStreamO = new ObjectInputStream(sClient.getInputStream());
-                Object usuari = (Object) diStreamO.readObject();
+                Object usuari = (Usuari) diStreamO.readObject();
                 if(usuari instanceof Usuari){
                     if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
                         doStream.writeBoolean(true);
                         sockets.add(sClient);
+
+                        System.out.println(((Usuari) usuari).getLogin());
+
                         (new ThreadClient(sClient, sockets)).start();
                     }else {
                         doStream.writeBoolean(false);
