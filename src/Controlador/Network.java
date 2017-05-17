@@ -38,7 +38,7 @@ public class Network extends Thread {
             sServer = new ServerSocket(11111);
 
             System.out.println("servidor conectat");
-            start();
+            //start();
         } catch (Exception e) {
             e.printStackTrace();
         }
