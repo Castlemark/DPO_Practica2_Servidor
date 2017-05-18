@@ -19,7 +19,9 @@ public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
-    private Network network;
+    private Network network = new Network(this);;
+
+    private boolean connectat = false;
 
     public Controlador(VistaServidor vista, Model_usuari model){
         this.vista = vista;
@@ -59,11 +61,17 @@ public class Controlador implements ActionListener{
                     vista.gsUpdateList(model.recuperaLogins());
                 }
                 else if (event.getActionCommand().equals("INICIAR")){
-                    network = new Network(this);
-                    network.connect();
+                    if (!connectat){
+                        network.connect();
+                        connectat = true;
+                    }
                 }
+                //No es pot obrir i tancar el port més d'una vegada, suposo que perque tot i matar els sockets del run, no matem el thread de run.
                 else if (event.getActionCommand().equals("ATURAR")){
-                    network.disconnect();
+                    if (connectat){
+                        network.disconnect();
+                        connectat = false;
+                    }
                 }
 
             }

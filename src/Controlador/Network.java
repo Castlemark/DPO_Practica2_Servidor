@@ -26,13 +26,11 @@ public class Network extends Thread {
     private Controlador controlador;
     private ServerSocket sServer;
     private boolean running;
-    private ArrayList<ThreadClient> clients;
 
     public Network(Controlador controlador) {
         sockets = new ArrayList<>();
         this.controlador = controlador;
         running = true;
-        clients = new ArrayList<ThreadClient>();
     }
 
     public void connect() {
@@ -102,9 +100,7 @@ public class Network extends Thread {
                     if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
                         doStream.writeBoolean(true);
                         sockets.add(sClient);
-                        ThreadClient client = new ThreadClient(sClient, sockets, ((Usuari) usuari).getLogin());
-                        client.start();
-                        clients.add(client);
+                        (new ThreadClient(sClient, sockets)).start();
                     }else {
                         doStream.writeBoolean(false);
                     }
