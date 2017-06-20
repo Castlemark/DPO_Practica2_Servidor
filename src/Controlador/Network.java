@@ -4,6 +4,7 @@ import Model.Inicia;
 import Model.Model_usuari;
 import Model.Usuari;
 
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -38,7 +39,7 @@ public class Network extends Thread {
             sServer = new ServerSocket(11111);
 
             System.out.println("servidor conectat");
-            //start();
+            start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,11 +92,36 @@ public class Network extends Thread {
 
     @Override
     public void run() {
+        String which;
+
         while (running) {
             try {
+
                 sClient = sServer.accept();
                 diStreamO = new ObjectInputStream(sClient.getInputStream());
-                Object usuari = (Usuari) diStreamO.readObject();
+                doStream = new DataOutputStream(sClient.getOutputStream());
+                //diStream = new DataInputStream(sClient.getInputStream());
+
+                which = (String) diStreamO.readObject();
+                System.out.println(which);
+
+                switch (which){
+                    case "REGISTRAR":
+
+                        Usuari usuari = (Usuari) diStreamO.readObject();
+
+                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
+                            doStream.writeBoolean(true);
+                            sockets.add(sClient);
+
+                            System.out.println(usuari.getLogin());
+                        }
+                        else {
+                            doStream.writeBoolean(false);
+                        }
+                }
+
+                /*Object usuari = (Usuari) diStreamO.readObject();
                 if(usuari instanceof Usuari){
                     if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
                         doStream.writeBoolean(true);
@@ -109,7 +135,7 @@ public class Network extends Thread {
                     }
                 } else{
                     doStream.write(new Model_usuari().comprovaInicia((Inicia) usuari));
-                }
+                }*/
 
 
 

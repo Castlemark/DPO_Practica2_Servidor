@@ -13,7 +13,7 @@ public class Usuari implements Serializable{
     private String mail;
     private String password;
 
-    public Usuari(){
+    public Usuari (){
 
     }
     public Usuari(String login, String mail, String password){
@@ -197,3 +197,4 @@ public class Usuari implements Serializable{
         return true;
     }
 }
+
