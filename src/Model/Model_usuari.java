@@ -200,40 +200,49 @@ public class Model_usuari {
         return text;
     }
 
-    public int comprovaInicia(Inicia inicia) throws SQLException{
+    public String comprovaInicia(Inicia inicia) throws SQLException{
 
         ResultSet rs;
         conn.connect();
 
-        int id;
+        String login;
 
+        System.out.println("hola3");
         if (inicia.getOpcio() == 1){
 
+            System.out.println("hola opcio1");
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
-            id = rs.getInt(1);
+            System.out.println("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
+            if (!rs.next()){
+                return "error a Model_usuari.comprovaInicia";
+            }
+            login = rs.getString(2);
 
             if (rs.getString(2).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
 
+                System.out.println("hola3 opcio1");
                 conn.disconnect();
-                return id;
+                return login;
             }
 
             conn.disconnect();
-            return -1;
+            return "error a Model_usuari.comprovaInicia";
         }
         else{
 
+            System.out.println("Hola opcio2");
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE mail =" + "'" + inicia.getNom() + "'");
-            id = rs.getInt(1);
+            rs.next();
+            login = rs.getString(2);
 
             if (rs.getString(3).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
 
                 conn.disconnect();
-                return id;
+                return login;
             }
 
             conn.disconnect();
-            return -1;
+            return "error a Model_usuari.comprovaInicia";
         }
 
     }
