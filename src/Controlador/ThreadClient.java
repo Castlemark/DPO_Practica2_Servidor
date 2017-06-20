@@ -1,5 +1,8 @@
 package Controlador;
 
+import Model.Partida2;
+import Model.Partida4;
+import Model.PartidaTorneig;
 import Model.Serp;
 
 import java.io.*;
@@ -14,6 +17,10 @@ public class ThreadClient extends Thread{
     private Socket sClient;
     private ArrayList<Socket> sockets;
     private String login;
+    private int tipusPartida;
+    private Partida2 partida2;
+    private Partida4 partida4;
+    private PartidaTorneig partidaTorneig;
 
     public ThreadClient(Socket sClient, ArrayList<Socket> sockets, String login) {
         this.sClient = sClient;
@@ -46,26 +53,43 @@ public class ThreadClient extends Thread{
                     //afegirCuaTor(login);
                     //jugaTor();
                     break;
-            }
 
-            Serp serp;
-            name = diStream.readUTF();
-            System.out.println("[SERVER]: "+name+" connected  from "+sClient.getRemoteSocketAddress().toString()+" "+sClient.getInetAddress().getHostName());
-            int joc;
-            joc = 1;
+                case 4:
+                    Serp serp;
+                    name = diStream.readUTF();
+                    System.out.println("[SERVER]: "+name+" connected  from "+sClient.getRemoteSocketAddress().toString()+" "+sClient.getInetAddress().getHostName());
 
+                    int tipus;
+                    tipus = diStream.readInt();
+                    serp = (Serp) diStreamO.readObject();
 
-            while(true){
-                serp = (Serp) diStreamO.readObject();
-                for(Socket s : sockets) {
-                    if (s != sClient) {
+                    switch(tipus){
+                        case 1:
+                            partida2.enviaSerp(serp, sClient);
+                            break;
+                        case 2:
 
-                        DataOutputStream otherDoStream = new DataOutputStream(s.getOutputStream());
-                        otherDoStream.writeUTF("["+name+"]: "+message);
+                            break;
+                        case 3:
+
+                            break;
                     }
-                }
-                System.out.println("["+name+"]: "+message);
+
+
+                    while(true){
+                        serp = (Serp) diStreamO.readObject();
+                        for(Socket s : sockets) {
+                            if (s != sClient) {
+
+                                DataOutputStream otherDoStream = new DataOutputStream(s.getOutputStream());
+                                otherDoStream.writeUTF("["+name+"]: "+message);
+                            }
+                        }
+                        System.out.println("["+name+"]: "+message);
+                    }
             }
+
+
 
         } catch(EOFException e){
             System.out.println("[SERVER]: "+name+" disconnected.");
