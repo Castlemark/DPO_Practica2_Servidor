@@ -134,7 +134,7 @@ public class Network extends Thread {
                     }
                 } else{
                     doStream.write(new Model_usuari().comprovaInicia((Inicia) usuari));
-                }
+                }*/
 
 
 
