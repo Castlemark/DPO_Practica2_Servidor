@@ -100,7 +100,7 @@ public class Network extends Thread {
                     if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
                         doStream.writeBoolean(true);
                         sockets.add(sClient);
-                        (new ThreadClient(sClient, sockets)).start();
+                        (new ThreadClient(sClient, sockets, ((Usuari) usuari).getLogin())).start();
                     }else {
                         doStream.writeBoolean(false);
                     }
