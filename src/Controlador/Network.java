@@ -38,7 +38,7 @@ public class Network extends Thread {
             sServer = new ServerSocket(11111);
 
             System.out.println("servidor conectat");
-            //start();
+            start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,16 +91,44 @@ public class Network extends Thread {
 
     @Override
     public void run() {
+        String which;
+
         while (running) {
             try {
+
                 sClient = sServer.accept();
                 diStreamO = new ObjectInputStream(sClient.getInputStream());
-                Object usuari = (Object) diStreamO.readObject();
+                doStream = new DataOutputStream(sClient.getOutputStream());
+                //diStream = new DataInputStream(sClient.getInputStream());
+
+                which = (String) diStreamO.readObject();
+                System.out.println(which);
+
+                switch (which){
+                    case "REGISTRAR":
+
+                        Usuari usuari = (Usuari) diStreamO.readObject();
+
+                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
+                            doStream.writeBoolean(true);
+                            sockets.add(sClient);
+
+                            System.out.println(usuari.getLogin());
+                        }
+                        else {
+                            doStream.writeBoolean(false);
+                        }
+                }
+
+                /*Object usuari = (Usuari) diStreamO.readObject();
                 if(usuari instanceof Usuari){
                     if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
                         doStream.writeBoolean(true);
                         sockets.add(sClient);
-                        (new ThreadClient(sClient, sockets, ((Usuari) usuari).getLogin())).start();
+
+                        System.out.println(((Usuari) usuari).getLogin());
+
+                        (new ThreadClient(sClient, sockets)).start();
                     }else {
                         doStream.writeBoolean(false);
                     }
