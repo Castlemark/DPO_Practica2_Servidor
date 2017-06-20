@@ -16,7 +16,7 @@ public class ConectorDB {
 	static String password;
 	static String db;
 	static int port;
-	static String url = "jdbc:mysql://localhost";
+	static String url;
 	static Connection conn = null;
 	static Statement s;
     
@@ -25,7 +25,7 @@ public class ConectorDB {
 		ConectorDB.password = pass;
 		ConectorDB.db = db;
 		ConectorDB.port = port;
-		ConectorDB.url += ":"+port+"/";
+		ConectorDB.url = "jdbc:mysql://localhost:"+port+"/";
 		ConectorDB.url += db;
 	}
 
@@ -38,6 +38,7 @@ public class ConectorDB {
             }
         }
         catch(SQLException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("Problema al connecta-nos a la BBDD --> "+url);
         }
         catch(ClassNotFoundException ex) {

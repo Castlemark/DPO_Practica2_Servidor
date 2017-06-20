@@ -141,6 +141,7 @@ public class Network extends Thread {
 
             }catch (IOException e){
                 //e.printStackTrace();
+                System.out.println("holi");
                 System.out.println(e.getMessage());
             } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -149,6 +150,6 @@ public class Network extends Thread {
             }
 
         }
-        System.out.println("Run acabat");
+        System.out.println("Run Acabat");
     }
 }
