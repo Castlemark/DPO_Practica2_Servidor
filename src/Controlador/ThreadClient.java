@@ -1,9 +1,8 @@
 package Controlador;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.ObjectOutputStream;
+import Model.Serp;
+
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,9 +13,12 @@ import java.util.LinkedList;
 public class ThreadClient extends Thread{
     private Socket sClient;
     private ArrayList<Socket> sockets;
-    public ThreadClient(Socket sClient, ArrayList<Socket> sockets) {
+    private String login;
+
+    public ThreadClient(Socket sClient, ArrayList<Socket> sockets, String login) {
         this.sClient = sClient;
         this.sockets = sockets;
+        this.login = login;
     }
 
     @Override
@@ -26,13 +28,38 @@ public class ThreadClient extends Thread{
             DataInputStream diStream = new DataInputStream(sClient.getInputStream());
             DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
             ObjectOutputStream doStreamO = new ObjectOutputStream(sClient.getOutputStream());
+            ObjectInputStream diStreamO = new ObjectInputStream(sClient.getInputStream());
             String message = "";
+
+            int opcio = diStream.readInt();
+
+            switch(opcio){
+                case 1:
+                   // afegirCua2(login);
+                    //juga2();
+                    break;
+                case 2:
+                    //afegirCua4(login);
+                    //juga4();
+                    break;
+                case 3:
+                    //afegirCuaTor(login);
+                    //jugaTor();
+                    break;
+            }
+
+            Serp serp;
             name = diStream.readUTF();
             System.out.println("[SERVER]: "+name+" connected  from "+sClient.getRemoteSocketAddress().toString()+" "+sClient.getInetAddress().getHostName());
+            int joc;
+            joc = 1;
+
+
             while(true){
-                message = diStream.readUTF();
+                serp = (Serp) diStreamO.readObject();
                 for(Socket s : sockets) {
                     if (s != sClient) {
+
                         DataOutputStream otherDoStream = new DataOutputStream(s.getOutputStream());
                         otherDoStream.writeUTF("["+name+"]: "+message);
                     }

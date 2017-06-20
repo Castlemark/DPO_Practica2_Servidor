@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 import Model.utils.ConectorDB;
 
@@ -16,6 +17,7 @@ public class Model_usuari {
     private String login;
     private String mail;
     private String password;
+    private Queue<String> cua2;
 
     ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
 
@@ -182,7 +184,6 @@ public class Model_usuari {
 
         while (rs.next()){
             text = "\n";
-
             text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
             text += "                                       LOGIN:                                 |             " + rs.getString(2) + "\n";
             text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
@@ -268,6 +269,10 @@ public class Model_usuari {
 
         conn.disconnect();
 
+    }
+
+    public void afegirCua2(String login){
+        cua2.add(login);
     }
 }
 

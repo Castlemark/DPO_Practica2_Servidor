@@ -4,7 +4,6 @@ import Model.Inicia;
 import Model.Model_usuari;
 import Model.Usuari;
 
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
