@@ -15,7 +15,6 @@ import java.sql.SQLException;
 public class Gestionar extends JPanel {
     private JPanel jpGestionar;
     private JPanel jpTaula;
-    private JButton jbAtras;
     private JLabel jlTitle;
     private ButtonColumn taula;
     private JTable jtTaula;

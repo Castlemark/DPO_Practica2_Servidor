@@ -86,7 +86,7 @@ public class Network extends Thread {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        System.out.println("diconnect executat");
+        System.out.println("disconnect executat");
     }
 
     @Override
@@ -118,6 +118,9 @@ public class Network extends Thread {
                         else {
                             doStream.writeBoolean(false);
                         }
+                    case "CONTROLS":
+
+                        usuari.actualitzaControls(diStreamO);
                 }
 
                 /*Object usuari = (Usuari) diStreamO.readObject();

@@ -14,7 +14,6 @@ public class Ranquing extends JPanel {
         private JPanel jpGestionar;
         private JPanel jpTitle;
         private JPanel jpTaula;
-        private JButton jbAtras;
         private JLabel jlTitle;
         private ButtonColumn taula;
         private JTable jtTaula;
@@ -40,8 +39,6 @@ public class Ranquing extends JPanel {
             DefaultTableModel model = new DefaultTableModel(data, columnNames);
             JTable jtTaula = new JTable( model );
 
-
-            jbAtras = new JButton("<-");
             jlTitle = new JLabel("Rànquing", SwingConstants.CENTER);
 
             jpGestionar.setLayout(new GridLayout(2,1));
