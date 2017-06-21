@@ -13,6 +13,7 @@ import java.util.LinkedList;
 /**
  * Created by Grup 6 on 19/04/2017.
  */
+
 public class ThreadClient extends Thread{
     private Socket sClient;
     private ArrayList<Socket> sockets;

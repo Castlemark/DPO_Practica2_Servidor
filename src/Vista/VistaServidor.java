@@ -169,4 +169,8 @@ public class VistaServidor extends JFrame {
     public String gsGetSelectedLogin(){
         return gs.getSelectedLogin();
     }
+
+    public void actualitzaPort(int port){
+        config.actualitzaPort(port);
+    }
 }

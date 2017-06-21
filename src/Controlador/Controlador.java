@@ -8,7 +8,9 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
+import Model.Arxiu;
 
 /**
  * Classe del controlador
@@ -27,11 +29,28 @@ public class Controlador implements ActionListener{
         this.vista = vista;
         this.model = model;
 
+
+        Arxiu arxiu = new Arxiu();
+        arxiu = arxiu.llegeixDades();
+        vista.actualitzaPort(arxiu.getportClient());
+
     }
 
     public void actionPerformed(ActionEvent event){
 
         try {
+
+            if (event.getActionCommand().equals("INICIAR")){
+                String stringPortClient = vista.getPort();
+                int portClient = Integer.parseInt(stringPortClient);
+                Arxiu arxiu = new Arxiu();
+                arxiu.escriuPort(portClient);
+                arxiu.llegeixDades();
+                System.out.println("Port de la base de Dades desat correctament");
+            }
+
+
+
             if (event.getSource() instanceof JMenuItem){
                 System.out.println(event.getActionCommand() + " - pestaña");
 
