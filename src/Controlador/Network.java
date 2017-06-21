@@ -86,7 +86,7 @@ public class Network extends Thread {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        System.out.println("disconnect executat");
+        System.out.println("diconnect executat");
     }
 
     @Override
@@ -121,6 +121,30 @@ public class Network extends Thread {
                     case "CONTROLS":
 
                         usuari.actualitzaControls(diStreamO);
+                        break;
+
+                    case "INICIARSESSIO":
+
+                        String aux;
+                        Inicia inicia = (Inicia) diStreamO.readObject();
+
+                        System.out.println("hola");
+                        aux = new Model_usuari().comprovaInicia(inicia);
+                        System.out.println("hola2");
+
+                        if (aux.equals("error a Model_usuari.comprovaInicia")){
+                            doStream.writeBoolean(false);
+                            System.out.println("enviat false");
+                        }
+                        else {
+                            doStream.writeBoolean(true);
+                            System.out.println("enviat true");
+                        }
+
+                        sockets.add(sClient);
+                        (new ThreadClient(sClient,sockets,aux)).start();
+
+                        break;
                 }
 
                 /*Object usuari = (Usuari) diStreamO.readObject();
