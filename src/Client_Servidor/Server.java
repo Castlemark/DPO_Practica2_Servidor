@@ -3,6 +3,8 @@ package Client_Servidor;
 import Controlador.GestionarPartides;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -49,7 +51,11 @@ public class Server extends Thread{
     public void run(){
         while (running) try{
             Socket socket = sSocket.accept();
-            DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides);
+
+            ObjectOutputStream doStreamO = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream diStreamO = new ObjectInputStream(socket.getInputStream());
+
+            DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides, doStreamO, diStreamO);
             dedicatedServers.add(dServer);
             System.out.println("afegit");
 
