@@ -41,10 +41,8 @@ public class DedicatedServer extends Thread{
            running = true;
            while (running){
 
-               System.out.println("holi");
                String opcio = (String) diStreamO.readObject();
 
-               System.out.println(opcio);
                switch (opcio){
                    case "INICIARSESSIO":
 
@@ -54,11 +52,11 @@ public class DedicatedServer extends Thread{
                        aux = new Model_usuari().comprovaInicia(inicia);
 
                        if (aux.equals("error a Model_usuari.comprovaInicia")){
-                           doStreamO.writeBoolean(false);
+                           doStreamO.writeObject(false);
                            System.out.println("enviat false");
                        }
                        else {
-                           doStreamO.writeBoolean(true);
+                           doStreamO.writeObject(true);
                            System.out.println("enviat true");
 
                        }
@@ -86,6 +84,7 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
+
            e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
