@@ -22,7 +22,6 @@ public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
-    private Network network = new Network(this);
     private Server server;
     private final GestionarPartides gPartides;
 
@@ -91,7 +90,7 @@ public class Controlador implements ActionListener{
                 //No es pot obrir i tancar el port més d'una vegada, suposo que perque tot i matar els sockets del run, no matem el thread de run.
                 else if (event.getActionCommand().equals("ATURAR")){
                     if (connectat){
-                        network.disconnect();
+                        server.stopServer();
                         connectat = false;
                     }
                 }

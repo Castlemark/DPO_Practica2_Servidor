@@ -44,6 +44,7 @@ public class Server extends Thread{
         for(DedicatedServer d: dedicatedServers){
             d.stopRunning();
         }
+
     }
 
 
