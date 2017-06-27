@@ -52,8 +52,6 @@ public class Server extends Thread{
     public void run(){
         while (running) try{
             Socket socket = sSocket.accept();
-        //    ObjectOutputStream doStreamO = new ObjectOutputStream(socket.getOutputStream());
-        //    ObjectInputStream diStreamO = new ObjectInputStream(socket.getInputStream());
 
             DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides);
             dedicatedServers.add(dServer);
