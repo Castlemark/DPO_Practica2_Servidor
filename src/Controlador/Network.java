@@ -134,8 +134,6 @@ public class Network extends Thread {
                             doStream.writeBoolean(true);
                             System.out.println("enviat true");
 
-                            sockets.add(sClient);
-                            (new ThreadClient(sClient,sockets,aux)).start();
                         }
                         break;
                 }
