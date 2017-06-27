@@ -17,7 +17,6 @@ public class Model_usuari {
     private String login;
     private String mail;
     private String password;
-    private Queue<String> cua2;
 
     ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
 

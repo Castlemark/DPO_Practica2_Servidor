@@ -88,12 +88,6 @@ public class Arxiu {
 
             BufferedReader br = new BufferedReader(new FileReader("config.json"));
             arxiu = gson.fromJson(br, Arxiu.class);
-            System.out.println(arxiu.getportBBDD());
-            System.out.println(arxiu.getIP());
-            System.out.println(arxiu.getnomBBDD());
-            System.out.println(arxiu.getusuariBBDD());
-            System.out.println(arxiu.getpasswordBBDD());
-            System.out.println(arxiu.getportClient());
 
         } catch (IOException e) {
             System.err.println("Hi ha hagut un problema al llegir el fitxer config.json");
