@@ -40,9 +40,13 @@ public class DedicatedServer extends Thread{
 
            running = true;
            while (running){
-               String opcio = diStreamO.readUTF();
+
+               System.out.println("holi");
+               String opcio = (String) diStreamO.readObject();
+
+               System.out.println(opcio);
                switch (opcio){
-                   case "INICIA":
+                   case "INICIARSESSIO":
 
                        String aux;
                        Inicia inicia = (Inicia) diStreamO.readObject();

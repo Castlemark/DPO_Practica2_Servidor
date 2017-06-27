@@ -53,6 +53,7 @@ public class Server extends Thread{
         while (running) try{
             Socket socket = sSocket.accept();
             DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides);
+            dServer.start();
             dedicatedServers.add(dServer);
             System.out.println("afegit");
 
