@@ -61,15 +61,15 @@ public class DedicatedServer extends Thread{
 
                        }
                        break;
-                   case "REGISTRA":
+                   case "REGISTRAR":
                        Usuari usuari = (Usuari) diStreamO.readObject();
 
                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
-                           doStreamO.writeBoolean(true);
+                           doStreamO.writeObject(true);
                            System.out.println(usuari.getLogin());
                        }
                        else {
-                           doStreamO.writeBoolean(false);
+                           doStreamO.writeObject(false);
                        }
                        break;
                    case "MOVIMENT":
@@ -84,7 +84,6 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
-
            e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
