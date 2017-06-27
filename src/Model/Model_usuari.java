@@ -162,7 +162,7 @@ public class Model_usuari {
 
             System.out.println("inserint");
             System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + ")");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE()" + ")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre, data_ultimacces) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE(), CURDATE()" + ")");
 
             conn.disconnect();
             return true;
@@ -171,6 +171,16 @@ public class Model_usuari {
         conn.disconnect();
         return false;
 
+    }
+
+    public void actualitzaData(String login){
+
+        conn.connect();
+
+        System.out.println("UPDATE usuari SET data_ultimacces = " + "CURDATE() WHERE login = '" + login +"';");
+        conn.updateQuery("UPDATE usuari SET data_ultimacces = " + "CURDATE() WHERE login = '" + login +"';" );
+
+        conn.disconnect();
     }
 
     /**
@@ -205,7 +215,7 @@ public class Model_usuari {
             text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
             text += "                                       DATA REGISTRE:              |             " + rs.getDate(6) + "\n";
             text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
-            text += "                                       DATA ULTIM ACCES:        |             " + rs.getDate(6) + "\n";
+            text += "                                       DATA ULTIM ACCES:        |             " + rs.getDate(7) + "\n";
             text += "----------------------------------------------------------------------------------------------------------------------------" + "\n";
         }
 

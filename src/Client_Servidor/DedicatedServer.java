@@ -61,6 +61,7 @@ public class DedicatedServer extends Thread{
                        else {
                            doStreamO.writeObject(true);
                            System.out.println("enviat true");
+                           new Model_usuari().actualitzaData(aux);
                            this.login = aux;
 
                        }
