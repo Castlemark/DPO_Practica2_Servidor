@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DedicatedServer extends Thread{
     private Socket sClient;
     private String login;
-    private GestionarPartides gPartides;
+    private final GestionarPartides gPartides;
     private Model_usuari model;
     private final Partida2 partida2;
     private final Partida4 partida4;

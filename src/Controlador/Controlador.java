@@ -1,5 +1,6 @@
 package Controlador;
 
+import Client_Servidor.Server;
 import Model.Model_usuari;
 import Vista.VistaServidor;
 
@@ -22,13 +23,16 @@ public class Controlador implements ActionListener{
     private VistaServidor vista;
     private Model_usuari model;
     private Network network = new Network(this);;
+    private Server server;
+    private final GestionarPartides gPartides;
 
     private boolean connectat = false;
 
     public Controlador(VistaServidor vista, Model_usuari model){
         this.vista = vista;
         this.model = model;
-
+        gPartides = new GestionarPartides();
+        server = new Server(11111, gPartides);
 
         Arxiu arxiu = new Arxiu();
         arxiu = arxiu.llegeixDades();

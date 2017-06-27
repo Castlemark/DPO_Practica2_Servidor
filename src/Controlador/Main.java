@@ -1,5 +1,6 @@
 package Controlador;
 
+import Client_Servidor.Server;
 import Model.Model_usuari;
 
 import java.sql.SQLException;
