@@ -21,20 +21,23 @@ public class DedicatedServer extends Thread{
     private final Partida4 partida4;
     private final PartidaTorneig partidaTorneig;
     private boolean running;
+    ObjectInputStream diStreamO;
+    ObjectOutputStream doStreamO;
 
-    public DedicatedServer(Socket sClient, GestionarPartides gPartides){
+    public DedicatedServer(Socket sClient, GestionarPartides gPartides) throws IOException{
         this.sClient = sClient;
         this.gPartides = gPartides;
         partida2 = null;
         partida4 = null;
         partidaTorneig = null;
+        doStreamO = new ObjectOutputStream(sClient.getOutputStream());
+        diStreamO = new ObjectInputStream(sClient.getInputStream());
     }
 
     @Override
     public void run() {
        try {
-           ObjectOutputStream doStreamO = new ObjectOutputStream(sClient.getOutputStream());
-           ObjectInputStream diStreamO = new ObjectInputStream(sClient.getInputStream());
+
            running = true;
            while (running){
                String opcio = diStreamO.readUTF();
