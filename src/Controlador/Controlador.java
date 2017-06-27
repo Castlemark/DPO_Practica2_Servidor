@@ -22,7 +22,7 @@ public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
-    private Network network = new Network(this);;
+    private Network network = new Network(this);
     private Server server;
     private final GestionarPartides gPartides;
 

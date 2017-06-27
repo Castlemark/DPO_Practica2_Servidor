@@ -290,7 +290,6 @@ public class Model_usuari {
         conn.disconnect();
 
     }
-
 }
 
 
