@@ -99,7 +99,6 @@ public class Network extends Thread {
                 sClient = sServer.accept();
                 diStreamO = new ObjectInputStream(sClient.getInputStream());
                 doStream = new DataOutputStream(sClient.getOutputStream());
-                //diStream = new DataInputStream(sClient.getInputStream());
 
                 which = (String) diStreamO.readObject();
                 System.out.println(which);
@@ -125,9 +124,7 @@ public class Network extends Thread {
                         String aux;
                         Inicia inicia = (Inicia) diStreamO.readObject();
 
-                        System.out.println("hola");
                         aux = new Model_usuari().comprovaInicia(inicia);
-                        System.out.println("hola2");
 
                         if (aux.equals("error a Model_usuari.comprovaInicia")){
                             doStream.writeBoolean(false);
@@ -136,31 +133,12 @@ public class Network extends Thread {
                         else {
                             doStream.writeBoolean(true);
                             System.out.println("enviat true");
+
+                            sockets.add(sClient);
+                            (new ThreadClient(sClient,sockets,aux)).start();
                         }
-
-                        sockets.add(sClient);
-                        (new ThreadClient(sClient,sockets,aux)).start();
-
                         break;
                 }
-
-                /*Object usuari = (Usuari) diStreamO.readObject();
-                if(usuari instanceof Usuari){
-                    if(new Model_usuari().registraUsuari(((Usuari) usuari).getLogin(),((Usuari) usuari).getMail(),((Usuari) usuari).getPassword(), ((Usuari) usuari).getPassword())){
-                        doStream.writeBoolean(true);
-                        sockets.add(sClient);
-
-                        System.out.println(((Usuari) usuari).getLogin());
-
-                        (new ThreadClient(sClient, sockets)).start();
-                    }else {
-                        doStream.writeBoolean(false);
-                    }
-                } else{
-                    doStream.write(new Model_usuari().comprovaInicia((Inicia) usuari));
-                }*/
-
-
 
             }catch (IOException e){
                 //e.printStackTrace();

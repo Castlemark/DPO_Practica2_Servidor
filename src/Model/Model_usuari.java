@@ -207,10 +207,8 @@ public class Model_usuari {
 
         String login;
 
-        System.out.println("hola3");
         if (inicia.getOpcio() == 1){
 
-            System.out.println("hola opcio1");
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
             System.out.println("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
             if (!rs.next()){
@@ -220,7 +218,6 @@ public class Model_usuari {
 
             if (rs.getString(2).equals(inicia.getNom()) && rs.getString(4).equals(inicia.getPassword())){
 
-                System.out.println("hola3 opcio1");
                 conn.disconnect();
                 return login;
             }
