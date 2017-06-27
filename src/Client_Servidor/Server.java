@@ -5,6 +5,7 @@ import Controlador.GestionarPartides;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,11 +24,14 @@ public class Server extends Thread{
     public Server (int port, GestionarPartides gestionarPartides){
         this.port = port;
         this.gestionarPartides = gestionarPartides;
+        dedicatedServers = new ArrayList<>();
     }
 
     public void startServer () throws IOException{
 
-        sSocket = new ServerSocket(port);
+        sSocket = new ServerSocket(11111);
+
+        System.out.println("servidor conectat");
         running = true;
         start();
     }
@@ -39,12 +43,15 @@ public class Server extends Thread{
         }
     }
 
+
+
     @Override
     public void run(){
         while (running) try{
             Socket socket = sSocket.accept();
             DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides);
             dedicatedServers.add(dServer);
+            System.out.println("afegit");
 
         }catch (IOException e){
             e.printStackTrace();

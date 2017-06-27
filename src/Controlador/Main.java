@@ -29,13 +29,18 @@ public class Main {
             @Override
             public void run() {
 
-                VistaServidor vista = new VistaServidor();
-                Model_usuari model = new Model_usuari();
-                Controlador controlador = new Controlador(vista, model);
+               try {
+                   VistaServidor vista = new VistaServidor();
 
-                vista.registerController(controlador);
+                   Model_usuari model = new Model_usuari();
+                   Controlador controlador = new Controlador(vista, model);
 
-                vista.setVisible(true);
+                   vista.registerController(controlador);
+
+                   vista.setVisible(true);
+               }catch (IOException e){
+                   e.printStackTrace();
+               }
             }
 
         });

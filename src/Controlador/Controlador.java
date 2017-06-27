@@ -28,12 +28,11 @@ public class Controlador implements ActionListener{
 
     private boolean connectat = false;
 
-    public Controlador(VistaServidor vista, Model_usuari model){
+    public Controlador(VistaServidor vista, Model_usuari model) throws IOException{
         this.vista = vista;
         this.model = model;
         gPartides = new GestionarPartides();
         server = new Server(11111, gPartides);
-
         Arxiu arxiu = new Arxiu();
         arxiu = arxiu.llegeixDades();
         vista.actualitzaPort(arxiu.getportClient());
@@ -85,7 +84,7 @@ public class Controlador implements ActionListener{
                 }
                 else if (event.getActionCommand().equals("INICIAR")){
                     if (!connectat){
-                        network.connect();
+                        server.startServer();
                         connectat = true;
                     }
                 }
@@ -108,6 +107,8 @@ public class Controlador implements ActionListener{
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
+        }catch (IOException e){
             e.printStackTrace();
         }
 
