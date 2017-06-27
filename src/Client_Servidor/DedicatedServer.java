@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Marc on 27/06/2017.
@@ -21,12 +22,14 @@ public class DedicatedServer extends Thread{
     private final Partida4 partida4;
     private final PartidaTorneig partidaTorneig;
     private boolean running;
-    ObjectInputStream diStreamO;
-    ObjectOutputStream doStreamO;
+    private ObjectInputStream diStreamO;
+    private ObjectOutputStream doStreamO;
+    private ArrayList<DedicatedServer> dedicatedServers;
 
-    public DedicatedServer(Socket sClient, GestionarPartides gPartides) throws IOException{
+    public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
         this.sClient = sClient;
         this.gPartides = gPartides;
+        this.dedicatedServers = dedicatedServers;
         partida2 = null;
         partida4 = null;
         partidaTorneig = null;
@@ -51,13 +54,14 @@ public class DedicatedServer extends Thread{
 
                        aux = new Model_usuari().comprovaInicia(inicia);
 
-                       if (aux.equals("error a Model_usuari.comprovaInicia")){
+                       if (aux.equals("error a Model_usuari.comprovaInicia") || estaIniciat(aux)){
                            doStreamO.writeObject(false);
                            System.out.println("enviat false");
                        }
                        else {
                            doStreamO.writeObject(true);
                            System.out.println("enviat true");
+                           this.login = aux;
 
                        }
                        break;
@@ -66,6 +70,7 @@ public class DedicatedServer extends Thread{
 
                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
                            doStreamO.writeObject(true);
+                           this.login = usuari.getLogin();
                            System.out.println(usuari.getLogin());
                        }
                        else {
@@ -84,6 +89,7 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
+           dedicatedServers.remove(this);
            e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
@@ -93,7 +99,22 @@ public class DedicatedServer extends Thread{
 
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     public void stopRunning(){
         running = false;
     }
+
+    public boolean estaIniciat(String login){
+        for(int i = 0; i < dedicatedServers.size(); i++){
+            if(dedicatedServers.get(i).getLogin().equals(login)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

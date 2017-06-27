@@ -17,7 +17,7 @@ import java.util.List;
 public class Server extends Thread{
 
     private ServerSocket  sSocket;
-    private List<DedicatedServer> dedicatedServers;
+    private ArrayList<DedicatedServer> dedicatedServers;
 
     private GestionarPartides gestionarPartides;
 
@@ -52,7 +52,7 @@ public class Server extends Thread{
     public void run(){
         while (running) try{
             Socket socket = sSocket.accept();
-            DedicatedServer dServer = new DedicatedServer( socket, gestionarPartides);
+            DedicatedServer dServer = new DedicatedServer(socket, gestionarPartides, dedicatedServers);
             dServer.start();
             dedicatedServers.add(dServer);
             System.out.println("afegit");
