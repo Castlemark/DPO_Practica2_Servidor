@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class DedicatedServer extends Thread{
     private Socket sClient;
-    private String login;
+    private String login = "";
     private final GestionarPartides gPartides;
     private Model_usuari model;
     private final Partida2 partida2;
@@ -78,13 +78,33 @@ public class DedicatedServer extends Thread{
                            doStreamO.writeObject(false);
                        }
                        break;
+
+                   case "JOC2":
+
+                       break;
+
+                   case "JOC4":
+
+                       break;
+
+                   case "CAMPEONAT":
+
+                       break;
+
                    case "MOVIMENT":
+
                        break;
+
                    case "COLLISIO":
+
                        break;
+
                    case "CANVIACONTROLS":
+
                        break;
+
                    case "MOSTRARANKING":
+
                        break;
                }
            }
@@ -110,6 +130,12 @@ public class DedicatedServer extends Thread{
 
     public boolean estaIniciat(String login){
         for(int i = 0; i < dedicatedServers.size(); i++){
+
+            System.out.println(dedicatedServers.get(i).getLogin());
+            if (dedicatedServers == null){
+                return false;
+            }
+
             if(dedicatedServers.get(i).getLogin().equals(login)){
                 return true;
             }
