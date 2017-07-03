@@ -17,7 +17,7 @@ import java.util.List;
 public class Server extends Thread{
 
     private ServerSocket  sSocket;
-    private ArrayList<DedicatedServer> dedicatedServers;
+    private final ArrayList<DedicatedServer> dedicatedServers;
 
     private GestionarPartides gestionarPartides;
 

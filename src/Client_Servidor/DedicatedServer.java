@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DedicatedServer extends Thread{
     private Socket sClient;
     private String login = "";
-    private final GestionarPartides gPartides;
+    private GestionarPartides gPartides;
     private Model_usuari model;
     private final Partida2 partida2;
     private final Partida4 partida4;
@@ -43,6 +43,7 @@ public class DedicatedServer extends Thread{
 
            running = true;
            while (running){
+
 
                String opcio = (String) diStreamO.readObject();
 
@@ -81,14 +82,20 @@ public class DedicatedServer extends Thread{
 
                    case "JOC2":
 
+                       gPartides.addJoc2(this);
+                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "JOC4":
 
+                       gPartides.addJoc4(this);
+                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "CAMPEONAT":
 
+                       gPartides.addCampeonat(this);
+                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "MOVIMENT":
@@ -131,7 +138,6 @@ public class DedicatedServer extends Thread{
     public boolean estaIniciat(String login){
         for(int i = 0; i < dedicatedServers.size(); i++){
 
-            System.out.println(dedicatedServers.get(i).getLogin());
             if (dedicatedServers == null){
                 return false;
             }
