@@ -149,5 +149,15 @@ public class DedicatedServer extends Thread{
         return false;
     }
 
+    public Socket getsClient() {
+        return sClient;
+    }
 
+    public ObjectInputStream getDiStreamO() {
+        return diStreamO;
+    }
+
+    public ObjectOutputStream getDoStreamO() {
+        return doStreamO;
+    }
 }

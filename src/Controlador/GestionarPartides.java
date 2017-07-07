@@ -1,8 +1,12 @@
 package Controlador;
 
 import Client_Servidor.DedicatedServer;
+import Model.Partida;
+import Model.Partida2;
 import com.sun.deploy.resources.Deployment_de;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -30,11 +34,12 @@ public class GestionarPartides {
         currentCuaTorneig = new ArrayList<>();
     }
 
-    public void addJoc2(DedicatedServer d){
+    public void addJoc2(DedicatedServer d) throws IOException{
 
         if (currentCua2.size() < 2){
 
             currentCua2.add(d);
+            System.out.println("La cua te " + currentCua2.size());
         }
         else{
 
@@ -43,6 +48,13 @@ public class GestionarPartides {
             currentCua2.add(d);
 
             //aqui comença una partida perque tenim tota la gent necesari
+        }
+        if(currentCua2.size() == 2){
+            Partida2 p2 = new Partida2(currentCua2);
+            for(int i = 0; i < 2; i++){
+                currentCua2.get(i).getDoStreamO().writeObject("COMENÇA");
+                System.out.println("comença " + currentCua2.get(i).getLogin());
+            }
         }
     }
 
