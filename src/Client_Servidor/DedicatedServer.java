@@ -26,6 +26,7 @@ public class DedicatedServer extends Thread{
     private ObjectInputStream diStreamO;
     private ObjectOutputStream doStreamO;
     private ArrayList<DedicatedServer> dedicatedServers;
+    private int num;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
         this.sClient = sClient;
@@ -162,5 +163,11 @@ public class DedicatedServer extends Thread{
         return doStreamO;
     }
 
+    public void setNum(int num) {
+        this.num = num;
+    }
 
+    public int getNum() {
+        return num;
+    }
 }

@@ -24,6 +24,7 @@ public class Partida2 {
         for(int i = 0; i < 2; i++){
             jugadors.get(i).getDoStreamO().writeObject("JUGADOR");
             jugadors.get(i).getDoStreamO().writeObject(logins);
+            jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
             System.out.println("comença " + jugadors.get(i).getLogin());
         }

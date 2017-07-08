@@ -40,6 +40,7 @@ public class GestionarPartides {
 
             currentCua2.add(d);
             System.out.println("La cua te " + currentCua2.size());
+            d.setNum(currentCua2.size() - 1);
         }
         else{
 
