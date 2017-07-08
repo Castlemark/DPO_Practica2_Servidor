@@ -3,6 +3,7 @@ package Controlador;
 import Client_Servidor.Server;
 import Model.Model_usuari;
 
+import java.net.InetAddress;
 import java.sql.SQLException;
 
 import Vista.*;
@@ -31,7 +32,7 @@ public class Main {
 
                try {
                    VistaServidor vista = new VistaServidor();
-
+                    System.out.println(InetAddress.getLocalHost());
                    Model_usuari model = new Model_usuari();
                    Controlador controlador = new Controlador(vista, model);
 

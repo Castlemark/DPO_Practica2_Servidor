@@ -15,10 +15,18 @@ import java.util.ArrayList;
  */
 public class Partida2 {
     private ArrayList<DedicatedServer> jugadors;
+    String[] logins = new String[2];
 
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
-
+        logins[0] = jugadors.get(0).getLogin();
+        logins[1] = jugadors.get(1).getLogin();
+        for(int i = 0; i < 2; i++){
+            jugadors.get(i).getDoStreamO().writeObject("JUGADOR");
+            jugadors.get(i).getDoStreamO().writeObject(logins);
+            jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
+            System.out.println("comença " + jugadors.get(i).getLogin());
+        }
     }
 
     public void enviaSerp(Serp serp, Socket emisor) {

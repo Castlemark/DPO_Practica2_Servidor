@@ -51,10 +51,7 @@ public class GestionarPartides {
         }
         if(currentCua2.size() == 2){
             Partida2 p2 = new Partida2(currentCua2);
-            for(int i = 0; i < 2; i++){
-                currentCua2.get(i).getDoStreamO().writeObject("COMENÇA");
-                System.out.println("comença " + currentCua2.get(i).getLogin());
-            }
+
         }
     }
 
