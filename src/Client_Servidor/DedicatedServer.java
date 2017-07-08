@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
  * Created by Marc on 27/06/2017.
  */
@@ -161,8 +162,5 @@ public class DedicatedServer extends Thread{
         return doStreamO;
     }
 
-    public void writeMessage(String m) throws IOException{
-        System.out.println("asdfghj");
-        doStreamO.writeObject(m);
-    }
+
 }

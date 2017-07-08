@@ -18,10 +18,7 @@ public class Partida2 {
 
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
-        for(int i = 0; i < jugadors.size(); i++){
-            ObjectOutputStream doStreamO = new ObjectOutputStream(jugadors.get(i).getsClient().getOutputStream());
-            doStreamO.writeObject(true);
-        }
+
     }
 
     public void enviaSerp(Serp serp, Socket emisor) {
