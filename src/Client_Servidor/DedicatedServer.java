@@ -160,4 +160,9 @@ public class DedicatedServer extends Thread{
     public ObjectOutputStream getDoStreamO() {
         return doStreamO;
     }
+
+    public void writeMessage(String m) throws IOException{
+        System.out.println("asdfghj");
+        doStreamO.writeObject(m);
+    }
 }

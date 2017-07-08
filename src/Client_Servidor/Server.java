@@ -56,7 +56,6 @@ public class Server extends Thread{
             DedicatedServer dServer = new DedicatedServer(socket, gestionarPartides, dedicatedServers);
             dServer.start();
             dedicatedServers.add(dServer);
-            System.out.println("afegit");
 
         }catch (IOException e){
             e.printStackTrace();
