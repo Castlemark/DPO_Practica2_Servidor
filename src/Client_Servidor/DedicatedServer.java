@@ -26,6 +26,7 @@ public class DedicatedServer extends Thread{
     private ObjectInputStream diStreamO;
     private ObjectOutputStream doStreamO;
     private ArrayList<DedicatedServer> dedicatedServers;
+    private boolean mort = false;
     private int num;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
@@ -108,6 +109,13 @@ public class DedicatedServer extends Thread{
 
                        break;
 
+                   case "MORT":
+                       mort = true;
+                       System.out.println(getLogin() + " crida checkpartida");
+                       gPartides.checkPartida(this);
+
+                       break;
+
                    case "CANVIACONTROLS":
 
                        break;
@@ -166,8 +174,14 @@ public class DedicatedServer extends Thread{
     public void setNum(int num) {
         this.num = num;
     }
+    public void setMort(boolean mort) {
+        this.mort = mort;
+    }
 
     public int getNum() {
         return num;
+    }
+    public boolean isMort() {
+        return mort;
     }
 }

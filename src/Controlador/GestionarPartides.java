@@ -7,6 +7,7 @@ import com.sun.deploy.resources.Deployment_de;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.security.Signature;
 import java.util.ArrayList;
 
 /**
@@ -42,17 +43,18 @@ public class GestionarPartides {
             System.out.println("La cua te " + currentCua2.size());
             d.setNum(currentCua2.size() - 1);
         }
-        else{
 
-            cua2.add(currentCua2);
-            currentCua2.clear();
-            currentCua2.add(d);
-
-            //aqui comença una partida perque tenim tota la gent necesari
-        }
         if(currentCua2.size() == 2){
             Partida2 p2 = new Partida2(currentCua2);
+            for(int i = 0; i < 2; i++){
+                currentCua2.get(i).getDoStreamO().writeObject("COMENÇA");
+                System.out.println("comença " + currentCua2.get(i).getLogin());
+            }
 
+            System.out.println("afegit a cua");
+            cua2.add(currentCua2);
+            System.out.println(cua2.get(0).size());
+            currentCua2.clear();
         }
     }
 
@@ -86,6 +88,69 @@ public class GestionarPartides {
 
             //aqui comença una partida perque tenim tota la gent necesari
         }
+    }
+
+    public void checkPartida(DedicatedServer d){
+
+        boolean aux = false;
+        ArrayList<DedicatedServer> daux = new ArrayList<>();
+
+        System.out.println("tamany cua2: " + cua2.size());
+        for (int i = 0; i < cua2.size(); i++){
+            ArrayList<DedicatedServer> temp = cua2.get(i);
+            System.out.println("tamany temp: " + temp.size());
+            System.out.println(d.getLogin() + " esborrat");
+            temp.remove(d);
+            if (temp.isEmpty()){
+                System.out.println("cua buida");
+                aux = true;
+                daux.addAll(temp);
+            }
+        }
+
+        if (aux){
+            System.out.println("Cua esborrada");
+            cua2.remove(daux);
+        }
+
+        /*boolean aux = true;
+
+        for (DedicatedServer temp: cua){
+
+            System.out.println(cua.size());
+            System.out.println(temp.getLogin() + " esta mort? " + temp.isMort());
+            if (!temp.isMort()){
+                aux = false;
+            }
+        }
+
+        if (aux){
+
+            for (DedicatedServer temp: cua){
+                temp.setMort(false);
+            }
+
+            System.out.println("esborrat");
+            cua2.remove();
+        }*/
+    }
+
+    public ArrayList<DedicatedServer> getCua(DedicatedServer d){
+        int k = 0;
+
+        for (int i = 0; i< cua2.size(); i++){
+
+            System.out.println(cua2.get(i).size() + " per i = " + i);
+            for (int j = 0; j < cua2.get(i).size(); j++){
+
+                System.out.println(cua2.get(i).get(j).getLogin() + " : " + d.getLogin());
+                if (cua2.get(i).get(j).getLogin().equals(d.getLogin())){
+                    k = i;
+                }
+
+            }
+        }
+        return cua2.get(k);
     }
 
 
