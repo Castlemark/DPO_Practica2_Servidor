@@ -33,7 +33,7 @@ public class Controlador implements ActionListener{
         gPartides = new GestionarPartides();
         server = new Server(11111, gPartides);
         Arxiu arxiu = new Arxiu();
-        arxiu = arxiu.llegeixDades();
+//        arxiu = arxiu.llegeixDades();
         vista.actualitzaPort(arxiu.getportClient());
 
     }
@@ -45,9 +45,9 @@ public class Controlador implements ActionListener{
             if (event.getActionCommand().equals("INICIAR")){
                 String stringPortClient = vista.getPort();
                 int portClient = Integer.parseInt(stringPortClient);
-                Arxiu arxiu = new Arxiu();
-                arxiu.escriuPort(portClient);
-                arxiu.llegeixDades();
+     //           Arxiu arxiu = new Arxiu();
+     //           arxiu.escriuPort(portClient);
+     //           arxiu.llegeixDades();
                 System.out.println("Port de la base de Dades desat correctament");
             }
 

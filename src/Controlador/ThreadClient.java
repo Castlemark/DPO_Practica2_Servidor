@@ -65,7 +65,7 @@ public class ThreadClient extends Thread{
 
                     switch(tipus){
                         case 1:
-                            partida2.enviaSerp(serp, sClient);
+                            //partida2.enviaSerp(serp, sClient);
                             break;
                         case 2:
 

@@ -19,6 +19,8 @@ public class Partida2 {
 
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
+        jugadors.get(0).setPartida2(this);
+        jugadors.get(1).setPartida2(this);
         logins[0] = jugadors.get(0).getLogin();
         logins[1] = jugadors.get(1).getLogin();
         for(int i = 0; i < 2; i++){
@@ -30,7 +32,7 @@ public class Partida2 {
         }
     }
 
-    public void enviaSerp(Serp serp, Socket emisor) {
+    public void enviaSerp(int dir, Socket emisor) {
         try {
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
@@ -39,11 +41,13 @@ public class Partida2 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
+                System.out.println("enviant a");
+
                 if (jugadors.get(i).getsClient() != emisor) {
-                    DataOutputStream doStream = new DataOutputStream(emisor.getOutputStream());
-                    ObjectOutputStream doStreamO = new ObjectOutputStream(emisor.getOutputStream());
-                    doStream.writeInt(j);
-                    doStreamO.writeObject(serp);
+                    System.out.println("enviant a" + jugadors.get(i).getLogin());
+                    jugadors.get(i).getDoStreamO().writeObject("MOU");
+                    jugadors.get(i).getDoStreamO().writeObject(j);
+                    jugadors.get(i).getDoStreamO().writeObject(dir);
                 }
             }
         }catch(IOException e){

@@ -19,14 +19,13 @@ public class DedicatedServer extends Thread{
     private String login = "";
     private GestionarPartides gPartides;
     private Model_usuari model;
-    private final Partida2 partida2;
-    private final Partida4 partida4;
-    private final PartidaTorneig partidaTorneig;
+    private Partida2 partida2;
+    private Partida4 partida4;
+    private PartidaTorneig partidaTorneig;
     private boolean running;
     private ObjectInputStream diStreamO;
     private ObjectOutputStream doStreamO;
     private ArrayList<DedicatedServer> dedicatedServers;
-    private boolean mort = false;
     private int num;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
@@ -102,17 +101,11 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "MOVIMENT":
-
+                       System.out.println("sha rebut serp");
+                       partida2.enviaSerp((int)diStreamO.readObject(), sClient);
                        break;
 
                    case "COLLISIO":
-
-                       break;
-
-                   case "MORT":
-                       mort = true;
-                       System.out.println(getLogin() + " crida checkpartida");
-                       gPartides.checkPartida(this);
 
                        break;
 
@@ -174,14 +167,12 @@ public class DedicatedServer extends Thread{
     public void setNum(int num) {
         this.num = num;
     }
-    public void setMort(boolean mort) {
-        this.mort = mort;
-    }
 
     public int getNum() {
         return num;
     }
-    public boolean isMort() {
-        return mort;
+
+    public void setPartida2(Partida2 partida2) {
+        this.partida2 = partida2;
     }
 }
