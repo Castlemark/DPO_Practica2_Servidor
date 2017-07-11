@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 /**
- * Created by Propietario on 20/06/2017.
+ * Created by Grup 6 on 20/06/2017.
  */
 public class Partida2 {
     private ArrayList<DedicatedServer> jugadors;
@@ -48,6 +48,26 @@ public class Partida2 {
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     jugadors.get(i).getDoStreamO().writeObject(dir);
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void haMort(Socket emisor){
+        try{
+            int j=-1;
+            for (int i = 0; i < jugadors.size(); i++) {
+                if (jugadors.get(i).getsClient() == emisor) {
+                    j = i;
+                }
+            }
+            for (int i = 0; i < jugadors.size(); i++) {
+                System.out.println("enviant a");
+
+                if (jugadors.get(i).getsClient() != emisor) {
+                    jugadors.get(i).getDoStreamO().writeObject("MORT");
                 }
             }
         }catch(IOException e){

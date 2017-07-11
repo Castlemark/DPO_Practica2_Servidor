@@ -87,7 +87,4 @@ public class GestionarPartides {
             //aqui comença una partida perque tenim tota la gent necesari
         }
     }
-
-
-
 }

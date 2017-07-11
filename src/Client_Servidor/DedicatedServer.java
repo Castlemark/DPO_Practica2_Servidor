@@ -116,6 +116,10 @@ public class DedicatedServer extends Thread{
                    case "MOSTRARANKING":
 
                        break;
+
+                   case "MORT":
+                       partida2.haMort(sClient);
+                       break;
                }
            }
 
