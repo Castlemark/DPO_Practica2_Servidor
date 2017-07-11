@@ -32,7 +32,7 @@ public class Partida2 {
         }
     }
 
-    public void enviaSerp(int dir, Socket emisor) {
+    public void enviaSerp(int dir, Posicio cap, Socket emisor) {
         try {
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
@@ -48,6 +48,7 @@ public class Partida2 {
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     jugadors.get(i).getDoStreamO().writeObject(dir);
+                    jugadors.get(i).getDoStreamO().writeObject(cap);
                 }
             }
         }catch(IOException e){

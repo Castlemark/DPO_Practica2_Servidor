@@ -102,7 +102,7 @@ public class DedicatedServer extends Thread{
 
                    case "MOVIMENT":
                        System.out.println("sha rebut serp");
-                       partida2.enviaSerp((int)diStreamO.readObject(), sClient);
+                       partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                        break;
 
                    case "COLLISIO":
