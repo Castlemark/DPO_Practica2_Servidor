@@ -13,6 +13,7 @@ import java.util.LinkedList;
 /**
  * Created by Grup 6 on 19/04/2017.
  */
+
 public class ThreadClient extends Thread{
     private Socket sClient;
     private ArrayList<Socket> sockets;
@@ -32,13 +33,12 @@ public class ThreadClient extends Thread{
     public void run() {
         String name = null;
         try {
-            DataInputStream diStream = new DataInputStream(sClient.getInputStream());
-            DataOutputStream doStream = new DataOutputStream(sClient.getOutputStream());
+
             ObjectOutputStream doStreamO = new ObjectOutputStream(sClient.getOutputStream());
             ObjectInputStream diStreamO = new ObjectInputStream(sClient.getInputStream());
             String message = "";
 
-            int opcio = diStream.readInt();
+            int opcio = diStreamO.readInt();
 
             switch(opcio){
                 case 1:
@@ -56,16 +56,16 @@ public class ThreadClient extends Thread{
 
                 case 4:
                     Serp serp;
-                    name = diStream.readUTF();
+                    name = diStreamO.readUTF();
                     System.out.println("[SERVER]: "+name+" connected  from "+sClient.getRemoteSocketAddress().toString()+" "+sClient.getInetAddress().getHostName());
 
                     int tipus;
-                    tipus = diStream.readInt();
+                    tipus = diStreamO.readInt();
                     serp = (Serp) diStreamO.readObject();
 
                     switch(tipus){
                         case 1:
-                            partida2.enviaSerp(serp, sClient);
+                            //partida2.enviaSerp(serp, sClient);
                             break;
                         case 2:
 
@@ -94,6 +94,7 @@ public class ThreadClient extends Thread{
         } catch(EOFException e){
             System.out.println("[SERVER]: "+name+" disconnected.");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

@@ -46,6 +46,10 @@ public class Configuracio extends JPanel {
         this.add(jpConfiguracio, BorderLayout.SOUTH);
     }
 
+    public void actualitzaPort(int port){
+        String portStr= Integer.toString(port);
+        jtPort.setText(portStr);
+    }
     public void registerController(ActionListener c){
         jbIniciar.setActionCommand("INICIAR");
         jbAturar.setActionCommand("ATURAR");

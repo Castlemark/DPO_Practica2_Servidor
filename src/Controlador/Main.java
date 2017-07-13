@@ -1,7 +1,9 @@
 package Controlador;
 
+import Client_Servidor.Server;
 import Model.Model_usuari;
 
+import java.net.InetAddress;
 import java.sql.SQLException;
 
 import Vista.*;
@@ -28,13 +30,18 @@ public class Main {
             @Override
             public void run() {
 
-                VistaServidor vista = new VistaServidor();
-                Model_usuari model = new Model_usuari();
-                Controlador controlador = new Controlador(vista, model);
+               try {
+                   VistaServidor vista = new VistaServidor();
+                    System.out.println(InetAddress.getLocalHost());
+                   Model_usuari model = new Model_usuari();
+                   Controlador controlador = new Controlador(vista, model);
 
-                vista.registerController(controlador);
+                   vista.registerController(controlador);
 
-                vista.setVisible(true);
+                   vista.setVisible(true);
+               }catch (IOException e){
+                   e.printStackTrace();
+               }
             }
 
         });

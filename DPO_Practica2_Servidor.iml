@@ -13,5 +13,7 @@
     <orderEntry type="library" name="jcommon-1.0.23" level="project" />
     <orderEntry type="library" name="MigLayout" level="project" />
     <orderEntry type="library" name="JGoodies Forms" level="project" />
+    <orderEntry type="library" name="gson-2.3.1" level="project" />
+    <orderEntry type="library" name="gson-2.3.11" level="project" />
   </component>
 </module>

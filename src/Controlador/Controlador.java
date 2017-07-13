@@ -1,5 +1,6 @@
 package Controlador;
 
+import Client_Servidor.Server;
 import Model.Model_usuari;
 import Vista.VistaServidor;
 
@@ -8,7 +9,9 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
+import Model.Arxiu;
 
 /**
  * Classe del controlador
@@ -19,19 +22,37 @@ public class Controlador implements ActionListener{
 
     private VistaServidor vista;
     private Model_usuari model;
-    private Network network = new Network(this);;
+    private Server server;
+    private final GestionarPartides gPartides;
 
     private boolean connectat = false;
 
-    public Controlador(VistaServidor vista, Model_usuari model){
+    public Controlador(VistaServidor vista, Model_usuari model) throws IOException{
         this.vista = vista;
         this.model = model;
+        gPartides = new GestionarPartides();
+        server = new Server(11111, gPartides);
+        Arxiu arxiu = new Arxiu();
+//        arxiu = arxiu.llegeixDades();
+        vista.actualitzaPort(arxiu.getportClient());
 
     }
 
     public void actionPerformed(ActionEvent event){
 
         try {
+
+            if (event.getActionCommand().equals("INICIAR")){
+                String stringPortClient = vista.getPort();
+                int portClient = Integer.parseInt(stringPortClient);
+     //           Arxiu arxiu = new Arxiu();
+     //           arxiu.escriuPort(portClient);
+     //           arxiu.llegeixDades();
+                System.out.println("Port de la base de Dades desat correctament");
+            }
+
+
+
             if (event.getSource() instanceof JMenuItem){
                 System.out.println(event.getActionCommand() + " - pestaña");
 
@@ -62,14 +83,14 @@ public class Controlador implements ActionListener{
                 }
                 else if (event.getActionCommand().equals("INICIAR")){
                     if (!connectat){
-                        network.connect();
+                        server.startServer();
                         connectat = true;
                     }
                 }
                 //No es pot obrir i tancar el port més d'una vegada, suposo que perque tot i matar els sockets del run, no matem el thread de run.
                 else if (event.getActionCommand().equals("ATURAR")){
                     if (connectat){
-                        network.disconnect();
+                        server.stopServer();
                         connectat = false;
                     }
                 }
@@ -85,6 +106,8 @@ public class Controlador implements ActionListener{
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
+        }catch (IOException e){
             e.printStackTrace();
         }
 
