@@ -82,6 +82,7 @@ public class DedicatedServer extends Thread{
                        }
                        break;
 
+
                    case "JOC2":
 
                        gPartides.addJoc2(this);

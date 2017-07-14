@@ -45,8 +45,8 @@ public class Model_usuari {
 
         } else {
             /*comprovem el format del correu mirant lletra per lletra:
-              - ha de tenir només una arrova
-              - ha de tenir almenys un punt després de l'arrova i aquest no pot estar just després ni al final
+              - ha de tenir només una arroba
+              - ha de tenir almenys un punt després de l'arroba i aquest no pot estar just després ni al final
               - no pot tenir espais
              */
             int arrova = 0;
