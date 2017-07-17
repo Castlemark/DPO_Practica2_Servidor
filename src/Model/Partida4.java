@@ -103,7 +103,6 @@ public class Partida4 {
 
     public void fiPartida() {
         try {
-            reinicia();
             int guanyador = -1;
             for (int i = 0; i < jugadors.size(); i++) {
                 if (posicions[i].equals("1r")) {
@@ -116,6 +115,7 @@ public class Partida4 {
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(guanyador);
             }
+            reinicia();
         } catch (IOException e) {
             e.printStackTrace();
         }
