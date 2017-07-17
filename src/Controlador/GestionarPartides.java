@@ -70,6 +70,7 @@ public class GestionarPartides {
             //aqui comença una partida perque tenim tota la gent necesaria
         }
         if(currentCua4.size() == 4){
+
             Partida4 p4 = new Partida4(currentCua4);
         }
     }
