@@ -135,6 +135,9 @@ public class DedicatedServer extends Thread{
                            }
                        }
                        break;
+
+                   case "TANCARSESSIO":
+                       this.login=null;//sha de provar
                }
            }
 
