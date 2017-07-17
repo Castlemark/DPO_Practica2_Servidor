@@ -91,10 +91,12 @@ public class Partida4 {
                         case 3:
                             posicions[i] = "2n";
                             puntuacions[i] = 10;
-                            fiPartida();
                             break;
                     }
                 }
+            }
+            if(morts == 3){
+                fiPartida();
             }
         }catch(IOException e){
             e.printStackTrace();
