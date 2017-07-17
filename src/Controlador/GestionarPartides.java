@@ -62,6 +62,8 @@ public class GestionarPartides {
         if (currentCua4.size() < 4){
 
             currentCua4.add(d);
+            d.setNum(currentCua4.size() - 1);
+
         }
         else {
 

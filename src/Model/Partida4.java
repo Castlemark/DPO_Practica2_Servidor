@@ -72,12 +72,13 @@ public class Partida4 {
                     j = i;
                 }
             }
+            morts++;
             for (int i = 0; i < jugadors.size(); i++) {
 
                 if (jugadors.get(i).getsClient() != emisor) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
                     jugadors.get(i).getDoStreamO().writeObject(j);
-                    morts++;
+                    System.out.println("Han mort " + morts);
                     switch (morts){
                         case 1:
                             posicions[i] = "4t";
@@ -100,11 +101,12 @@ public class Partida4 {
         }
     }
 
-    public void fiPartida(){
-        try{
+    public void fiPartida() {
+        try {
+            reinicia();
             int guanyador = -1;
             for (int i = 0; i < jugadors.size(); i++) {
-                if(posicions[i].equals("1r")){
+                if (posicions[i].equals("1r")) {
                     guanyador = i;
                 }
             }
@@ -114,8 +116,16 @@ public class Partida4 {
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(guanyador);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void reinicia(){
+        morts = 0;
+        for(int i = 0; i < 4; i++){
+            posicions[i] = "1r";
+            puntuacions[i] = 20;
         }
     }
 
