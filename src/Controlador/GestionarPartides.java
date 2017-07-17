@@ -9,7 +9,6 @@ import com.sun.deploy.resources.Deployment_de;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Propietario on 20/06/2017.
@@ -25,7 +24,7 @@ public class GestionarPartides {
     private ArrayList<DedicatedServer> currentCuaTorneig;
 
 
-    public GestionarPartides() {
+    public GestionarPartides(){
 
         cua2 = new ArrayList<>();
         cua4 = new ArrayList<>();
@@ -54,12 +53,15 @@ public class GestionarPartides {
         }
     }
 
-    public void addJoc4(DedicatedServer d) throws IOException {
+    public void addJoc4(DedicatedServer d) throws IOException{
 
-        if (currentCua4.size() < 4) {
+        if (currentCua4.size() < 4){
 
             currentCua4.add(d);
-        } else {
+            d.setNum(currentCua4.size() - 1);
+
+        }
+        else {
 
             cua4.add(currentCua4);
             currentCua4.clear();
@@ -67,17 +69,18 @@ public class GestionarPartides {
 
             //aqui comença una partida perque tenim tota la gent necesaria
         }
-        if (currentCua4.size() == 4) {
+        if(currentCua4.size() == 4){
             Partida4 p4 = new Partida4(currentCua4);
         }
     }
 
-    public void addCampeonat(DedicatedServer d) {
+    public void addCampeonat(DedicatedServer d){
 
-        if (currentCuaTorneig.size() < 4) {
+        if (currentCuaTorneig.size() < 4){
 
             currentCuaTorneig.add(d);
-        } else {
+        }
+        else {
 
             cuaTorneig.add(currentCuaTorneig);
             currentCua4.clear();

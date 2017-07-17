@@ -146,6 +146,10 @@ public class DedicatedServer extends Thread{
                            partida4 = null;
                        }
                        break;
+
+                   case "TANCARSESSIO":
+                       this.login="";
+                       break;
                }
            }
 
