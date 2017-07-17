@@ -140,6 +140,7 @@ public class DedicatedServer extends Thread{
                        this.login="";
                        break;
                }
+
            }
 
        }catch (IOException e){
