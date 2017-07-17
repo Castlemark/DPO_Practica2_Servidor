@@ -103,7 +103,15 @@ public class DedicatedServer extends Thread{
 
                    case "MOVIMENT":
                        System.out.println("sha rebut serp");
-                       partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                       if(partida2 != null){
+                           partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                       }else{
+                           if(partida4 != null){
+                               partida4.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                           }else {
+
+                           }
+                        }
                        break;
 
                    case "COLLISIO":
@@ -119,14 +127,20 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "MORT":
-                       partida2.haMort(sClient);
+                       if(partida2 != null){
+                           partida2.haMort(sClient);
+                       }else {
+                           if(partida4 != null){
+                               partida4.haMort(sClient);
+                           }
+                       }
                        break;
                }
            }
 
        }catch (IOException e){
            dedicatedServers.remove(this);
-           e.printStackTrace();
+          // e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
        }catch (ClassNotFoundException e){
@@ -179,5 +193,9 @@ public class DedicatedServer extends Thread{
 
     public void setPartida2(Partida2 partida2) {
         this.partida2 = partida2;
+    }
+
+    public void setPartida4(Partida4 partida4) {
+        this.partida4 = partida4;
     }
 }

@@ -3,6 +3,7 @@ package Controlador;
 import Client_Servidor.DedicatedServer;
 import Model.Partida;
 import Model.Partida2;
+import Model.Partida4;
 import com.sun.deploy.resources.Deployment_de;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class GestionarPartides {
         }
     }
 
-    public void addJoc4(DedicatedServer d){
+    public void addJoc4(DedicatedServer d) throws IOException{
 
         if (currentCua4.size() < 4){
 
@@ -69,6 +70,9 @@ public class GestionarPartides {
             currentCua4.add(d);
 
             //aqui comença una partida perque tenim tota la gent necesaria
+        }
+        if(currentCua4.size() == 4){
+            Partida4 p4 = new Partida4(currentCua4);
         }
     }
 
