@@ -70,6 +70,7 @@ public class Partida2 {
 
                 if (jugadors.get(i).getsClient() != emisor) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
+                    jugadors.get(i).getDoStreamO().writeObject(j);
                     posicions[i] = "1r";
                     puntuacions[i] = 10;
                 } else{
