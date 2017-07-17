@@ -4,6 +4,7 @@ import Client_Servidor.DedicatedServer;
 import Model.Partida;
 import Model.Partida2;
 import Model.Partida4;
+import Model.PartidaTorneig;
 import com.sun.deploy.resources.Deployment_de;
 
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class GestionarPartides {
         }
     }
 
-    public void addCampeonat(DedicatedServer d){
+    public void addCampeonat(DedicatedServer d) throws IOException{
 
         if (currentCuaTorneig.size() < 4){
 
@@ -88,6 +89,10 @@ public class GestionarPartides {
             currentCua4.add(d);
 
             //aqui comença una partida perque tenim tota la gent necesari
+        }
+
+        if(currentCuaTorneig.size() == 4){
+            PartidaTorneig pt = new PartidaTorneig(currentCuaTorneig);
         }
     }
 

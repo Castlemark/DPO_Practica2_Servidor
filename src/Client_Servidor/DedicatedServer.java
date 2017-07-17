@@ -213,4 +213,8 @@ public class DedicatedServer extends Thread{
     public void setPartida4(Partida4 partida4) {
         this.partida4 = partida4;
     }
+
+    public void setPartidaTorneig(PartidaTorneig partidaTorneig) {
+        this.partidaTorneig = partidaTorneig;
+    }
 }
