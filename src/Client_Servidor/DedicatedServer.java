@@ -135,6 +135,17 @@ public class DedicatedServer extends Thread{
                            }
                        }
                        break;
+
+                   case "ABANDONA":
+                       if (partida2 != null){
+                           gPartides.buidaPartida(this,2);
+                           partida2 = null;
+                       }
+                       else if (partida4 != null){
+                           gPartides.buidaPartida(this,4);
+                           partida4 = null;
+                       }
+                       break;
                }
            }
 
