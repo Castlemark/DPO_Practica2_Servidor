@@ -16,6 +16,9 @@ public class PartidaTorneig {
     private String[] posicions = new String[4];
     private int morts;
     private int ronda;
+    private boolean[] eliminats = new boolean[4];
+    private int guanyador;
+    private int eliminat;
 
     public PartidaTorneig(ArrayList<DedicatedServer> jugadors) throws IOException {
         this.jugadors = jugadors;
@@ -39,7 +42,9 @@ public class PartidaTorneig {
         for(int i = 0; i < 4; i++){
             posicions[i] = "1r";
             puntuacions[i] = 20;
+            eliminats[i] = false;
         }
+
     }
 
 
@@ -86,7 +91,7 @@ public class PartidaTorneig {
                             System.out.println("Han mort " + morts);
                             switch (morts) {
                                 case 1:
-                                    posicions[j] = "4t";
+                                    posicions[j] = "4t Estàs eliminat!";
                                     puntuacions[j] = -20;
                                     break;
                                 case 2:
@@ -105,8 +110,49 @@ public class PartidaTorneig {
                     }
                     break;
                 case 2:
+                    morts++;
+                    for (int i = 0; i < jugadors.size(); i++) {
+
+                        if (jugadors.get(i).getsClient() != emisor) {
+                            jugadors.get(i).getDoStreamO().writeObject("MORT");
+                            jugadors.get(i).getDoStreamO().writeObject(j);
+                            System.out.println("Han mort " + morts);
+                            switch (morts) {
+                                case 1:
+                                    posicions[j] = "3r Estàs eliminat!";
+                                    puntuacions[j] = -10;
+                                    break;
+                                case 2:
+                                    posicions[j] = "2n";
+                                    puntuacions[j] = 0;
+                                    break;
+                            }
+                        }
+                    }
+                    if (morts == 2) {
+                        fiRonda();
+                    }
                     break;
                 case 3:
+                    morts++;
+                    for (int i = 0; i < jugadors.size(); i++) {
+
+
+                        if (jugadors.get(i).getsClient() != emisor) {
+                            jugadors.get(i).getDoStreamO().writeObject("MORT");
+                            jugadors.get(i).getDoStreamO().writeObject(j);
+                            System.out.println("Han mort " + morts);
+                            switch (morts) {
+                                case 1:
+                                    posicions[j] = "2n";
+                                    puntuacions[j] = -10;
+                                    break;
+                            }
+                        }
+                    }
+                    if (morts == 1) {
+                        fiRonda();
+                    }
                     break;
             }
 
@@ -117,13 +163,16 @@ public class PartidaTorneig {
 
     public void fiRonda() {
         try {
+            System.out.println("ROnda " + ronda);
            switch (ronda) {
                case 1:
-                   int guanyador = -1;
+                   guanyador = -1;
 
                    for (int i = 0; i < jugadors.size(); i++) {
-                       if (posicions[i].equals("1r")) {
-                           guanyador = i;
+
+                       if(posicions[i].equals("4t Estàs eliminat!")){
+                           eliminats[i] = true;
+                           eliminat = i;
                        }
                    }
                    for (int i = 0; i < jugadors.size(); i++) {
@@ -131,12 +180,45 @@ public class PartidaTorneig {
                        jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                      // jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
                    }
-                   //reinicia();
+                   seguentRonda();
                    break;
                case 2:
+                   for (int i = 0; i < jugadors.size(); i++) {
+                       if(posicions[i].equals("3r Estàs eliminat!")){
+                           eliminats[i] = true;
+                       }
+                   }
+                   for (int i = 0; i < jugadors.size(); i++) {
+                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                       jugadors.get(i).getDoStreamO().writeObject(eliminats);
+                   }
+                   seguentRonda();
                    break;
                case 3:
+                   for (int i = 0; i < jugadors.size(); i++) {
+                       if(posicions[i].equals("1r Has guanyat el torneig!")){
+                           guanyador = i;
+                       }
+                       if(posicions[i].equals("2n")){
+                           eliminats[i] = true;
+                       }
+                   }
+                   for (int i = 0; i < jugadors.size(); i++) {
+                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                       jugadors.get(i).getDoStreamO().writeObject(eliminats);
+                   }
+                   seguentRonda();
                    break;
            }
         } catch (IOException e) {
@@ -144,18 +226,36 @@ public class PartidaTorneig {
         }
     }
 
-    public void seguentRonda(int eliminat){
+    public void seguentRonda(){
         switch (ronda) {
             case 1:
                 morts = 0;
                 for (int i = 0; i < 4; i++) {
-                    posicions[i] = "1r";
-                    puntuacions[i] = 20;
+                    if(!eliminats[i]){
+                        posicions[i] = "1r";
+                        puntuacions[i] = 10;
+                    }
                 }
+                ronda++;
                 break;
             case 2:
+                morts = 0;
+                for (int i = 0; i < 4; i++) {
+                    if(!eliminats[i]){
+                        posicions[i] = "1r Has guanyat el torneig!";
+                        puntuacions[i] = 10;
+                    }
+                }
+                ronda++;
                 break;
             case 3:
+                morts = 0;
+                for (int i = 0; i < 4; i++) {
+                        posicions[i] = "1r";
+                        puntuacions[i] = 20;
+                        eliminats[i] = false;
+                }
+                ronda = 1;
                 break;
         }
     }

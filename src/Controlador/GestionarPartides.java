@@ -41,10 +41,12 @@ public class GestionarPartides {
         if (cua2.isEmpty()){
             cua2.add(new ArrayList<DedicatedServer>());
             cua2.get(cua2.size() - 1).add(d);
+            d.setNum(cua2.get(cua2.size() - 1).size() - 1);
         }
         else {
 
             cua2.get(cua2.size() - 1).add(d);
+            d.setNum(cua2.get(cua2.size() - 1).size() - 1);
 
             if (cua2.get(cua2.size() - 1).size() == 2){
 
@@ -81,6 +83,7 @@ public class GestionarPartides {
         if (currentCuaTorneig.size() < 4){
 
             currentCuaTorneig.add(d);
+            d.setNum(currentCuaTorneig.size() -1);
         }
         else {
 

@@ -109,7 +109,7 @@ public class DedicatedServer extends Thread{
                            if(partida4 != null){
                                partida4.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                            }else {
-
+                               partidaTorneig.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                            }
                         }
                        break;
@@ -132,6 +132,8 @@ public class DedicatedServer extends Thread{
                        }else {
                            if(partida4 != null){
                                partida4.haMort(sClient);
+                           }else{
+                               partidaTorneig.haMort(sClient);
                            }
                        }
                        break;
