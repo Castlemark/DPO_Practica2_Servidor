@@ -311,6 +311,15 @@ public class Model_usuari {
         conn.disconnect();
     }
 
+    public void actualitzaControls(String login, int up, int down, int left, int right ){
+        conn.connect();
+        System.out.print("UPDATE usuari...");
+        //conn.updateQuery(); Shan d'actualitzar els controls
+        conn.disconnect();
+
+    }
+
+
     public int getPuntsUsuari (String login) throws  SQLException{
 
         int punts;

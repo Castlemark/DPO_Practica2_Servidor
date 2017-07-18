@@ -30,6 +30,12 @@ public class Usuari implements Serializable{
         this.right = 68;
     }
 
+  /*  public Usuari(String login, String mail, String password){
+        this.login = login;
+        this.mail = mail;
+        this.password = password;
+    }*/
+
     public void setLogin(String login){
         this.login = login;
     }
