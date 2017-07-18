@@ -1,4 +1,4 @@
-CREATE DATABASE Troner;
+CREATE DATABASE IF NOT exists Troner;
 USE Troner;
 
 CREATE TABLE Usuari(
@@ -9,10 +9,10 @@ CREATE TABLE Usuari(
   punts INT,
   data_registre DATE,
   data_ultimacces DATE,
-  up INT,
-  down INT,
-  left INT,
-  right INT
+  tecla_up INT,
+  tecla_down INT,
+  tecla_left INT,
+  tecla_right INT,
   PRIMARY KEY (id_jugador)
 );
 
@@ -40,8 +40,4 @@ CREATE TABLE Torneig(
 CREATE TABLE Torneig_Partida(
   id_torneig BIGINT UNSIGNED,
   id_partida BIGINT UNSIGNED
-);
-
-CREATE TABLE Controls(
-
 );
