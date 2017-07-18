@@ -161,8 +161,9 @@ public class Model_usuari {
         if (comprovaDadesInsercio(nomUsuari, correu, contrasenya) && comprovaDadesFormat(nomUsuari, correu, contrasenya, contrasenya2)) {
 
             System.out.println("inserint");
-            System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + ")");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, punts, data_registre, data_ultimacces) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE()" + ")");
+            System.out.println("INSERT INTO usuari (login, mail, contrasenya,  punts, data_registre, data_ultimacces ,up , down, left, right) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE(), 87, 83, 65, 68" + ")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya,  punts, data_registre, data_ultimacces ,tecla_up , tecla_down, tecla_left, tecla_right) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE(), 87, 83, 65, 68" + ")");
+
 
             conn.disconnect();
             return true;
@@ -311,10 +312,10 @@ public class Model_usuari {
         conn.disconnect();
     }
 
-    public void actualitzaControls(String login, int up, int down, int left, int right ){
+    public void actualitzaControls(String login, int up, int down, int left, int right ) {
         conn.connect();
-        System.out.print("UPDATE usuari...");
-        //conn.updateQuery(); Shan d'actualitzar els controls
+        System.out.print("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'");
+        conn.updateQuery("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
         conn.disconnect();
 
     }
@@ -355,6 +356,26 @@ public class Model_usuari {
         conn.disconnect();
         System.out.println(ranquing);
         return ranquing;
+    }
+
+    public int[] getControls (String login) throws  SQLException{
+
+        int[] controls = new int[4];
+        ResultSet resultSet;
+
+        conn.connect();;
+
+        resultSet = conn.selectQuery("SELECT tecla_up, tecla_down, tecla_left, tecla_right FROM usuari WHERE login = '" + login + "';");
+        controls[0]=resultSet.getInt("tecla_up");
+        controls[1]=resultSet.getInt("tecla_down");
+        controls[2]=resultSet.getInt("tecla_left");
+        controls[3]=resultSet.getInt("tecla_right");
+
+        conn.disconnect();
+
+        return controls;
+
+
     }
 }
 
