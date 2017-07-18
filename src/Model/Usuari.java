@@ -30,11 +30,7 @@ public class Usuari implements Serializable{
         this.right = 68;
     }
 
-  /*  public Usuari(String login, String mail, String password){
-        this.login = login;
-        this.mail = mail;
-        this.password = password;
-    }*/
+
 
     public void setLogin(String login){
         this.login = login;
@@ -58,6 +54,11 @@ public class Usuari implements Serializable{
 
     public String getPassword() {
         return password;
+    }
+
+    public void setControls (int up, int down, int left, int right){
+        this.up = up;
+        this.down = down;
     }
 
     /**

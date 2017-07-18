@@ -87,11 +87,11 @@ public class Controlador implements ActionListener{
                         connectat = true;
                     }
                 }
-                //No es pot obrir i tancar el port més d'una vegada, suposo que perque tot i matar els sockets del run, no matem el thread de run.
                 else if (event.getActionCommand().equals("ATURAR")){
                     if (connectat){
-                        server.stopServer();
-                        connectat = false;
+
+                        server = null;
+                        server = new Server(11111, gPartides);
                     }
                 }
 
