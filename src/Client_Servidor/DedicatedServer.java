@@ -61,7 +61,6 @@ public class DedicatedServer extends Thread{
                        if (aux.equals("error a Model_usuari.comprovaInicia") || estaIniciat(aux)){
                            doStreamO.writeObject(false);
                            System.out.println("enviat false");
-                           //passsa controls doStreamO.writeObject(
                        }
                        else {
                            doStreamO.writeObject(true);
@@ -122,9 +121,15 @@ public class DedicatedServer extends Thread{
 
                        break;
 
-                   case "CANVIACONTROLS":
+                   case "CONTROLS":
 
 
+                       int up = (Integer) diStreamO.readObject();
+                       int down = (Integer) diStreamO.readObject();
+                       int left = (Integer) diStreamO.readObject();
+                       int right = (Integer) diStreamO.readObject();
+
+                       new Model_usuari().actualitzaControls(login,up,down,left,right);
 
                        break;
 
