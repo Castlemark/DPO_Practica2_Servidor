@@ -81,16 +81,16 @@ public class Partida4 {
                     System.out.println("Han mort " + morts);
                     switch (morts){
                         case 1:
-                            posicions[j] = "4t";
-                            puntuacions[j] = -20;
+                            posicions[i] = "4t";
+                            puntuacions[i] = -20;
                             break;
                         case 2:
-                            posicions[j] = "3r";
-                            puntuacions[j] = -10;
+                            posicions[i] = "3r";
+                            puntuacions[i] = -10;
                             break;
                         case 3:
-                            posicions[j] = "2n";
-                            puntuacions[j] = 10;
+                            posicions[i] = "2n";
+                            puntuacions[i] = 10;
                             break;
                     }
                 }
@@ -104,6 +104,9 @@ public class Partida4 {
     }
 
     public void fiPartida() {
+
+        Model_usuari model_usuari = new Model_usuari();
+
         try {
             int guanyador = -1;
             for (int i = 0; i < jugadors.size(); i++) {
@@ -112,6 +115,7 @@ public class Partida4 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
+                model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                 jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                 jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
