@@ -33,21 +33,20 @@ public class Server extends Thread{
     public void startServer () throws IOException{
 
         sSocket = new ServerSocket(11111);
-
         System.out.println("servidor conectat");
         running = true;
         start();
     }
 
-    public void stopServer(){
+    public void stopServer() throws IOException{
         running = false;
+
+        sSocket.close();
         for(DedicatedServer d: dedicatedServers){
             d.stopRunning();
         }
 
     }
-
-
 
     @Override
     public void run(){
