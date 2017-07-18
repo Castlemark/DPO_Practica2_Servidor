@@ -4,6 +4,7 @@ import Client_Servidor.DedicatedServer;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -119,11 +120,14 @@ public class Partida4 {
                 jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                 jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                 jugadors.get(i).getDoStreamO().writeObject(guanyador);
             }
             reinicia();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
         }
     }
 

@@ -68,6 +68,8 @@ public class DedicatedServer extends Thread{
                            System.out.println("enviat true");
                            new Model_usuari().actualitzaData(aux);
                            this.login = aux;
+                           doStreamO.writeObject("RANQUING");
+                           doStreamO.writeObject(new Model_usuari().getRanquing());
 
                        }
                        break;

@@ -4,6 +4,7 @@ import Client_Servidor.DedicatedServer;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -168,6 +169,9 @@ public class PartidaTorneig {
     }
 
     public void fiRonda() {
+
+        Model_usuari model_usuari = new Model_usuari();
+
         try {
             System.out.println("ROnda " + ronda);
            switch (ronda) {
@@ -213,9 +217,11 @@ public class PartidaTorneig {
 
                    }
                    for (int i = 0; i < jugadors.size(); i++) {
+                       model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                        jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                        jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                        jugadors.get(i).getDoStreamO().writeObject(guanyador);
                        jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
                        jugadors.get(i).getDoStreamO().writeObject(eliminat);
@@ -225,6 +231,8 @@ public class PartidaTorneig {
            }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException se){
+            se.printStackTrace();
         }
     }
 
