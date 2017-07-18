@@ -81,16 +81,16 @@ public class Partida4 {
                     System.out.println("Han mort " + morts);
                     switch (morts){
                         case 1:
-                            posicions[j] = "4t";
-                            puntuacions[j] = -20;
+                            posicions[i] = "4t";
+                            puntuacions[i] = -20;
                             break;
                         case 2:
-                            posicions[j] = "3r";
-                            puntuacions[j] = -10;
+                            posicions[i] = "3r";
+                            puntuacions[i] = -10;
                             break;
                         case 3:
-                            posicions[j] = "2n";
-                            puntuacions[j] = 10;
+                            posicions[i] = "2n";
+                            puntuacions[i] = 10;
                             break;
                     }
                 }
