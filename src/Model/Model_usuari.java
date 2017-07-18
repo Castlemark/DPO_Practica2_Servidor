@@ -327,6 +327,25 @@ public class Model_usuari {
 
         return punts;
     }
+
+    public String getRanquing() throws SQLException{
+
+        String ranquing = "Num  -   Nom  -   Punts";
+        ResultSet resultSet;
+        int i = 1;
+
+        conn.connect();
+
+        resultSet = conn.selectQuery("SELECT login, punts FROM usuari ORDER BY punts DESC;");
+
+        while (resultSet.next()){
+            ranquing += "\n" + i + "    -   " + resultSet.getString("login") +"  -   " + resultSet.getInt("punts");
+        }
+
+        conn.disconnect();
+        System.out.println(ranquing);
+        return ranquing;
+    }
 }
 
 
