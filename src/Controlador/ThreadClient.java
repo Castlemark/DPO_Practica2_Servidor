@@ -89,8 +89,6 @@ public class ThreadClient extends Thread{
                     }
             }
 
-
-
         } catch(EOFException e){
             System.out.println("[SERVER]: "+name+" disconnected.");
         } catch (Exception e) {

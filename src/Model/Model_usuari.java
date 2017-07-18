@@ -18,7 +18,7 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    ConectorDB conn = new ConectorDB("root", "130796", "troner", 3306);
+    private ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
 
     /**
      * Constructor de la classe
@@ -45,8 +45,8 @@ public class Model_usuari {
 
         } else {
             /*comprovem el format del correu mirant lletra per lletra:
-              - ha de tenir només una arrova
-              - ha de tenir almenys un punt després de l'arrova i aquest no pot estar just després ni al final
+              - ha de tenir només una arroba
+              - ha de tenir almenys un punt després de l'arroba i aquest no pot estar just després ni al final
               - no pot tenir espais
              */
             int arrova = 0;
@@ -162,7 +162,7 @@ public class Model_usuari {
 
             System.out.println("inserint");
             System.out.println("INSERT INTO usuari (login, mail, contrasenya) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + ")");
-            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, data_registre, data_ultimacces) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "CURDATE(), CURDATE()" + ")");
+            conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya, punts, data_registre, data_ultimacces) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE()" + ")");
 
             conn.disconnect();
             return true;
@@ -299,6 +299,33 @@ public class Model_usuari {
 
         conn.disconnect();
 
+    }
+
+    public void updatePuntuacio(String login, int punts){
+
+        conn.connect();
+
+        System.out.println("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
+        conn.updateQuery("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
+
+        conn.disconnect();
+    }
+
+    public int getPuntsUsuari (String login) throws  SQLException{
+
+        int punts;
+        ResultSet resultSet;
+
+        conn.connect();
+
+        resultSet = conn.selectQuery("SELECT punts FROM usuari WHERE login = '" + login + "';" );
+        resultSet.next();
+
+        punts = resultSet.getInt("punts");
+
+        conn.disconnect();
+
+        return punts;
     }
 }
 

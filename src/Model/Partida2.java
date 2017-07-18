@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,9 @@ import java.util.ArrayList;
  */
 public class Partida2 {
     private ArrayList<DedicatedServer> jugadors;
-    String[] logins = new String[2];
+    private String[] logins = new String[2];
+    private int[] puntuacions = new int[2];
+    private String[] posicions = new String[2];
 
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
@@ -65,14 +68,47 @@ public class Partida2 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
-                System.out.println("enviant a");
 
                 if (jugadors.get(i).getsClient() != emisor) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
+                    jugadors.get(i).getDoStreamO().writeObject(j);
+                    posicions[i] = "1r";
+                    puntuacions[i] = 10;
+                } else{
+                    posicions[i] = "2n";
+                    puntuacions[i] = -10;
                 }
             }
+            fiPartida();
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void fiPartida(){
+
+        Model_usuari model_usuari = new Model_usuari();
+
+        try{
+            int guanyador = -1;
+            for (int i = 0; i < jugadors.size(); i++) {
+                if(posicions[i].equals("1r")){
+                    guanyador = i;
+                }
+            }
+            for (int i = 0; i < jugadors.size(); i++) {
+                model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
+                jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
+                jugadors.get(i).getDoStreamO().writeObject(guanyador);
+
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }catch (SQLException se){
+            se.printStackTrace();
         }
     }
 }

@@ -27,6 +27,7 @@ public class DedicatedServer extends Thread{
     private ObjectOutputStream doStreamO;
     private ArrayList<DedicatedServer> dedicatedServers;
     private int num;
+    private Inicia inicia;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
         this.sClient = sClient;
@@ -53,7 +54,7 @@ public class DedicatedServer extends Thread{
                    case "INICIARSESSIO":
 
                        String aux;
-                       Inicia inicia = (Inicia) diStreamO.readObject();
+                       inicia = (Inicia) diStreamO.readObject();
 
                        aux = new Model_usuari().comprovaInicia(inicia);
 
@@ -82,6 +83,7 @@ public class DedicatedServer extends Thread{
                        }
                        break;
 
+
                    case "JOC2":
 
                        gPartides.addJoc2(this);
@@ -102,7 +104,15 @@ public class DedicatedServer extends Thread{
 
                    case "MOVIMENT":
                        System.out.println("sha rebut serp");
-                       partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                       if(partida2 != null){
+                           partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                       }else{
+                           if(partida4 != null){
+                               partida4.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                           }else {
+                               partidaTorneig.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
+                           }
+                        }
                        break;
 
                    case "COLLISIO":
@@ -118,14 +128,37 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "MORT":
-                       partida2.haMort(sClient);
+                       if(partida2 != null){
+                           partida2.haMort(sClient);
+                       }else {
+                           if(partida4 != null){
+                               partida4.haMort(sClient);
+                           }else{
+                               partidaTorneig.haMort(sClient);
+                           }
+                       }
+                       break;
+
+                   case "ABANDONA":
+                       if (partida2 != null){
+                           gPartides.buidaPartida(this,2);
+                           partida2 = null;
+                       }
+                       else if (partida4 != null){
+                           gPartides.buidaPartida(this,4);
+                           partida4 = null;
+                       }
+                       break;
+
+                   case "TANCARSESSIO":
+                       this.login="";
                        break;
                }
            }
 
        }catch (IOException e){
            dedicatedServers.remove(this);
-           e.printStackTrace();
+          // e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
        }catch (ClassNotFoundException e){
@@ -178,5 +211,13 @@ public class DedicatedServer extends Thread{
 
     public void setPartida2(Partida2 partida2) {
         this.partida2 = partida2;
+    }
+
+    public void setPartida4(Partida4 partida4) {
+        this.partida4 = partida4;
+    }
+
+    public void setPartidaTorneig(PartidaTorneig partidaTorneig) {
+        this.partidaTorneig = partidaTorneig;
     }
 }
