@@ -12,6 +12,10 @@ public class Usuari implements Serializable{
     private String login;
     private String mail;
     private String password;
+    private int up;
+    private int down;
+    private int left;
+    private int right;
 
     public Usuari (){
 
@@ -21,6 +25,12 @@ public class Usuari implements Serializable{
         this.mail = mail;
         this.password = password;
     }
+
+  /*  public Usuari(String login, String mail, String password){
+        this.login = login;
+        this.mail = mail;
+        this.password = password;
+    }*/
 
     public void setLogin(String login){
         this.login = login;

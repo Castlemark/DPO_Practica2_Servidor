@@ -92,6 +92,8 @@ public class PartidaTorneig {
                             switch (morts) {
                                 case 1:
                                     posicions[j] = "4t Estàs eliminat!";
+                                    eliminats[j] = true;
+                                    eliminat = j;
                                     puntuacions[j] = -20;
                                     break;
                                 case 2:
@@ -120,7 +122,9 @@ public class PartidaTorneig {
                             switch (morts) {
                                 case 1:
                                     posicions[j] = "3r Estàs eliminat!";
+                                    eliminats[j] = true;
                                     puntuacions[j] = -10;
+                                    eliminat = j;
                                     break;
                                 case 2:
                                     posicions[j] = "2n";
@@ -146,6 +150,8 @@ public class PartidaTorneig {
                                 case 1:
                                     posicions[j] = "2n";
                                     puntuacions[j] = -10;
+                                    eliminats[j] = true;
+                                    eliminat = j;
                                     break;
                             }
                         }
@@ -168,37 +174,35 @@ public class PartidaTorneig {
                case 1:
                    guanyador = -1;
 
-                   for (int i = 0; i < jugadors.size(); i++) {
 
-                       if(posicions[i].equals("4t Estàs eliminat!")){
-                           eliminats[i] = true;
-                           eliminat = i;
-                       }
-                   }
-                   for (int i = 0; i < jugadors.size(); i++) {
-                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
-                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
-                      // jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
-                   }
-                   seguentRonda();
-                   break;
-               case 2:
-                   for (int i = 0; i < jugadors.size(); i++) {
-                       if(posicions[i].equals("3r Estàs eliminat!")){
-                           eliminats[i] = true;
-                       }
-                   }
                    for (int i = 0; i < jugadors.size(); i++) {
                        jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                        jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(guanyador);
                        jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminats);
+                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
                    }
+                   seguentRonda();
+                   break;
+               case 2:
+
+                   for (int i = 0; i < jugadors.size(); i++) {
+                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
+
+                   }
+                   int num = 0;
+                   for(int k = 0; k < eliminats.length; k++){
+                       if(eliminats[k]){
+                           num++;
+                       }
+                   }
+                   System.out.println("Hi han eliminats " + num);
                    seguentRonda();
                    break;
                case 3:
@@ -206,9 +210,7 @@ public class PartidaTorneig {
                        if(posicions[i].equals("1r Has guanyat el torneig!")){
                            guanyador = i;
                        }
-                       if(posicions[i].equals("2n")){
-                           eliminats[i] = true;
-                       }
+
                    }
                    for (int i = 0; i < jugadors.size(); i++) {
                        jugadors.get(i).getDoStreamO().writeObject("PUNTS");
@@ -216,7 +218,7 @@ public class PartidaTorneig {
                        jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                        jugadors.get(i).getDoStreamO().writeObject(guanyador);
                        jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminats);
+                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
                    }
                    seguentRonda();
                    break;
