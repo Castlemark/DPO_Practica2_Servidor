@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -85,6 +86,9 @@ public class Partida2 {
     }
 
     public void fiPartida(){
+
+        Model_usuari model_usuari = new Model_usuari();
+
         try{
             int guanyador = -1;
             for (int i = 0; i < jugadors.size(); i++) {
@@ -93,13 +97,18 @@ public class Partida2 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
+                model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                 jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                 jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                 jugadors.get(i).getDoStreamO().writeObject(guanyador);
+
             }
         }catch (IOException e){
             e.printStackTrace();
+        }catch (SQLException se){
+            se.printStackTrace();
         }
     }
 }

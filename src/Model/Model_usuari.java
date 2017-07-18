@@ -310,6 +310,23 @@ public class Model_usuari {
 
         conn.disconnect();
     }
+
+    public int getPuntsUsuari (String login) throws  SQLException{
+
+        int punts;
+        ResultSet resultSet;
+
+        conn.connect();
+
+        resultSet = conn.selectQuery("SELECT punts FROM usuari WHERE login = '" + login + "';" );
+        resultSet.next();
+
+        punts = resultSet.getInt("punts");
+
+        conn.disconnect();
+
+        return punts;
+    }
 }
 
 

@@ -27,6 +27,7 @@ public class DedicatedServer extends Thread{
     private ObjectOutputStream doStreamO;
     private ArrayList<DedicatedServer> dedicatedServers;
     private int num;
+    private Inicia inicia;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
         this.sClient = sClient;
@@ -53,7 +54,7 @@ public class DedicatedServer extends Thread{
                    case "INICIARSESSIO":
 
                        String aux;
-                       Inicia inicia = (Inicia) diStreamO.readObject();
+                       inicia = (Inicia) diStreamO.readObject();
 
                        aux = new Model_usuari().comprovaInicia(inicia);
 
