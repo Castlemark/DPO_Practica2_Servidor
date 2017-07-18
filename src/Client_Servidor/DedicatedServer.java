@@ -61,7 +61,6 @@ public class DedicatedServer extends Thread{
                        if (aux.equals("error a Model_usuari.comprovaInicia") || estaIniciat(aux)){
                            doStreamO.writeObject(false);
                            System.out.println("enviat false");
-                           //passsa controls doStreamO.writeObject(
                        }
                        else {
                            doStreamO.writeObject(true);
@@ -70,6 +69,7 @@ public class DedicatedServer extends Thread{
                            this.login = aux;
                            doStreamO.writeObject("RANQUING");
                            doStreamO.writeObject(new Model_usuari().getRanquing());
+
 
                        }
                        break;
@@ -122,7 +122,14 @@ public class DedicatedServer extends Thread{
 
                        break;
 
-                   case "CANVIACONTROLS":
+                   case "ENVIACONTROLS":
+                       int [] controls = new Model_usuari().getControls(login);
+                       doStreamO.writeObject(controls[0]);
+                       doStreamO.writeObject(new Model_usuari().getControls(login)[1]);
+                       doStreamO.writeObject(new Model_usuari().getControls(login)[2]);
+                       doStreamO.writeObject(new Model_usuari().getControls(login)[0]);
+
+
 
 
 
