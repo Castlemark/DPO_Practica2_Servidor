@@ -38,16 +38,6 @@ public class Server extends Thread{
         start();
     }
 
-    public void stopServer() throws IOException{
-        running = false;
-
-        sSocket.close();
-        for(DedicatedServer d: dedicatedServers){
-            d.stopRunning();
-        }
-
-    }
-
     @Override
     public void run(){
         while (running) try{
