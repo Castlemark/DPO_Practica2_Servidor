@@ -69,6 +69,13 @@ public class DedicatedServer extends Thread{
                            this.login = aux;
                            doStreamO.writeObject("RANQUING");
                            doStreamO.writeObject(new Model_usuari().getRanquing());
+                           doStreamO.writeObject("ENVIACONTROLS");
+                           int[] controls = (new Model_usuari().getControls(login));
+                           doStreamO.writeObject(controls[0]);
+                           doStreamO.writeObject(controls[1]);
+                           doStreamO.writeObject(controls[2]);
+                           doStreamO.writeObject(controls[3]);
+                           System.out.println("ola" + controls[0] );
 
 
                        }
@@ -132,12 +139,12 @@ public class DedicatedServer extends Thread{
 
                    case "CONTROLS":
 
-
+                       System.out.println("bye tonto");
                        int up = (Integer) diStreamO.readObject();
                        int down = (Integer) diStreamO.readObject();
                        int left = (Integer) diStreamO.readObject();
                        int right = (Integer) diStreamO.readObject();
-
+                       System.out.println(up +down+left+right);
                        new Model_usuari().actualitzaControls(login,up,down,left,right);
 
                        break;

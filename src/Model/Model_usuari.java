@@ -385,6 +385,8 @@ public class Model_usuari {
         conn.connect();;
 
         resultSet = conn.selectQuery("SELECT tecla_up, tecla_down, tecla_left, tecla_right FROM usuari WHERE login = '" + login + "';");
+        resultSet.next();
+
         controls[0]=resultSet.getInt("tecla_up");
         controls[1]=resultSet.getInt("tecla_down");
         controls[2]=resultSet.getInt("tecla_left");

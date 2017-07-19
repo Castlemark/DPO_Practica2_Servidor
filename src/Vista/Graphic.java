@@ -23,9 +23,9 @@ public class Graphic extends JPanel {
     private JLabel jlMode;
 
     private JComboBox jcLogin;
-    private JComboBox jcMode;
+    //private JComboBox jcMode;
 
-    private String[] mode = {"2", "4", "Torneig"};
+    //private String[] mode = {"2", "4", "Torneig"};
 
     public Graphic(){
 
@@ -44,17 +44,18 @@ public class Graphic extends JPanel {
         jlLogin = new JLabel("Login          ");
         jlMode = new JLabel("Mode de joc        ");
         jcLogin = new JComboBox();
-        jcMode = new JComboBox(mode);
+        //jcMode = new JComboBox(mode);
 
         jpGraphic.setLayout(new GridLayout(4,1));
         jpLogin.add(jlLogin, BorderLayout.LINE_START);
         jpLogin.add(jcLogin, BorderLayout.CENTER);
         jpMode.add(jlMode, BorderLayout.LINE_START);
-        jpMode.add(jcMode, BorderLayout.CENTER);
+       // jpMode.add(jcMode, BorderLayout.CENTER);
 
         jpGraphic.add(jlTitle, BorderLayout.CENTER);
         jpGraphic.add(jpLogin);
-        jpGraphic.add(jpMode);
+        //jpGraphic.add(jpMode);
+
         Grafic_usuari gu = new Grafic_usuari();
       //  jpGraphic.add(gu);
 
@@ -69,10 +70,10 @@ public class Graphic extends JPanel {
 
     public void registerController(Controlador c){
         jcLogin.setActionCommand("LOGIN");
-        jcMode.setActionCommand("MODE");
+        //jcMode.setActionCommand("MODE");
 
         jcLogin.addActionListener(c);
-        jcMode.addActionListener(c);
+        //jcMode.addActionListener(c);
     }
 
     public void setLlistaLogin(ArrayList<String> logins){
