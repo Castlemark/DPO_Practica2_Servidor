@@ -18,7 +18,7 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    private ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
+    private ConectorDB conn = new ConectorDB("root", "mysql123ñ", "troner", 3306);
 
     /**
      * Constructor de la classe
@@ -316,8 +316,8 @@ public class Model_usuari {
 
     public void actualitzaControls(String login, int up, int down, int left, int right ) {
         conn.connect();
-        System.out.print("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'");
-        conn.updateQuery("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
+        System.out.print("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'");
+        conn.updateQuery("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
         conn.disconnect();
 
     }

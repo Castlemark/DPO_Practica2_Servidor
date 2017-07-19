@@ -76,6 +76,7 @@ public class Controlador implements ActionListener{
 
                 if (event.getActionCommand().equals("REGISTRAR BOTO")){
                     vista.showMessage(model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword(), vista.getPassword2()));
+
                 }
                 else if (event.getActionCommand().equals("ELIMINA")){
                     model.eliminaUsuari(vista.gsGetSelectedLogin());

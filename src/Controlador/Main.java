@@ -36,6 +36,7 @@ public class Main {
                    Model_usuari model = new Model_usuari();
                    Controlador controlador = new Controlador(vista, model);
 
+
                    vista.registerController(controlador);
 
                    vista.setVisible(true);
