@@ -55,7 +55,7 @@ public class Graphic extends JPanel {
         jpGraphic.add(jlTitle, BorderLayout.CENTER);
         jpGraphic.add(jpLogin);
         jpGraphic.add(jpMode);
-        Grafic_usuari gu = new Grafic_usuari();
+        GraficUsuari gu = new GraficUsuari();
       //  jpGraphic.add(gu);
 
         this.add(jpGraphic, BorderLayout.LINE_START);

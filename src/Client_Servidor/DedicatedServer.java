@@ -2,6 +2,7 @@ package Client_Servidor;
 
 import Controlador.GestionarPartides;
 import Model.*;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -69,6 +70,12 @@ public class DedicatedServer extends Thread{
                            this.login = aux;
                            doStreamO.writeObject("RANQUING");
                            doStreamO.writeObject(new Model_usuari().getRanquing());
+                           doStreamO.writeObject(new Model_usuari().getControls(login)[0]);
+                           System.out.println(new Model_usuari().getControls(login)[1]);//comprovar
+                           doStreamO.writeObject(new Model_usuari().getControls(login)[1]);
+                           doStreamO.writeObject(new Model_usuari().getControls(login)[2]);
+                           doStreamO.writeObject(new Model_usuari().getControls(login)[3]);
+
 
 
                        }
