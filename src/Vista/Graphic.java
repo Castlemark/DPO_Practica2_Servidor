@@ -23,9 +23,9 @@ public class Graphic extends JPanel {
     private JLabel jlMode;
 
     private JComboBox jcLogin;
-    private JComboBox jcMode;
+    //private JComboBox jcMode;
 
-    private String[] mode = {"2", "4", "Torneig"};
+    //private String[] mode = {"2", "4", "Torneig"};
 
     public Graphic(){
 
@@ -54,7 +54,7 @@ public class Graphic extends JPanel {
 
         jpGraphic.add(jlTitle, BorderLayout.CENTER);
         jpGraphic.add(jpLogin);
-        jpGraphic.add(jpMode);
+        //jpGraphic.add(jpMode);
         GraficUsuari gu = new GraficUsuari();
       //  jpGraphic.add(gu);
 
@@ -69,10 +69,10 @@ public class Graphic extends JPanel {
 
     public void registerController(Controlador c){
         jcLogin.setActionCommand("LOGIN");
-        jcMode.setActionCommand("MODE");
+        //jcMode.setActionCommand("MODE");
 
         jcLogin.addActionListener(c);
-        jcMode.addActionListener(c);
+        //jcMode.addActionListener(c);
     }
 
     public void setLlistaLogin(ArrayList<String> logins){
