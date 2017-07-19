@@ -18,7 +18,7 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    private ConectorDB conn = new ConectorDB("root", "mysql123ñ", "troner", 3306);
+    private ConectorDB conn = new ConectorDB("root", "12069554eE", "troner", 3306);
 
     /**
      * Constructor de la classe
@@ -308,8 +308,8 @@ public class Model_usuari {
 
         System.out.println("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
         conn.updateQuery("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
-        conn.insertQuery("INSERT INTO partida(data_partida) VALUES (CURDATE())");
-        conn.insertQuery("INSERT INTO Usuari_Partida(id_jugador, id_partida, puntuacio) VALUES (SELECT id_jugador FROM Usuari WHERE login = '"+ login + "', )");
+        System.out.println("INSERT INTO puntuacio(id_jugador, puntuacio) VALUES ((SELECT id_jugador FROM Usuari WHERE login = '"+ login + "'), " + punts + ");");
+        conn.insertQuery("INSERT INTO puntuacio(id_jugador, puntuacio) VALUES ((SELECT id_jugador FROM Usuari WHERE login = '"+ login + "'), " + punts + ");");
 
         conn.disconnect();
     }
@@ -340,6 +340,24 @@ public class Model_usuari {
         return punts;
     }
 
+    public ArrayList<Integer> getHistorial(String login) throws SQLException{
+
+        ResultSet resultSet;
+        ArrayList<Integer> punts = new ArrayList<>();
+
+        conn.connect();
+
+        System.out.println("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
+        resultSet = conn.selectQuery("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
+
+        while (resultSet.next()){
+            punts.add(resultSet.getInt("puntuacio"));
+        }
+
+        conn.disconnect();
+        return punts;
+    }
+
     public String getRanquing() throws SQLException{
 
         String ranquing = "Pos  -   Nom  -   Punts";
@@ -356,7 +374,6 @@ public class Model_usuari {
         }
 
         conn.disconnect();
-        System.out.println(ranquing);
         return ranquing;
     }
 
