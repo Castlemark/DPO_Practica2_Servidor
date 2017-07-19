@@ -141,12 +141,12 @@ public class DedicatedServer extends Thread{
 
                    case "CONTROLS":
 
-                       System.out.println("bye tonto");
+
                        int up = (Integer) diStreamO.readObject();
                        int down = (Integer) diStreamO.readObject();
                        int left = (Integer) diStreamO.readObject();
                        int right = (Integer) diStreamO.readObject();
-                       System.out.println(up +down+left+right);
+
                        new Model_usuari().actualitzaControls(login,up,down,left,right);
 
                        break;
