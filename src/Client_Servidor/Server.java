@@ -38,6 +38,10 @@ public class Server extends Thread{
         start();
     }
 
+    public ServerSocket getsSocket(){
+        return sSocket;
+    }
+
     @Override
     public void run(){
         while (running) try{

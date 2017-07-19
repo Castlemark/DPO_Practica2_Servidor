@@ -16,7 +16,15 @@ CREATE TABLE Usuari(
   PRIMARY KEY (id_jugador)
 );
 
-CREATE TABLE Partida(
+CREATE TABLE puntuacio(
+  id_jugador BIGINT UNSIGNED,
+  id_puntuacio BIGINT UNSIGNED AUTO_INCREMENT,
+  puntuacio INT,
+  PRIMARY KEY (id_puntuacio),
+  FOREIGN KEY (id_jugador) REFERENCES Usuari(id_jugador)
+);
+
+/*CREATE TABLE Partida(
   id_partida BIGINT UNSIGNED AUTO_INCREMENT,
   data_partida DATE,
   num_jugadors INT,
@@ -40,4 +48,4 @@ CREATE TABLE Torneig(
 CREATE TABLE Torneig_Partida(
   id_torneig BIGINT UNSIGNED,
   id_partida BIGINT UNSIGNED
-);
+);*/

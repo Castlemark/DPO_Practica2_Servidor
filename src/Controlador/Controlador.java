@@ -90,6 +90,7 @@ public class Controlador implements ActionListener{
                 else if (event.getActionCommand().equals("ATURAR")){
                     if (connectat){
 
+                        connectat = false;
                         server = null;
                         server = new Server(11111, gPartides);
                     }

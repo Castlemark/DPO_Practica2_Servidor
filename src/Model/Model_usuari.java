@@ -308,6 +308,8 @@ public class Model_usuari {
 
         System.out.println("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
         conn.updateQuery("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
+        conn.insertQuery("INSERT INTO partida(data_partida) VALUES (CURDATE())");
+        conn.insertQuery("INSERT INTO Usuari_Partida(id_jugador, id_partida, puntuacio) VALUES (SELECT id_jugador FROM Usuari WHERE login = '"+ login + "', )");
 
         conn.disconnect();
     }
