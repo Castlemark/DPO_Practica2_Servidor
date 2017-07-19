@@ -81,6 +81,8 @@ public class DedicatedServer extends Thread{
                        }
                        break;
                    case "REGISTRAR":
+                       System.out.println("ok");
+
                        Usuari usuari = (Usuari) diStreamO.readObject();
 
                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
@@ -113,7 +115,7 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "MOVIMENT":
-                       System.out.println("sha rebut serp");
+                       System.out.println("sha rebut serp" + num);
                        if(partida2 != null){
                            partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                        }else{
@@ -167,6 +169,7 @@ public class DedicatedServer extends Thread{
 
                    case "ABANDONA":
                        if (partida2 != null){
+                           //partida2.haMort(sClient);
                            gPartides.buidaPartida(this,2);
                            partida2 = null;
                        }

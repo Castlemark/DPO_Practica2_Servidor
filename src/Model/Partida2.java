@@ -31,7 +31,7 @@ public class Partida2 {
             jugadors.get(i).getDoStreamO().writeObject(logins);
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
-            System.out.println("comença " + jugadors.get(i).getLogin());
+            System.out.println("comença " + jugadors.get(i).getLogin() + " amb la serp " + i);
         }
     }
 
@@ -44,10 +44,9 @@ public class Partida2 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
-                System.out.println("enviant a");
 
                 if (jugadors.get(i).getsClient() != emisor) {
-                    System.out.println("enviant a" + jugadors.get(i).getLogin());
+                    System.out.println("enviant a" + jugadors.get(i).getLogin() + " amb serp " + i);
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     jugadors.get(i).getDoStreamO().writeObject(dir);

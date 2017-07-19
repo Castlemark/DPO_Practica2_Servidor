@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 /**
- * Classe de l'usuari en el model del client
+ * Classe de l'usuari en el Model del client
  *
  * Created by Grup 6 on 30/03/2017.
  */
@@ -17,20 +17,18 @@ public class Usuari implements Serializable{
     private int left;
     private int right;
 
-    public Usuari (){
+    public Usuari(){
 
     }
     public Usuari(String login, String mail, String password){
         this.login = login;
         this.mail = mail;
         this.password = password;
-        this.up = 87;
-        this.down = 83;
-        this.left = 65;
-        this.right = 68;
+        this.up=87;
+        this.down=83;
+        this.left=65;
+        this.right=68;
     }
-
-
 
     public void setLogin(String login){
         this.login = login;
@@ -54,11 +52,6 @@ public class Usuari implements Serializable{
 
     public String getPassword() {
         return password;
-    }
-
-    public void setControls (int up, int down, int left, int right){
-        this.up = up;
-        this.down = down;
     }
 
     /**
@@ -212,12 +205,10 @@ public class Usuari implements Serializable{
         return true;
     }
 
-    public void actualitzaControls (int[] controls) {
-
-        this.up = controls[0];
-        this.down = controls[1];
-        this.left = controls[2];
-        this.right = controls[3];
+    public void setControls (int up, int down, int left, int right) {
+        this.up = up;
+        this.down = down;
+        this.left = left;
+        this.right = right;
     }
 }
-

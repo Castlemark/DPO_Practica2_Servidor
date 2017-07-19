@@ -113,6 +113,12 @@ public class GestionarPartides {
 
                     for (int j = 0; j < cua2.get(i).size(); j++){
                         aux.add(cua2.get(i).get(j));
+                        if(!aux.get(j).equals(d)){
+                            aux.get(j).setPartida2(null);
+                            aux.get(j).getDoStreamO().writeObject("ABANDONAT");
+                            System.out.println("enviat abandonat");
+                        }
+
                     }
                     cua2.remove(i);
 
@@ -173,7 +179,6 @@ public class GestionarPartides {
             }
 
             for (int i = 0; i < aux.size(); i++){
-
                 addCampeonat(aux.get(i));
                 System.out.println(aux.get(i).getLogin() + " afegit a una nova cua");
             }
