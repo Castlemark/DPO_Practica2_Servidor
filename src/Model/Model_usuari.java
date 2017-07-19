@@ -314,8 +314,8 @@ public class Model_usuari {
 
     public void actualitzaControls(String login, int up, int down, int left, int right ) {
         conn.connect();
-        System.out.print("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'");
-        conn.updateQuery("UPDATE usuari SET up =" + up + ", SET down = " + down + ", SET left =" + left + ", SET right = " + right + "WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
+        System.out.print("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'");
+        conn.updateQuery("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
         conn.disconnect();
 
     }
