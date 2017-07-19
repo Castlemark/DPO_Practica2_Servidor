@@ -44,13 +44,13 @@ public class Graphic extends JPanel {
         jlLogin = new JLabel("Login          ");
         jlMode = new JLabel("Mode de joc        ");
         jcLogin = new JComboBox();
-        jcMode = new JComboBox(mode);
+        //jcMode = new JComboBox(mode);
 
         jpGraphic.setLayout(new GridLayout(4,1));
         jpLogin.add(jlLogin, BorderLayout.LINE_START);
         jpLogin.add(jcLogin, BorderLayout.CENTER);
         jpMode.add(jlMode, BorderLayout.LINE_START);
-        jpMode.add(jcMode, BorderLayout.CENTER);
+  //      jpMode.add(jcMode, BorderLayout.CENTER);
 
         jpGraphic.add(jlTitle, BorderLayout.CENTER);
         jpGraphic.add(jpLogin);
