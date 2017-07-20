@@ -1,6 +1,7 @@
 package Controlador;
 
 import Client_Servidor.Server;
+import Model.Arxiu;
 import Model.Model_usuari;
 
 import java.net.InetAddress;
@@ -31,8 +32,9 @@ public class Main {
             public void run() {
 
                try {
+
                    VistaServidor vista = new VistaServidor();
-                    System.out.println(InetAddress.getLocalHost());
+                   System.out.println(InetAddress.getLocalHost());
                    Model_usuari model = new Model_usuari();
                    Controlador controlador = new Controlador(vista, model);
 

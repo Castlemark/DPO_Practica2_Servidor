@@ -38,6 +38,10 @@ public class Server extends Thread{
         start();
     }
 
+    public void stopServer(){
+        running = false;
+    }
+
     public ServerSocket getsSocket(){
         return sSocket;
     }
@@ -51,7 +55,7 @@ public class Server extends Thread{
             dedicatedServers.add(dServer);
 
         }catch (IOException e){
-            e.printStackTrace();
+            System.out.println("Servidor aturat");
         }
     }
 

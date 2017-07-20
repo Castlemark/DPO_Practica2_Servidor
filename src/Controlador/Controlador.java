@@ -31,9 +31,9 @@ public class Controlador implements ActionListener{
         this.vista = vista;
         this.model = model;
         gPartides = new GestionarPartides();
-        server = new Server(11111, gPartides);
+        server = new Server(vista.getPort(), gPartides);
         Arxiu arxiu = new Arxiu();
-//        arxiu = arxiu.llegeixDades();
+        arxiu = arxiu.llegeixDades();
         vista.actualitzaPort(arxiu.getportClient());
 
     }
@@ -41,17 +41,6 @@ public class Controlador implements ActionListener{
     public void actionPerformed(ActionEvent event){
 
         try {
-
-            if (event.getActionCommand().equals("INICIAR")){
-                String stringPortClient = vista.getPort();
-                int portClient = Integer.parseInt(stringPortClient);
-     //           Arxiu arxiu = new Arxiu();
-     //           arxiu.escriuPort(portClient);
-     //           arxiu.llegeixDades();
-                System.out.println("Port de la base de Dades desat correctament");
-            }
-
-
 
             if (event.getSource() instanceof JMenuItem){
                 System.out.println(event.getActionCommand() + " - pestaña");
@@ -93,13 +82,16 @@ public class Controlador implements ActionListener{
                         server.startServer();
                         connectat = true;
                     }
+                    Arxiu arxiu = new Arxiu();
+                    arxiu.escriuPort(vista.getPort());
                 }
                 else if (event.getActionCommand().equals("ATURAR")){
                     if (connectat){
 
                         connectat = false;
-                        server = null;
-                        server = new Server(11111, gPartides);
+                        server.stopServer();
+                        server.getsSocket().close();
+                        server = new Server(vista.getPort(), gPartides);
                     }
                 }
 

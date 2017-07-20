@@ -18,12 +18,17 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    private ConectorDB conn = new ConectorDB("root", "miauMia1", "troner", 3306);
+    private ConectorDB conn;
 
     /**
      * Constructor de la classe
      */
-    public Model_usuari() {
+    public Model_usuari(){
+
+        Arxiu arxiu = new Arxiu();
+        arxiu = arxiu.llegeixDades();
+
+        conn = new ConectorDB(arxiu.getusuariBBDD(), arxiu.getpasswordBBDD(), arxiu.getnomBBDD(), arxiu.getportBBDD());
     }
 
     /**

@@ -28,7 +28,7 @@ public class Configuracio extends JPanel {
 
         jlTitle = new JLabel("Configuració", SwingConstants.CENTER);
         jlPort = new JLabel("Port  ");
-        jtPort = new JTextField();
+        jtPort = new JTextField("11111");
         jtPort.setHorizontalAlignment(SwingConstants.RIGHT);
         jbIniciar = new JButton("Iniciar");
         jbAturar = new JButton("Aturar");
