@@ -18,7 +18,7 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    private ConectorDB conn = new ConectorDB("root", "miauMia1", "troner", 3306);
+    private ConectorDB conn = new ConectorDB("root", "130796", "troner", 3306);
 
     /**
      * Constructor de la classe
