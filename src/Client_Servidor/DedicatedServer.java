@@ -51,6 +51,7 @@ public class DedicatedServer extends Thread{
                String opcio = (String) diStreamO.readObject();
 
                switch (opcio){
+
                    case "INICIARSESSIO":
 
                        String aux;
@@ -63,32 +64,31 @@ public class DedicatedServer extends Thread{
                            System.out.println("enviat false");
                        }
                        else {
+
                            doStreamO.writeObject(true);
                            System.out.println("enviat true");
                            new Model_usuari().actualitzaData(aux);
                            this.login = aux;
+
                            doStreamO.writeObject("RANQUING");
                            doStreamO.writeObject(new Model_usuari().getRanquing());
+
                            doStreamO.writeObject("ENVIACONTROLS");
                            int[] controls = (new Model_usuari().getControls(login));
                            doStreamO.writeObject(controls[0]);
                            doStreamO.writeObject(controls[1]);
                            doStreamO.writeObject(controls[2]);
                            doStreamO.writeObject(controls[3]);
-                           System.out.println("ola" + controls[0] );
-
-
                        }
                        break;
+
                    case "REGISTRAR":
-                       System.out.println("ok");
 
                        Usuari usuari = (Usuari) diStreamO.readObject();
 
                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
                            doStreamO.writeObject(true);
                            this.login = usuari.getLogin();
-                           System.out.println(usuari.getLogin());
                        }
                        else {
                            doStreamO.writeObject(false);
@@ -99,23 +99,21 @@ public class DedicatedServer extends Thread{
                    case "JOC2":
 
                        gPartides.addJoc2(this);
-                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "JOC4":
 
                        gPartides.addJoc4(this);
-                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "CAMPEONAT":
 
                        gPartides.addCampeonat(this);
-                       //Aqui fas un OK/KO per avisar al client si hi ha una cua plena,si una cua esta plena el client canvia a la finestra de joc i comença la partida
                        break;
 
                    case "MOVIMENT":
                        System.out.println("sha rebut serp" + num);
+
                        if(partida2 != null){
                            partida2.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                        }else{
@@ -125,10 +123,6 @@ public class DedicatedServer extends Thread{
                                partidaTorneig.enviaSerp((int)diStreamO.readObject(), (Posicio)diStreamO.readObject(), sClient);
                            }
                         }
-                       break;
-
-                   case "COLLISIO":
-
                        break;
 
                    case "ENVIACONTROLS":
@@ -141,21 +135,16 @@ public class DedicatedServer extends Thread{
 
                    case "CONTROLS":
 
-
                        int up = (Integer) diStreamO.readObject();
                        int down = (Integer) diStreamO.readObject();
                        int left = (Integer) diStreamO.readObject();
                        int right = (Integer) diStreamO.readObject();
 
                        new Model_usuari().actualitzaControls(login,up,down,left,right);
-
-                       break;
-
-                   case "MOSTRARANKING":
-
                        break;
 
                    case "MORT":
+
                        if(partida2 != null){
                            partida2.haMort(sClient);
                        }else {
@@ -168,6 +157,7 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "ABANDONA":
+
                        if (partida2 != null){
                            //partida2.haMort(sClient);
                            gPartides.buidaPartida(this,2);
@@ -187,7 +177,6 @@ public class DedicatedServer extends Thread{
 
        }catch (IOException e){
            dedicatedServers.remove(this);
-          // e.printStackTrace();
        }catch (SQLException e){
            e.printStackTrace();
        }catch (ClassNotFoundException e){
@@ -205,6 +194,7 @@ public class DedicatedServer extends Thread{
     }
 
     public boolean estaIniciat(String login){
+
         for(int i = 0; i < dedicatedServers.size(); i++){
 
             if (dedicatedServers == null){

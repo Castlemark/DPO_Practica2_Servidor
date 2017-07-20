@@ -5,8 +5,6 @@ import Model.Model_usuari;
 import Vista.VistaServidor;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -43,7 +41,6 @@ public class Controlador implements ActionListener{
         try {
 
             if (event.getSource() instanceof JMenuItem){
-                System.out.println(event.getActionCommand() + " - pestaña");
 
                 if (event.getActionCommand().equals("GEST")){
                     vista.gsUpdateList(model.recuperaLogins());
@@ -67,7 +64,6 @@ public class Controlador implements ActionListener{
 
             }
             else if (event.getSource() instanceof JButton){
-                System.out.println(event.getActionCommand() + " - boto");
 
                 if (event.getActionCommand().equals("REGISTRAR BOTO")){
                     vista.showMessage(model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword(), vista.getPassword2()));
@@ -108,7 +104,6 @@ public class Controlador implements ActionListener{
 
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
             e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
