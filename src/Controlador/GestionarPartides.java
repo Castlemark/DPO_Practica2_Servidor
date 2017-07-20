@@ -187,7 +187,6 @@ public class GestionarPartides {
                 addCampeonat(aux.get(i));
                 System.out.println(aux.get(i).getLogin() + " afegit a una nova cua");
             }
-
         }
     }
 }
