@@ -103,7 +103,6 @@ public class Partida2 {
                 jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
                 jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                 jugadors.get(i).getDoStreamO().writeObject(guanyador);
-
             }
         }catch (IOException e){
             e.printStackTrace();

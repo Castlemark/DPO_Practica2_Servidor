@@ -18,7 +18,6 @@ public class DedicatedServer extends Thread{
     private Socket sClient;
     private String login = "";
     private GestionarPartides gPartides;
-    private Model_usuari model;
     private Partida2 partida2;
     private Partida4 partida4;
     private PartidaTorneig partidaTorneig;
@@ -168,8 +167,11 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "ABANDONA":
+                       doStreamO.writeObject("RANQUING");
+                       doStreamO.writeObject(new Model_usuari().getRanquing());
                        if (partida2 != null){
-                           //partida2.haMort(sClient);
+                           Model_usuari model = new Model_usuari();
+                           model.updatePuntuacio(login, -10);
                            gPartides.buidaPartida(this,2);
                            partida2 = null;
                        }

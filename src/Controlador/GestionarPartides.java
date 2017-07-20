@@ -1,10 +1,7 @@
 package Controlador;
 
 import Client_Servidor.DedicatedServer;
-import Model.Partida;
-import Model.Partida2;
-import Model.Partida4;
-import Model.PartidaTorneig;
+import Model.*;
 import com.sun.deploy.resources.Deployment_de;
 
 import java.io.IOException;
@@ -100,26 +97,34 @@ public class GestionarPartides {
     }
 
     public void buidaPartida(DedicatedServer d, int tipuscua) throws IOException{
-
+        boolean conte;
         ArrayList<DedicatedServer> aux = new ArrayList<>();
-
+        System.out.println("Entra un cop");
         if (tipuscua == 2) {
 
             for (int i = 0; i < cua2.size(); i++) {
-
-                if (cua2.get(i).contains(d)) {
+                conte = false;
+                for(int j = 0; j < cua2.get(i).size(); j++){
+                    if(cua2.get(i).get(j).getLogin().equals(d.getLogin())){
+                        conte = true;
+                    }
+                }
+                if (conte) {
 
                     System.out.println("tamany: " + cua2.size());
 
                     for (int j = 0; j < cua2.get(i).size(); j++){
                         aux.add(cua2.get(i).get(j));
-                        if(!aux.get(j).equals(d)){
+                        if(!aux.get(j).getLogin().equals(d.getLogin())){
                             aux.get(j).setPartida2(null);
+                            Model_usuari model = new Model_usuari();
+                            model.updatePuntuacio(aux.get(j).getLogin(), 10);
                             aux.get(j).getDoStreamO().writeObject("ABANDONAT");
                             System.out.println("enviat abandonat");
                         }
 
                     }
+                    System.out.println(cua2.get(i).get(0).getLogin() + " eliminat de la cua");
                     cua2.remove(i);
 
                     System.out.println("tamany: " + cua2.size());
