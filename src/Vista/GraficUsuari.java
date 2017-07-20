@@ -36,11 +36,11 @@ public class GraficUsuari extends JPanel {
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
     private int numberYDivisions = 10;
-    private List<Double> scores;
+    private List<Integer> scores;
 
     public GraficUsuari(){}
 
-    public GraficUsuari(List<Double> scores) {
+    public GraficUsuari(List<Integer> scores) {
         this.scores = scores;
     }
 
@@ -136,7 +136,7 @@ public class GraficUsuari extends JPanel {
 
     private double getMinScore() {
         double minScore = Double.MAX_VALUE;
-        for (Double score : scores) {
+        for (int score : scores) {
             minScore = Math.min(minScore, score);
         }
         return minScore;
@@ -144,29 +144,29 @@ public class GraficUsuari extends JPanel {
 
     private double getMaxScore() {
         double maxScore = Double.MIN_VALUE;
-        for (Double score : scores) {
+        for (int score : scores) {
             maxScore = Math.max(maxScore, score);
         }
         return maxScore;
     }
 
-    public void setScores(List<Double> scores) {
+    public void setScores(List<Integer> scores) {
         this.scores = scores;
         invalidate();
         this.repaint();
     }
 
-    public List<Double> getScores() {
+    public List<Integer> getScores() {
         return scores;
     }
 
     private static void createAndShowGui() {
-        List<Double> scores = new ArrayList<>();
+        List<Integer> scores = new ArrayList<>();
         Random random = new Random();
         int maxDataPoints = 40;
         int maxScore = 10;
         for (int i = 0; i < maxDataPoints; i++) {
-            scores.add((double) random.nextDouble() * maxScore);
+            scores.add((int) random.nextDouble() * maxScore);
 //            scores.add((double) i);
         }
         GraficUsuari mainPanel = new GraficUsuari(scores);

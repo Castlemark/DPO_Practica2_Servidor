@@ -23,6 +23,7 @@ public class Graphic extends JPanel {
     private JLabel jlMode;
 
     private JComboBox jcLogin;
+    private GraficUsuari gu;
     //private JComboBox jcMode;
 
     //private String[] mode = {"2", "4", "Torneig"};
@@ -56,12 +57,14 @@ public class Graphic extends JPanel {
         jpGraphic.add(jpLogin);
         //jpGraphic.add(jpMode);
         GraficUsuari gu = new GraficUsuari();
-      //  jpGraphic.add(gu);
+
+        this.add(gu,BorderLayout.PAGE_END);
+      // jpGraphic.add(gu);
 
         this.add(jpGraphic, BorderLayout.LINE_START);
 
 
-        this.add(gu,BorderLayout.PAGE_END);
+
 
 
         //this.getContentPane().add(jpGraphic, BorderLayout.PAGE_START);
@@ -83,4 +86,18 @@ public class Graphic extends JPanel {
         }
 
     }
+
+    public void creaGrafic(ArrayList<Integer> dades){
+
+         gu = new GraficUsuari(dades);
+
+        //this.add(gu,BorderLayout.PAGE_END);
+
+    }
+
+    public String getLogin(){
+        return (String) jcLogin.getSelectedItem();
+    }
+
+
 }

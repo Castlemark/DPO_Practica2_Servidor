@@ -108,8 +108,11 @@ public class Controlador implements ActionListener{
 
                 if (event.getActionCommand().equals("TRIA")){
                     vista.gsUpdateInfo(model.recuperaDadesUsuari(vista.gsGetSelectedLogin()));
+                } else if (event.getActionCommand().equals("LOGIN")) {
+                    vista.creaGrafic(new Model_usuari().getHistorial(vista.getGraficLogin()));
                 }
             }
+
 
         }
         catch (SQLException e){

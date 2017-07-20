@@ -54,6 +54,8 @@ public class VistaServidor extends JFrame {
         rank = new Ranquing();
         gs = new Gest();
 
+
+
         jmbbarraMenu = new JMenuBar();
         jmRegistrar = new JMenuItem("Registrar");
         jmGestionar = new JMenuItem("Gestionar");
@@ -151,6 +153,14 @@ public class VistaServidor extends JFrame {
     //pestaña grafics
     public void grUupdateLoginList(ArrayList<String> logins){
         graf.setLlistaLogin(logins);
+    }
+
+    public String getGraficLogin(){
+        return graf.getLogin();
+    }
+
+    public void creaGrafic(ArrayList<Integer> dades){
+        graf.creaGrafic(dades);
     }
 
     //pestanya gestionar
