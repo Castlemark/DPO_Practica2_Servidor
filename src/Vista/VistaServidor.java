@@ -146,8 +146,15 @@ public class VistaServidor extends JFrame {
     }
 
     //configuració
-    public String getPort(){
-        return config.getPort();
+    public int getPort(){
+
+        if (config.getPort().matches("[0-9]+")){
+            return Integer.parseInt(config.getPort());
+        }else {
+            JOptionPane.showMessageDialog(null, "Port incorrecte\nS'ha iniciat per defecte el port 11111 ");
+            return 11111;
+        }
+
     }
 
     //pestaña grafics
