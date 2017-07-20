@@ -27,23 +27,17 @@ public class Ranquing extends JPanel {
             jpTitle = new JPanel(new BorderLayout());
             jpTaula = new JPanel(new BorderLayout());
 
-            String[] columnNames = {"Pos.", "Nickname", "Data_U.A", "Punts"};
-            Object[][] data =
-                    {
-                            {"1", "Homer", "10/10/1234", "32"},
-                            {"2", "Madge", "11/10/1234", "15"},
-                            {"3", "Bart",  "12/10/1242", "7"},
-                            {"4", "Lisa",  "13/10/1234", "0"},
-                    };
+            String[] columnNames = {"Posició", "Login", "Data últim accés", "Punts"};
+            Object[][] data = {{}};
 
-            DefaultTableModel model = new DefaultTableModel(data, columnNames);
-            JTable jtTaula = new JTable( model );
+           // DefaultTableModel model = new DefaultTableModel(data, columnNames);
+       //     JTable jtTaula = new JTable(data,columnNames);
 
             jlTitle = new JLabel("Rànquing", SwingConstants.CENTER);
 
             jpGestionar.setLayout(new GridLayout(2,1));
 
-            jpTaula.add(jtTaula, BorderLayout.CENTER);
+         //   jpTaula.add(jtTaula, BorderLayout.CENTER);
 
 
             //jpTitle.add(jbAtras, BorderLayout.LINE_START);
@@ -61,7 +55,21 @@ public class Ranquing extends JPanel {
 
         public void updateList(Object[][] data){
 
-            //Metode bombolla
+            jpTaula.removeAll();
+            String[] columnNames = {"Posició", "Login", "Data últim accés", "Punts"};
+            System.out.println("prova"+data[1][1]);
+            //DefaultTableModel model = new DefaultTableModel(data, columnNames);
+           // System.out.println(model);;
+            jtTaula = new JTable(data,columnNames);
+            jpTaula.add(jtTaula, BorderLayout.CENTER);
+          //  jtTaula.repaint();
+           // jpTaula.repaint();
+           // jtTaula.updateUI();
+          //  jpTaula.updateUI();
+
+
+            //   model.fireTableDataChanged();
+
         }
 
     }

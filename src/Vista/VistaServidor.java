@@ -54,8 +54,6 @@ public class VistaServidor extends JFrame {
         rank = new Ranquing();
         gs = new Gest();
 
-
-
         jmbbarraMenu = new JMenuBar();
         jmRegistrar = new JMenuItem("Registrar");
         jmGestionar = new JMenuItem("Gestionar");
@@ -172,5 +170,11 @@ public class VistaServidor extends JFrame {
 
     public void actualitzaPort(int port){
         config.actualitzaPort(port);
+    }
+
+    //ranqing
+
+    public  void rankingUpdateList(Object[][] data){
+        rank.updateList(data);
     }
 }

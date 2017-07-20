@@ -18,7 +18,7 @@ public class Model_usuari {
     private String mail;
     private String password;
 
-    private ConectorDB conn = new ConectorDB("root", "130796", "troner", 3306);
+    private ConectorDB conn = new ConectorDB("root", "miauMia1", "troner", 3306);
 
     /**
      * Constructor de la classe
@@ -398,6 +398,45 @@ public class Model_usuari {
         return controls;
 
 
+    }
+
+    public Object [][] ompleRanquing () throws SQLException {
+        ResultSet rs;
+        int i = 0;
+        int rows = 0;
+
+        System.out.println("hola query");
+
+        conn.connect();
+
+        rs = conn.selectQuery("SELECT login, data_ultimacces, punts FROM Usuari ORDER BY punts DESC");
+
+        rs.next();
+        while (rs.next()) {
+            System.out.println("next");
+            rows++;
+        }
+        Object [][] usuaris = new Object[rows+1][4];
+        System.out.println(rows);
+        rs.first();
+        usuaris [0][0] = 1;
+        usuaris [0][1] = rs.getObject(1);
+        usuaris [0][2] = rs.getObject(2);
+        usuaris [0][3] = rs.getObject(3);
+        i++;
+
+        while (rs.next()) {
+            System.out.println("print i = " + i);
+            usuaris[i] = new Object[4];
+            usuaris[i][0] = i + 1;
+            usuaris[i][1] = rs.getObject(1);
+            usuaris[i][2] = rs.getObject(2);
+            usuaris[i][3] = rs.getObject(3);
+            System.out.println("print objecto = " + usuaris [i][1]);
+            i++;
+        }
+        conn.disconnect();
+        return usuaris;
     }
 }
 

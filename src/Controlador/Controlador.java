@@ -66,6 +66,12 @@ public class Controlador implements ActionListener{
                     vista.grUupdateLoginList(model.recuperaLogins());
                     vista.changePanel(event.getActionCommand());
                 }
+                else if (event.getActionCommand().equals("RANQUING")){
+                        vista.rankingUpdateList(model.ompleRanquing());
+                        vista.changePanel(event.getActionCommand());
+
+
+                }
                 else {
                     vista.changePanel(event.getActionCommand());
                 }
