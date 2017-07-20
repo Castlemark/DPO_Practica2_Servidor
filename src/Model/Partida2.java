@@ -20,6 +20,7 @@ public class Partida2 {
     private int[] puntuacions = new int[2];
     private String[] posicions = new String[2];
 
+
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
         jugadors.get(0).setPartida2(this);
