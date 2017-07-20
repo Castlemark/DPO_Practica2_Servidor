@@ -27,6 +27,7 @@ public class Ranquing extends JPanel {
             jpTitle = new JPanel(new BorderLayout());
             jpTaula = new JPanel(new BorderLayout());
 
+
             String[] columnNames = {"Posició", "Login", "Data últim accés", "Punts"};
             Object[][] data = {{}};
 
@@ -60,7 +61,19 @@ public class Ranquing extends JPanel {
             System.out.println("prova"+data[1][1]);
             //DefaultTableModel model = new DefaultTableModel(data, columnNames);
            // System.out.println(model);;
-            jtTaula = new JTable(data,columnNames);
+            jtTaula = new JTable();
+
+            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    //all cells false
+                    return false;
+                }
+            };
+
+            jtTaula.setModel(tableModel);
+
             jpTaula.add(jtTaula, BorderLayout.CENTER);
           //  jtTaula.repaint();
            // jpTaula.repaint();
@@ -71,6 +84,7 @@ public class Ranquing extends JPanel {
             //   model.fireTableDataChanged();
 
         }
+
 
     }
 
