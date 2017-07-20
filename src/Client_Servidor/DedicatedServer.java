@@ -111,6 +111,7 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "MOVIMENT":
+
                        System.out.println("sha rebut serp" + num);
 
                        if(partida2 != null){
