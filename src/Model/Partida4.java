@@ -131,6 +131,7 @@ public class Partida4 {
             }
             for (int i = 0; i < jugadors.size(); i++) {
                 if(jugadors.get(i) != null){
+
                     model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                     jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                     jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
