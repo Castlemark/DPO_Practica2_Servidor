@@ -158,8 +158,6 @@ public class DedicatedServer extends Thread{
 
                    case "ABANDONA":
 
-                       doStreamO.writeObject("RANQUING");
-                       doStreamO.writeObject(new Model_usuari().getRanquing());
                        if (partida2 != null){
                            Model_usuari model = new Model_usuari();
                            model.updatePuntuacio(login, -10);
@@ -171,6 +169,9 @@ public class DedicatedServer extends Thread{
                            gPartides.gestionaAbandona(this,4);
                            partida4 = null;
                        }
+
+                       doStreamO.writeObject("RANQUING");
+                       doStreamO.writeObject(new Model_usuari().getRanquing());
                        break;
 
                    case "TANCARSESSIO":
