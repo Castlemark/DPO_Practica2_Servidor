@@ -349,15 +349,23 @@ public class Model_usuari {
 
         ResultSet resultSet;
         ArrayList<Integer> punts = new ArrayList<>();
+        int punts_aux = 0;
+        int punts_totals = 0;
+
 
         conn.connect();
 
         System.out.println("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
         resultSet = conn.selectQuery("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
 
+        punts.add(0); //Inicialitzem partida 0
         while (resultSet.next()){
-            punts.add(resultSet.getInt("puntuacio"));
+            punts_aux = resultSet.getInt("puntuacio");
+            punts_totals = punts_totals + punts_aux;
+            punts.add(punts_totals);
         }
+
+
 
         conn.disconnect();
         return punts;
@@ -410,19 +418,17 @@ public class Model_usuari {
         int i = 0;
         int rows = 0;
 
-        System.out.println("hola query");
-
         conn.connect();
-
         rs = conn.selectQuery("SELECT login, data_ultimacces, punts FROM Usuari ORDER BY punts DESC");
-
         rs.next();
+
         while (rs.next()) {
-            System.out.println("next");
+
             rows++;
         }
+
         Object [][] usuaris = new Object[rows+1][4];
-        System.out.println(rows);
+
         rs.first();
         usuaris [0][0] = 1;
         usuaris [0][1] = rs.getObject(1);
@@ -431,13 +437,11 @@ public class Model_usuari {
         i++;
 
         while (rs.next()) {
-            System.out.println("print i = " + i);
             usuaris[i] = new Object[4];
             usuaris[i][0] = i + 1;
             usuaris[i][1] = rs.getObject(1);
             usuaris[i][2] = rs.getObject(2);
             usuaris[i][3] = rs.getObject(3);
-            System.out.println("print objecto = " + usuaris [i][1]);
             i++;
         }
         conn.disconnect();

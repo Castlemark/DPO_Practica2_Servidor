@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import Model.Arxiu;
 
 /**
@@ -97,7 +99,15 @@ public class Controlador implements ActionListener{
                 if (event.getActionCommand().equals("TRIA")){
                     vista.gsUpdateInfo(model.recuperaDadesUsuari(vista.gsGetSelectedLogin()));
                 } else if (event.getActionCommand().equals("LOGIN")) {
-                    vista.creaGrafic(new Model_usuari().getHistorial(vista.getGraficLogin()));
+                    System.out.println("login "+ vista.getGraficLogin());
+                    ArrayList<Integer> punts = model.getHistorial(vista.getGraficLogin());
+
+                    if (punts.size() != 1) {
+                        vista.creaGrafic(punts);
+                    } else if (vista.getGraficLogin()==null) {}
+                    else {
+                        JOptionPane.showMessageDialog(null, "Aquest jugador no ha jugat cap partida!");
+                    }
                 }
             }
 
