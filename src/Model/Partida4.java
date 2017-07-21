@@ -16,6 +16,7 @@ public class Partida4 {
     private int[] puntuacions = new int[4];
     private String[] posicions = new String[4];
     private int morts;
+    private boolean abandona;
 
     public Partida4(ArrayList<DedicatedServer> jugadors) throws IOException {
         this.jugadors = jugadors;
@@ -39,6 +40,7 @@ public class Partida4 {
             posicions[i] = "1r";
             puntuacions[i] = 20;
         }
+        abandona = false;
     }
 
 
@@ -46,13 +48,13 @@ public class Partida4 {
         try {
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
-                if (jugadors.get(i).getsClient() == emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
 
-                if (jugadors.get(i).getsClient() != emisor) {
+                if (jugadors.get(i) != null &&jugadors.get(i).getsClient() != emisor) {
                     System.out.println("enviant a" + jugadors.get(i).getLogin());
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
@@ -69,14 +71,14 @@ public class Partida4 {
         try{
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
-                if (jugadors.get(i).getsClient() == emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
                 }
             }
             morts++;
             for (int i = 0; i < jugadors.size(); i++) {
 
-                if (jugadors.get(i).getsClient() != emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     System.out.println("Han mort " + morts);
@@ -98,6 +100,15 @@ public class Partida4 {
             }
             if(morts == 3){
                 fiPartida();
+                if(abandona){
+                    boolean ok = true;
+                    for (int i = 0; i < jugadors.size() && ok; i++) {
+                        if (jugadors.get(i) != null) {
+                            ok = false;
+                            jugadors.get(i).acabaPartida4();
+                        }
+                    }
+                }
             }
         }catch(IOException e){
             e.printStackTrace();
@@ -116,12 +127,15 @@ public class Partida4 {
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
-                model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
-                jugadors.get(i).getDoStreamO().writeObject("PUNTS");
-                jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
-                jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
-                jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                if(jugadors.get(i) != null){
+                    model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
+                    jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                    jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                    jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                    jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
+                    jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                }
+
             }
             reinicia();
         } catch (IOException e) {
@@ -139,5 +153,12 @@ public class Partida4 {
         }
     }
 
+    public void setAbandona(boolean abandona) {
+        this.abandona = abandona;
+    }
+
+    public boolean isAbandona() {
+        return abandona;
+    }
 }
 

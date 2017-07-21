@@ -163,11 +163,12 @@ public class DedicatedServer extends Thread{
                        if (partida2 != null){
                            Model_usuari model = new Model_usuari();
                            model.updatePuntuacio(login, -10);
-                           gPartides.buidaPartida(this,2);
+                           gPartides.gestionaAbandona(this,2);
                            partida2 = null;
                        }
                        else if (partida4 != null){
-                           gPartides.buidaPartida(this,4);
+                           partida4.haMort(sClient);
+                           gPartides.gestionaAbandona(this,4);
                            partida4 = null;
                        }
                        break;
@@ -179,6 +180,17 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
+           if (partida2 != null){
+               try{
+                   Model_usuari model = new Model_usuari();
+                   model.updatePuntuacio(login, -10);
+                   gPartides.gestionaAbandona(this,2);
+                   partida2 = null;
+               }catch(IOException ex){
+
+               }
+
+           }
            dedicatedServers.remove(this);
        }catch (SQLException e){
            e.printStackTrace();
@@ -241,5 +253,13 @@ public class DedicatedServer extends Thread{
 
     public void setPartidaTorneig(PartidaTorneig partidaTorneig) {
         this.partidaTorneig = partidaTorneig;
+    }
+
+    public void acabaPartida4(){
+        try{
+            gPartides.acabaPartida4(this);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 }
