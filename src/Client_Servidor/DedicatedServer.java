@@ -27,6 +27,8 @@ public class DedicatedServer extends Thread{
     private ArrayList<DedicatedServer> dedicatedServers;
     private int num;
     private Inicia inicia;
+    private int tipus;
+    private boolean juga;
 
     public DedicatedServer(Socket sClient, GestionarPartides gPartides, ArrayList<DedicatedServer> dedicatedServers) throws IOException{
         this.sClient = sClient;
@@ -37,6 +39,7 @@ public class DedicatedServer extends Thread{
         partidaTorneig = null;
         doStreamO = new ObjectOutputStream(sClient.getOutputStream());
         diStreamO = new ObjectInputStream(sClient.getInputStream());
+        juga = false;
     }
 
     @Override
@@ -96,17 +99,17 @@ public class DedicatedServer extends Thread{
 
 
                    case "JOC2":
-
+                        tipus = 2;
                        gPartides.addJoc2(this);
                        break;
 
                    case "JOC4":
-
+                        tipus = 4;
                        gPartides.addJoc4(this);
                        break;
 
                    case "CAMPEONAT":
-
+                        tipus = 5;
                        gPartides.addCampeonat(this);
                        break;
 
@@ -149,7 +152,7 @@ public class DedicatedServer extends Thread{
                            partida2.haMort(sClient);
                        }else {
                            if(partida4 != null){
-                               partida4.haMort(sClient);
+                               partida4.haMort(num);
                            }else{
                                partidaTorneig.haMort(sClient);
                            }
@@ -157,21 +160,43 @@ public class DedicatedServer extends Thread{
                        break;
 
                    case "ABANDONA":
+                       Model_usuari model = new Model_usuari();
+                       switch (tipus){
+                           case 2:
+                               if(partida2 != null) {
+                                   model.updatePuntuacio(login, -10);
+                                   gPartides.gestionaAbandona(this, 2);
+                                   partida2 = null;
+                               }
+                               break;
+                           case 4:
+                               gPartides.gestionaAbandona(this, 4);
+                               if (juga) {
+                                   partida4.setAbandona(true);
+                                   partida4.haMort(num);
+                                   switch (partida4.getMorts()) {
+                                       case 0:
+                                           model.updatePuntuacio(login, -20);
+                                           break;
+                                       case 1:
+                                           model.updatePuntuacio(login, -10);
+                                           break;
+                                       case 2:
+                                           model.updatePuntuacio(login, 10);
+                                           break;
+                                   }
+                               }
+                               partida4 = null;
 
-                       if (partida2 != null){
-                           Model_usuari model = new Model_usuari();
-                           model.updatePuntuacio(login, -10);
-                           gPartides.gestionaAbandona(this,2);
-                           partida2 = null;
+                               break;
+                           case 5:
+                               //Abandona torneig
                        }
-                       else if (partida4 != null){
-                           partida4.haMort(sClient);
-                           gPartides.gestionaAbandona(this,4);
-                           partida4 = null;
-                       }
+
 
                        doStreamO.writeObject("RANQUING");
                        doStreamO.writeObject(new Model_usuari().getRanquing());
+                       juga = false;
                        break;
 
                    case "TANCARSESSIO":
@@ -181,18 +206,44 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
-           if (partida2 != null){
-               try{
-                   Model_usuari model = new Model_usuari();
-                   model.updatePuntuacio(login, -10);
-                   gPartides.gestionaAbandona(this,2);
-                   partida2 = null;
-               }catch(IOException ex){
+         //  try{
+               Model_usuari model = new Model_usuari();
+               switch (tipus){
+                   case 2:
+                       model.updatePuntuacio(login, -10);
+                       gPartides.gestionaAbandona(this,2);
+                       partida2 = null;
+                       break;
+                   case 4:
+                       gPartides.gestionaAbandona(this, 4);
+                       if (juga) {
+                           partida4.setAbandona(true);
+                           partida4.haMort(num);
+                           switch (partida4.getMorts()) {
+                               case 0:
+                                   model.updatePuntuacio(login, -20);
+                                   break;
+                               case 1:
+                                   model.updatePuntuacio(login, -10);
+                                   break;
+                               case 2:
+                                   model.updatePuntuacio(login, 10);
+                                   break;
+                           }
+                       }
+                       partida4 = null;
 
+                       break;
+                   case 5:
+                       //Abandona torneig
                }
 
-           }
+
+        /*   }catch(IOException ex){
+                e.printStackTrace();
+           }*/
            dedicatedServers.remove(this);
+
        }catch (SQLException e){
            e.printStackTrace();
        }catch (ClassNotFoundException e){
@@ -262,5 +313,13 @@ public class DedicatedServer extends Thread{
         }catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    public void setJuga(boolean juga) {
+        this.juga = juga;
+    }
+
+    public boolean isJuga() {
+        return juga;
     }
 }
