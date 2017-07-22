@@ -15,19 +15,20 @@ import Model.Arxiu;
 
 /**
  * Classe del controlador
- *
  * Created by Grup 6 on 30/03/2017.
  */
 public class Controlador implements ActionListener{
 
+    //Atributs
     private VistaServidor vista;
     private Model_usuari model;
     private Server server;
     private final GestionarPartides gPartides;
-
     private boolean connectat = false;
 
+    //Constructor
     public Controlador(VistaServidor vista, Model_usuari model) throws IOException{
+
         this.vista = vista;
         this.model = model;
         gPartides = new GestionarPartides();
@@ -37,6 +38,8 @@ public class Controlador implements ActionListener{
         vista.actualitzaPort(arxiu.getportClient());
 
     }
+
+    //Metodes
 
     public void actionPerformed(ActionEvent event){
 

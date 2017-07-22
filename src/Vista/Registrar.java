@@ -6,9 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by sullivan on 11/04/2017.
+ * Created by Grup 6. Registrar.
+ * Vista del formulari de Registre d'un nou usuari.
  */
 public class Registrar extends JPanel {
+
+    //Atributs
     private JPanel jpButtons;
     private JPanel jpLogin;
     private JPanel jpPassword;
@@ -27,7 +30,7 @@ public class Registrar extends JPanel {
     private JTextField jtMail;
     private JButton jbRegistrar;
 
-
+    //Constructor
     public Registrar () {
 
         this.setSize (350, 350);
@@ -50,7 +53,6 @@ public class Registrar extends JPanel {
         jlPassword2 = new JLabel("Confirma Contrasenya  ");
         jtLogin = new JTextField();
 
-
         jpButtons.setLayout(new GridLayout(6,1));
         jpRegistrar.add(jbRegistrar, BorderLayout.LINE_END);
         jpLogin.add(jlLogin, BorderLayout.LINE_START);
@@ -72,9 +74,15 @@ public class Registrar extends JPanel {
         this.add(jpButtons, BorderLayout.PAGE_START);
     }
 
-    public void registerController(Controlador c){
-        jbRegistrar.setActionCommand("REGISTRAR BOTO");
+    //Metodes
 
+    /**
+     * Registra el controlador
+     * @param c Controlador
+     */
+    public void registerController(Controlador c){
+
+        jbRegistrar.setActionCommand("REGISTRAR BOTO");
         jbRegistrar.addActionListener(c);
     }
 

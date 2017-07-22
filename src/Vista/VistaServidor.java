@@ -16,10 +16,10 @@ import java.util.ResourceBundle;
  */
 public class VistaServidor extends JFrame {
 
+    //Atributs
     private Color blau_cel = new Color(135, 206, 250);
 
     private Configuracio config;
-    private Gestionar gest;
     private Registrar reg;
     private Graphic graf;
     private Ranquing rank;
@@ -48,13 +48,10 @@ public class VistaServidor extends JFrame {
         this.getContentPane().setLayout(layout);
 
         config = new Configuracio();
-        gest = new Gestionar();
         reg = new Registrar();
         graf = new Graphic();
         rank = new Ranquing();
         gs = new Gest();
-
-
 
         jmbbarraMenu = new JMenuBar();
         jmRegistrar = new JMenuItem("Registrar");
@@ -80,7 +77,6 @@ public class VistaServidor extends JFrame {
 
         this.getContentPane().add("CONFIGURACIO", config);
         this.getContentPane().add("REGISTRAR", reg);
-        this.getContentPane().add("GESTIONAR", gest);
         this.getContentPane().add("GRAFIC", graf);
         this.getContentPane().add("RANQUING", rank);
         this.getContentPane().add("GEST", gs);
@@ -104,12 +100,12 @@ public class VistaServidor extends JFrame {
 
         reg.registerController(c);
         config.registerController(c);
-        gest.registerController(c);
         graf.registerController(c);
         rank.registerController(c);
         gs.registerController(c);
     }
 
+    //Metodes
     public void changePanel(String which){
         layout.show(this.getContentPane(), which);
     }

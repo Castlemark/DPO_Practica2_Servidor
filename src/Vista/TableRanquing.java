@@ -4,15 +4,15 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 /**
- * Created by sullivan on 20/07/2017.
+ * Created by Grup 6 on 20/07/2017. TableRanquing.
+ * Clase propia per crear la taula per tal de que compleixi totes les coses necessaries.
  */
 public class TableRanquing extends DefaultTableModel {
 
-
-    // T�tol de les columnes
+    // Titol de les columnes
     private final String[] columnNames = {"Posició", "Login", "Data últim accés", "Puntuació"};
 
-    // Indica el tipus de les columnes
+    //Indica el tipus de les columnes
     private final Class<?>[] columnTypes = {
             java.lang.Integer.class,
             java.lang.String.class,
@@ -24,11 +24,15 @@ public class TableRanquing extends DefaultTableModel {
     // Les dades que es mostraran a la taula, una llista d'objectes de tipus Object
     private Object[][] dades;
 
+    //Constructor
     public TableRanquing(){
-
-        dades= new Object[0][4];
+        dades = new Object[0][4];
     }
 
+    /**
+     * Rebem les dades per omplir la taula.
+     * @param dades informació per omplir la taula.
+     */
     public TableRanquing(Object[][] dades){
 
         this.dades = dades;
@@ -59,6 +63,12 @@ public class TableRanquing extends DefaultTableModel {
     }
 
 
+    /**
+     * Obtenim el valor de cada casella per omplir la taula.
+     * @param row numero de fila.
+     * @param col numero de columna.
+     * @return
+     */
     public Object getValueAt(int row, int col) {
 
         switch(col) {
@@ -70,6 +80,9 @@ public class TableRanquing extends DefaultTableModel {
         }
     }
 
+    /**
+     * Indiquem que la taula no es pugui editar.
+     */
     @Override
     public boolean isCellEditable(int row, int col) {
         return false;

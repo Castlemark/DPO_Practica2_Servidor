@@ -13,30 +13,38 @@ import java.util.List;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Grup 6
+ * Created by Grup 6. GraficUsuari.
+ * Vista on apareixen els camps de port, per tal de que un usuari es connecti un cop hagi clicat el botó Iniciar.
  */
 
 public class GraficUsuari extends JPanel {
 
+    //Atributs
+    private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int padding = 25; //Relleno
     private int labelPadding = 25;
-    private Color lineColor = new Color(44, 102, 230, 180); //Color de la línia
     private Color lineColor2 = new Color (115, 103, 231, 209);
-    private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200); //Color de la graella
-    private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
-    private int numberYDivisions = 0;
+    private int divisions = 0;
     private List<Integer> punts;
 
+    //Constructors
     public GraficUsuari(List<Integer> punts) {
         this.punts = punts;
     }
 
+    //Metodes
+
+
+    /**
+     * Pinta per pantalla els components del gràfic del jugador seleccionat.
+     * @param g Graphics de Swing.
+     */
     @Override
     protected void paintComponent(Graphics g) {
-        numberYDivisions = getPunts().size() - 1;
+
+        divisions = getPunts().size() - 1;
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -58,20 +66,19 @@ public class GraficUsuari extends JPanel {
         g2.setColor(Color.WHITE);
         g2.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
         g2.setColor(Color.BLACK);
-
-
         g2.drawString("Punts", padding,   padding - 10); //Printem punts
-        // create hatch marks and grid lines for y axis.
-        for (int i = 0; i < numberYDivisions + 1; i++) {
+
+        //Creacio de la grid i càlcul de l'eix de les y
+        for (int i = 0; i < divisions + 1; i++) {
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
-            int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
+            int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / divisions + padding + labelPadding);
             int y1 = y0;
             if (punts.size() > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinPunts() + (getMaxPunts() - getMinPunts()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100 + "";
+                String yLabel = ((int) ((getMinPunts() + (getMaxPunts() - getMinPunts()) * ((i * 1.0) / divisions)) * 100)) / 100 + "";
                 FontMetrics metrics = g2.getFontMetrics();  //Medim el text
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3); //Printem els numeros de les y
@@ -79,8 +86,9 @@ public class GraficUsuari extends JPanel {
             g2.drawLine(x0, y0, x1, y1);
         }
 
-        // and for x axis
         g2.drawString("Partida", getWidth() - padding - labelPadding, getHeight() - labelPadding + 10); //Mostrar label partida
+
+        //Creacio de la grid i càlcul de l'eix de les x
         for (int i = 0; i < punts.size(); i++) {
             if (punts.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (punts.size() - 1) + padding + labelPadding;
@@ -100,13 +108,12 @@ public class GraficUsuari extends JPanel {
             }
         }
 
-        // crear els eixos
+        // Crear els eixos
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
-        //Stroke oldStroke = g2.getStroke();
-        g2.setColor(lineColor2);
-       // g2.setStroke(GRAPH_STROKE);
+       g2.setColor(lineColor2);
+
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
@@ -115,11 +122,13 @@ public class GraficUsuari extends JPanel {
             g2.drawLine(x1, y1, x2, y2);
         }
 
-        //g2.setStroke(oldStroke);
-
     }
 
+    /**
+     * @return double que indica els punts minims del jugador.
+     */
     private double getMinPunts() {
+
         double minPunts = Double.MAX_VALUE;
         for (Integer score : punts) {
             minPunts = Math.min(minPunts, score);

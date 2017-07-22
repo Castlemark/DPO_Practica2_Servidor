@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Graphic extends JPanel {
 
+    //Atributs
     private JPanel jpGraphic;
     private JPanel jpLogin;
     private JLabel jlTitle;
@@ -21,8 +22,8 @@ public class Graphic extends JPanel {
     private JComboBox jcLogin;
     private GraficUsuari gu;
 
-
-    public Graphic(){
+    //Constructors
+    public Graphic() {
 
         this.setSize (350,350);
 
@@ -50,6 +51,12 @@ public class Graphic extends JPanel {
 
     }
 
+    //Metodes
+
+    /**
+     * Registra el controlador
+     * @param c Controlador
+     */
     public void registerController(Controlador c){
 
         jcLogin.setActionCommand("LOGIN");
@@ -57,6 +64,10 @@ public class Graphic extends JPanel {
 
     }
 
+    /**
+     * Carga els logins de tots els usuaris.
+     * @param logins logins registrats.
+     */
     public void setLlistaLogin(ArrayList<String> logins){
 
         jcLogin.removeAllItems();
@@ -67,6 +78,10 @@ public class Graphic extends JPanel {
 
     }
 
+    /**
+     * Crea els gràfics segons els punts del jugador seleccionat.
+     * @param dades punts registrats del jugador en les diferents partides.
+     */
     public void creaGrafic(ArrayList<Integer> dades){
 
         ArrayList<Number> inicialitzador = new ArrayList<>(50);
@@ -79,6 +94,5 @@ public class Graphic extends JPanel {
     public String getLogin(){
         return (String) jcLogin.getSelectedItem();
     }
-
 
 }

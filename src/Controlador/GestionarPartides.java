@@ -9,19 +9,20 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- * Created by Propietario on 20/06/2017.
+ * Created by Grup 6 on 20/06/17. GestionarPartides.
+ * Classe que permet controlar les cues dels diferents modes de joc.
  */
 public class GestionarPartides {
 
+    //Atributs
     private ArrayList<ArrayList<DedicatedServer>> cua2;
     private ArrayList<ArrayList<DedicatedServer>> cua4;
     private ArrayList<ArrayList<DedicatedServer>> cuaTorneig;
-
     private ArrayList<DedicatedServer> currentCua2;
     private ArrayList<DedicatedServer> currentCua4;
     private ArrayList<DedicatedServer> currentCuaTorneig;
 
-
+    //Constructor
     public GestionarPartides() {
 
         cua2 = new ArrayList<>();
@@ -33,6 +34,14 @@ public class GestionarPartides {
         currentCuaTorneig = new ArrayList<>();
     }
 
+    //Metodes
+
+
+    /**
+     *
+     * @param d
+     * @throws IOException
+     */
     public void addJoc2(DedicatedServer d) throws IOException {
 
         if (cua2.isEmpty()) {
