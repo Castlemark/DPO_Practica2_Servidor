@@ -20,11 +20,13 @@ public class PartidaTorneig {
     private boolean[] eliminats = new boolean[4];
     private int guanyador;
     private int eliminat;
+    private boolean abandona;
 
     public PartidaTorneig(ArrayList<DedicatedServer> jugadors) throws IOException {
         this.jugadors = jugadors;
         morts = 0;
         ronda = 1;
+        abandona = false;
         jugadors.get(0).setPartidaTorneig(this);
         jugadors.get(1).setPartidaTorneig(this);
         jugadors.get(2).setPartidaTorneig(this);
@@ -78,7 +80,7 @@ public class PartidaTorneig {
 
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
-                if (jugadors.get(i).getsClient() == emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
                 }
             }
@@ -143,7 +145,6 @@ public class PartidaTorneig {
                     morts++;
                     for (int i = 0; i < jugadors.size(); i++) {
 
-
                         if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                             jugadors.get(i).getDoStreamO().writeObject("MORT");
                             jugadors.get(i).getDoStreamO().writeObject(j);
@@ -158,7 +159,10 @@ public class PartidaTorneig {
                             }
                         }
                     }
+                    System.out.println(abandona);
+                    System.out.println(morts);
                     if (morts == 1) {
+                        System.out.println("entra al fi ronda");
                         fiRonda();
                     }
                     break;
@@ -174,7 +178,6 @@ public class PartidaTorneig {
         Model_usuari model_usuari = new Model_usuari();
 
         try {
-            System.out.println("ROnda " + ronda);
            switch (ronda) {
                case 1:
                    guanyador = -1;
@@ -186,24 +189,41 @@ public class PartidaTorneig {
                            jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                            jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                            jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                            jugadors.get(i).getDoStreamO().writeObject(guanyador);
                            jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                           jugadors.get(i).getDoStreamO().writeObject(numEliminats());
+                           for(int j = 0; j < eliminats.length; j++){
+                               if(eliminats[j]){
+                                   jugadors.get(i).getDoStreamO().writeObject(j);
+                               }
+                           }
                        }
+                   }
+                   if(numEliminats() == 2){
+                       ronda++;
+                   }else if(numEliminats() == 3){
+                       ronda = 3;
                    }
                    seguentRonda();
                    break;
                case 2:
-
+                    guanyador = -1;
                    for (int i = 0; i < jugadors.size(); i++) {
 
                        if (jugadors.get(i) != null){
                            jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                            jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                            jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                            jugadors.get(i).getDoStreamO().writeObject(guanyador);
                            jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                           jugadors.get(i).getDoStreamO().writeObject(numEliminats());
+                           for(int j = 0; j < eliminats.length; j++){
+                               if(eliminats[j]){
+                                   jugadors.get(i).getDoStreamO().writeObject(j);
+                               }
+                           }
                        }
                    }
                    int num = 0;
@@ -213,9 +233,14 @@ public class PartidaTorneig {
                        }
                    }
                    System.out.println("Hi han eliminats " + num);
+
+                   if (numEliminats() == 3){
+                       ronda++;
+                   }
                    seguentRonda();
                    break;
                case 3:
+                   guanyador = -1;
                    for (int i = 0; i < jugadors.size(); i++) {
                        if(posicions[i].equals("1r Has guanyat el torneig!")){
                            guanyador = i;
@@ -231,7 +256,14 @@ public class PartidaTorneig {
                            jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                            jugadors.get(i).getDoStreamO().writeObject(guanyador);
                            jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                           jugadors.get(i).getDoStreamO().writeObject(numEliminats());
+                           for(int j = 0; j < eliminats.length; j++){
+                               if(eliminats[j]){
+                                   jugadors.get(i).getDoStreamO().writeObject(j);
+                               }
+                           }
+                           System.out.println("acaba la partida");
+
                        }
                    }
                    seguentRonda();
@@ -255,6 +287,8 @@ public class PartidaTorneig {
                     }
                 }
                 ronda++;
+                System.out.println("ROnda " + ronda);
+
                 break;
             case 2:
                 morts = 0;
@@ -265,6 +299,8 @@ public class PartidaTorneig {
                     }
                 }
                 ronda++;
+                System.out.println("ROnda " + ronda);
+
                 break;
             case 3:
                 morts = 0;
@@ -275,10 +311,45 @@ public class PartidaTorneig {
                 }
 
                 ronda = 1;
+                System.out.println("ROnda " + ronda);
+
+                if(abandona){
+                    boolean ok = true;
+                    for (int i = 0; i < jugadors.size() && ok; i++) {
+                        if (jugadors.get(i) != null) {
+                            ok = false;
+                            System.out.println("Redistribueix " + jugadors.get(i).getLogin());
+                            jugadors.get(i).acabaPartidaTorneig();
+                        }
+                    }
+                }
                 break;
         }
     }
 
+    public void setAbandona(boolean abandona, int num) {
+        if(abandona){
+            eliminats[num] = true;
+            System.out.println("eliminal");
+        }
+        this.abandona = abandona;
+    }
+
+    public int numEliminats(){
+        int num = 0;
+        for(int k = 0; k < eliminats.length; k++){
+            if(eliminats[k]){
+                num++;
+            }
+        }
+        return num;
+    }
+
+    public boolean[] getEliminats() {
+        return eliminats;
+    }
+
+    public int getRonda() {
+        return ronda;
+    }
 }
-
-

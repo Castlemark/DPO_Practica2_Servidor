@@ -161,13 +161,12 @@ public class DedicatedServer extends Thread{
 
                    case "ABANDONA":
                        Model_usuari model = new Model_usuari();
-                       switch (tipus){
+                       switch (tipus) {
                            case 2:
-                               if(partida2 != null) {
-                                   model.updatePuntuacio(login, -10);
-                                   gPartides.gestionaAbandona(this, 2);
-                                   partida2 = null;
-                               }
+                               model.updatePuntuacio(login, -10);
+                               gPartides.gestionaAbandona(this, 2);
+                               partida2 = null;
+
                                break;
                            case 4:
                                gPartides.gestionaAbandona(this, 4);
@@ -190,12 +189,37 @@ public class DedicatedServer extends Thread{
 
                                break;
                            case 5:
-                               //Abandona torneig
-                       }
-                       else {
-                           gPartides.gestionaAbandona(this, 0);
-                           partidaTorneig.haMort(sClient);
-                           partidaTorneig.seguentRonda();
+                          //Abandona torneig
+                               if(juga) {
+                                    switch (partidaTorneig.getRonda()){
+                                        case 1:
+                                            model.updatePuntuacio(login, -20);
+                                            break;
+                                        case 2:
+                                            model.updatePuntuacio(login, -10);
+                                            break;
+                                        case 3:
+                                            model.updatePuntuacio(login, -10);
+                                            break;
+                                    }
+                                   if(partidaTorneig.getEliminats()[num]){
+                                       partidaTorneig.setAbandona(true, num);
+                                       gPartides.gestionaAbandona(this, 0);
+                                       partidaTorneig = null;
+
+                                   }else {
+                                       partidaTorneig.setAbandona(true, num);
+                                       partidaTorneig.haMort(sClient);
+                                       gPartides.gestionaAbandona(this, 0);
+                                       partidaTorneig.fiRonda();
+                                       partidaTorneig = null;
+                                   }
+                               }else {
+                                   System.out.println("Entra a no juga");
+                                   gPartides.gestionaAbandona(this, 0);
+                               }
+                               break;
+
                        }
 
                        doStreamO.writeObject("RANQUING");
@@ -292,6 +316,7 @@ public class DedicatedServer extends Thread{
     }
 
     public void setNum(int num) {
+        System.out.println("Serp numero " + num);
         this.num = num;
     }
 
