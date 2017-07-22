@@ -194,6 +194,9 @@ public class DedicatedServer extends Thread{
                                            model.updatePuntuacio(login, 10);
                                            break;
                                    }
+                               }else{
+                                   gPartides.gestionaAbandona(this, 4);
+
                                }
                                partida4 = null;
 
@@ -226,7 +229,7 @@ public class DedicatedServer extends Thread{
                                    }
                                }else {
                                    System.out.println("Entra a no juga");
-                                   gPartides.gestionaAbandona(this, 0);
+                                   gPartides.novaCuaTorneig(this);
                                }
                                break;
 
@@ -269,12 +272,48 @@ public class DedicatedServer extends Thread{
                                    model.updatePuntuacio(login, 10);
                                    break;
                            }
+                       }else{
+                           gPartides.gestionaAbandona(this, 4);
+
                        }
                        partida4 = null;
 
                        break;
                    case 5:
                        //Abandona torneig
+                       if(juga) {
+                           switch (partidaTorneig.getRonda()){
+                               case 1:
+                                   model.updatePuntuacio(login, -20);
+                                   break;
+                               case 2:
+                                   model.updatePuntuacio(login, -10);
+                                   break;
+                               case 3:
+                                   model.updatePuntuacio(login, -10);
+                                   break;
+                           }
+                           if(partidaTorneig.getEliminats()[num]){
+                               partidaTorneig.setAbandona(true, num);
+                               gPartides.gestionaAbandona(this, 0);
+                               partidaTorneig = null;
+
+                           }else {
+                               partidaTorneig.setAbandona(true, num);
+                               partidaTorneig.haMort(sClient);
+                               gPartides.gestionaAbandona(this, 0);
+                               partidaTorneig.fiRonda();
+                               partidaTorneig = null;
+                           }
+                       }else {
+                           System.out.println("Entra a no juga");
+                           try{
+                               gPartides.novaCuaTorneig(this);
+                           }catch (IOException ex){
+
+                           }
+                       }
+                       break;
                }
 
 

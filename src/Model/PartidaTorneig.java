@@ -164,6 +164,9 @@ public class PartidaTorneig {
                     if (morts == 1) {
                         System.out.println("entra al fi ronda");
                         fiRonda();
+                        for(int i = 0; i < 4; i++){
+                            System.out.println(eliminats[i]);
+                        }
                     }
                     break;
             }

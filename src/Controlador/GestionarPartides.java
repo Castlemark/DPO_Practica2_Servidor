@@ -152,29 +152,18 @@ public class GestionarPartides {
                                 }
                             } else {
                                 for (int j = 0; j < cua4.get(i).size(); j++) {
-                                    if (cua4.get(i).get(j) == null) {
-                                        cua4.get(i).remove(j);
+                                    if (cua4.get(i).get(j) != null) {
+                                        aux.add(cua4.get(i).get(j));
                                     }
                                 }
-
-                        /*for (int j = 0; j < cua4.get(i).size(); j++){
-                            aux.add(cua4.get(i).get(j));
-                        }
-                        cua4.remove(i);
-
-                        System.out.println("tamany: " + cua4.size());
-
-                        aux.remove(d);*/
-
+                                cua4.remove(i);
+                                for(int j = 0; j < aux.size(); j++){
+                                    addJoc4(aux.get(j));
+                                }
                             }
                         }
                     }
                     break;
-            /*for (int i = 0; i < aux.size(); i++){
-
-                addJoc4(aux.get(i));
-                System.out.println(aux.get(i).getLogin() + " afegit a una nova cua");
-            }*/
 
                 default:
 
@@ -193,15 +182,7 @@ public class GestionarPartides {
                                             cuaTorneig.get(i).set(j, null);
                                         }
                                             System.out.println("Eliminat de la partida");
-                                    }else if(cuaTorneig.get(i).get(j) != null ){
-                                        aux.add(cuaTorneig.get(i).get(j));
                                     }
-                                }
-                                cuaTorneig.remove(i);
-                                for (int j = 0; j < aux.size(); j++) {
-                                    aux.get(j).setJuga(false);
-                                    addCampeonat(aux.get(j));
-                                    System.out.println(aux.get(j).getLogin() + " afegit a una nova cua");
                                 }
 
                             }
@@ -279,5 +260,33 @@ public class GestionarPartides {
             }
         }
 
+    }
+
+    public void novaCuaTorneig(DedicatedServer d) throws IOException{
+        boolean conte;
+        ArrayList<DedicatedServer> aux = new ArrayList<>();
+        for (int i = 0; i < cuaTorneig.size(); i++) {
+            conte = false;
+            for (int j = 0; j < cuaTorneig.get(i).size(); j++) {
+                if (cuaTorneig.get(i).get(j) != null && cuaTorneig.get(i).get(j).getLogin().equals(d.getLogin())) {
+                    conte = true;
+                    cuaTorneig.get(i).set(j, null);
+                    System.out.println("Conte funciona");
+                }
+            }
+            if(conte){
+                for (int j = 0; j < cuaTorneig.get(i).size(); j++) {
+                    if(cuaTorneig.get(i).get(j) != null ){
+                        aux.add(cuaTorneig.get(i).get(j));
+                    }
+                }
+                cuaTorneig.remove(i);
+                for (int j = 0; j < aux.size(); j++) {
+                    addCampeonat(aux.get(j));
+                    System.out.println(aux.get(j).getLogin() + " afegit a una nova cua");
+                }
+
+            }
+        }
     }
 }
