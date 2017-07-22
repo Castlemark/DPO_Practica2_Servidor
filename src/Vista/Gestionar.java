@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by sullivan on 18/04/2017.
+ * Created by miau on 18/04/2017.
  */
 public class Gestionar extends JPanel {
     private JPanel jpGestionar;

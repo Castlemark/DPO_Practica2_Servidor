@@ -14,7 +14,7 @@ import Controlador.Controlador;
 import net.miginfocom.swing.*;
 
 /**
- * @author Marc Castells
+ * @author Marc Castells mia
  */
 public class Gest extends JPanel {
     public Gest() {
