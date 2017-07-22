@@ -38,8 +38,8 @@ public class GestionarPartides {
 
 
     /**
-     *
-     * @param d
+     * Gestiona la cua de jugadors del mode de 2 jugadors.
+     * @param d DedicatedServer connexió amb el Client d'un usuari.
      * @throws IOException
      */
     public void addJoc2(DedicatedServer d) throws IOException {
@@ -61,6 +61,11 @@ public class GestionarPartides {
         }
     }
 
+    /**
+     * Gestiona la cua de jugadors del mode de 4 jugadors.
+     * @param d DedicatedServer connexió amb el Client d'un usuari.
+     * @throws IOException
+     */
     public void addJoc4(DedicatedServer d) throws IOException {
 
         if (cua4.isEmpty()) {
@@ -80,6 +85,11 @@ public class GestionarPartides {
         }
     }
 
+    /**
+     * Gestiona la cua de jugadors del mode de Torneig.
+     * @param d DedicatedServer connexió amb el Client d'un usuari.
+     * @throws IOException
+     */
     public void addCampeonat(DedicatedServer d) throws IOException {
         if (cuaTorneig.isEmpty()) {
             System.out.println("cua buida");
@@ -102,6 +112,11 @@ public class GestionarPartides {
 
     }
 
+    /**
+     * Gestiona els diferents cassos si algun usuari abandona la espera de la partida encara en funcionament.
+     * @param d connexió amb el client d'un usuari
+     * @param tipuscua tipus de mode abandonat.
+     */
     public void gestionaAbandona(DedicatedServer d, int tipuscua){
         try {
             boolean conte;
@@ -203,6 +218,12 @@ public class GestionarPartides {
         }
     }
 
+    /**
+     * En cas de que un jugador ha abandonat la partida. S'han d'afegir els altres a una altra cua.
+     *  Mode de 4 jugadors.
+     * @param d connexió amb el client d'un usuari.
+     * @throws IOException
+     */
     public void acabaPartida4(DedicatedServer d) throws IOException {
 
         ArrayList<DedicatedServer> aux = new ArrayList<>();
@@ -224,7 +245,6 @@ public class GestionarPartides {
                     }
                 }
                 cua4.remove(i);
-
             }
         }
 
@@ -235,6 +255,12 @@ public class GestionarPartides {
         }
     }
 
+    /**
+     * En cas de que un jugador ha abandonat la partida. S'han d'afegir els altres a una altra cua.
+     *  Mode de 4 jugadors.
+     * @param d connexió amb el client d'un usuari.
+     * @throws IOException
+     */
     public void acabaPartidaTorneig(DedicatedServer d) throws IOException{
         boolean conte;
         ArrayList<DedicatedServer> aux = new ArrayList<>();

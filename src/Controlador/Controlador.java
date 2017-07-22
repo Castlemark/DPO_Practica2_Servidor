@@ -40,7 +40,7 @@ public class Controlador implements ActionListener{
     }
 
     //Metodes
-
+    @Override
     public void actionPerformed(ActionEvent event){
 
         try {
@@ -107,13 +107,12 @@ public class Controlador implements ActionListener{
 
                     if (punts.size() != 1) {
                         vista.creaGrafic(punts);
-                    } else if (vista.getGraficLogin()==null) {}
+                    } else if (vista.getGraficLogin()== null) {}
                     else {
                         JOptionPane.showMessageDialog(null, "Aquest jugador no ha jugat cap partida!");
                     }
                 }
             }
-
 
         }
         catch (SQLException e){

@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Created by Grup 6 on 19/04/2017.
+ * Created by Grup 6 on 19/04/2017. ThreadClient.
+ *
  */
 
 public class ThreadClient extends Thread{
+
+    //Atributs
     private Socket sClient;
     private ArrayList<Socket> sockets;
     private String login;

@@ -51,15 +51,4 @@ public class Main {
 
     }
 
-        /*try {
-            Model_usuari usuari = new Model_usuari();
-
-            usuari.registraUsuari("marrc","holla@gmail.com","1234asdf");
-            //usuari.eliminaUsuari("marrc");
-        }
-        catch (SQLException e){
-            e.getMessage();
-        }
-
-    }*/
 }
