@@ -91,6 +91,16 @@ public class DedicatedServer extends Thread{
                        if (new Model_usuari().registraUsuari(usuari.getLogin(), usuari.getMail(), usuari.getPassword(), usuari.getPassword())){
                            doStreamO.writeObject(true);
                            this.login = usuari.getLogin();
+
+                           doStreamO.writeObject("RANQUING");
+                           doStreamO.writeObject(new Model_usuari().getRanquing());
+
+                           doStreamO.writeObject("ENVIACONTROLS");
+                           int[] controls = (new Model_usuari().getControls(login));
+                           doStreamO.writeObject(controls[0]);
+                           doStreamO.writeObject(controls[1]);
+                           doStreamO.writeObject(controls[2]);
+                           doStreamO.writeObject(controls[3]);
                        }
                        else {
                            doStreamO.writeObject(false);
@@ -229,6 +239,7 @@ public class DedicatedServer extends Thread{
 
                    case "TANCARSESSIO":
                        this.login="";
+                       dedicatedServers.remove(this);
                        break;
                }
            }
