@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by Propietario on 20/06/2017.
+ * Classe de partida de 4 jugadors
+ * Created by Grup 6 on 10/05/2017.
  */
 public class Partida4 {
     private ArrayList<DedicatedServer> jugadors;
@@ -18,6 +19,11 @@ public class Partida4 {
     private int morts;
     private boolean abandona;
 
+    /**
+     * Mètode que crea una partida de 4 jugadors
+     * @param jugadors
+     * @throws IOException
+     */
     public Partida4(ArrayList<DedicatedServer> jugadors) throws IOException {
         this.jugadors = jugadors;
         morts = 0;
@@ -44,7 +50,12 @@ public class Partida4 {
         abandona = false;
     }
 
-
+    /**
+     * Mètode que envia la serp al client
+     * @param dir
+     * @param cap
+     * @param emisor
+     */
     public void enviaSerp(int dir, Posicio cap, Socket emisor) {
         try {
             int j=-1;
@@ -68,9 +79,13 @@ public class Partida4 {
         }
     }
 
+    /**
+     * Mètode que finalitza la partida quan un jugador ha mort i reparteix els punts
+     * @param mort
+     */
     public void haMort(int mort){
         try{
-            /*int j=-1;
+            /*int j=-1;                     //BORRAR?
             for (int i = 0; i < jugadors.size(); i++) {
                 if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
@@ -118,6 +133,9 @@ public class Partida4 {
         }
     }
 
+    /**
+     * Mètode que envia els punts al client quan ha finalitzat la partida
+     */
     public void fiPartida() {
 
         Model_usuari model_usuari = new Model_usuari();

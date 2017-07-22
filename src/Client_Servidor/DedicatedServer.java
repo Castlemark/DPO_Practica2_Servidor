@@ -11,8 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
+
 /**
- * Created by Marc on 27/06/2017.
+ * Classe del thread dedicat per a cada usuari
+ * Created by Grup 6 on 27/06/2017.
  */
 public class DedicatedServer extends Thread{
     private Socket sClient;
@@ -42,6 +44,9 @@ public class DedicatedServer extends Thread{
         juga = false;
     }
 
+    /**
+     * Mètode que executa el Thread
+     */
     @Override
     public void run() {
        try {
@@ -317,9 +322,7 @@ public class DedicatedServer extends Thread{
                }
 
 
-        /*   }catch(IOException ex){
-                e.printStackTrace();
-           }*/
+
            dedicatedServers.remove(this);
 
        }catch (SQLException e){

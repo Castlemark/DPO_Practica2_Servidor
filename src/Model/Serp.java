@@ -40,8 +40,16 @@ public class Serp implements Serializable{
         }
 
     }
+
+    /**
+     * Mètode que mou la serp
+     */
     public void mouSerp(){cap.mouCap(dir);}
 
+    /**
+     * Mètode que canvia la direccio de la serp
+     * @param c direcció
+     */
     public void canviaDireccio (int c){
         if(c == 2 && dir != 3 && dir != 4){
             dir = 3;

@@ -9,8 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 
 
+
 /**
- * Created by Andreu on 10/05/2017.
+ * Classe encarregada de guardar la configuracio en un json
+ * Created by Grup 6 on 10/05/2017.
  */
 public class Arxiu {
     @SerializedName("Port Base de Dades")
@@ -79,6 +81,9 @@ public class Arxiu {
     }
 
 
+    /** Mètode que llegeix les dades del json
+     * @return
+     */
     public Arxiu llegeixDades() {
 
         Arxiu arxiu = new Arxiu();
@@ -96,6 +101,15 @@ public class Arxiu {
         return arxiu;
     }
 
+    /**
+     * Mètode que escriu dades al json
+     * @param portBBDD
+     * @param IP
+     * @param nomBBDD
+     * @param usuariBBDD
+     * @param passwordBBDD
+     * @param portClient
+     */
     public void escriuDades(int portBBDD, String IP, String nomBBDD, String usuariBBDD, String passwordBBDD, int portClient) {
         Arxiu arxiu = new Arxiu();
 
@@ -124,6 +138,10 @@ public class Arxiu {
 
     }
 
+    /**
+     * Mètode que escriu el port al json
+     * @param portClient
+     */
     public void escriuPort(int portClient){
         Arxiu arxiu = llegeixDades();
         arxiu.setportClient(portClient);

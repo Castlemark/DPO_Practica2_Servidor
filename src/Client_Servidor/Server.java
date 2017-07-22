@@ -11,11 +11,15 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Created by Marc on 27/06/2017.
+ * Classe del thread general per establir connexió
+ * Created by Grup 6 on 27/05/2017.
  */
 public class Server extends Thread{
 
+
+    //Atributs
     private ServerSocket  sSocket;
     private final ArrayList<DedicatedServer> dedicatedServers;
 
@@ -24,12 +28,19 @@ public class Server extends Thread{
     private boolean running;
     private int port;
 
+
+    //Mètodes
+
     public Server (int port, GestionarPartides gestionarPartides){
         this.port = port;
         this.gestionarPartides = gestionarPartides;
         dedicatedServers = new ArrayList<>();
     }
 
+    /**
+     * Inicialitza el socket
+     * @throws IOException
+     */
     public void startServer () throws IOException{
 
         sSocket = new ServerSocket(11111);
@@ -46,6 +57,9 @@ public class Server extends Thread{
         return sSocket;
     }
 
+    /**
+     * Mètode que executa el Thread
+     */
     @Override
     public void run(){
         while (running) try{

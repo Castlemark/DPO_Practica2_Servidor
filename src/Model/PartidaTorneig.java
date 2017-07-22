@@ -7,9 +7,10 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by Propietario on 20/06/2017.
- */
+    /**
+        * Classe de partida de torneig
+        * Created by Grup 6 on 10/05/2017.
+        */
 public class PartidaTorneig {
     private ArrayList<DedicatedServer> jugadors;
     private String[] logins = new String[4];
@@ -22,6 +23,13 @@ public class PartidaTorneig {
     private int eliminat;
     private boolean abandona;
 
+
+
+    /**
+     * Mètode que crea una partida de torneig
+     * @param jugadors
+     * @throws IOException
+     */
     public PartidaTorneig(ArrayList<DedicatedServer> jugadors) throws IOException {
         this.jugadors = jugadors;
         morts = 0;
@@ -51,7 +59,12 @@ public class PartidaTorneig {
 
     }
 
-
+        /**
+         * Mètode que envia la serp al client
+         * @param dir
+         * @param cap
+         * @param emisor
+         */
     public void enviaSerp(int dir, Posicio cap, Socket emisor) {
         try {
             int j=-1;
@@ -75,6 +88,10 @@ public class PartidaTorneig {
         }
     }
 
+        /**
+         * Mètode que finalitza la partida quan un jugador ha mort i reparteix els punts
+         * @param emisor
+         */
     public void haMort(Socket emisor){
         try{
 
@@ -175,7 +192,9 @@ public class PartidaTorneig {
             e.printStackTrace();
         }
     }
-
+        /**
+         * Mètode que envia els punts al client quan ha finalitzat la ronda
+         */
     public void fiRonda() {
 
         Model_usuari model_usuari = new Model_usuari();

@@ -29,6 +29,9 @@ public class ConectorDB {
 		ConectorDB.url += db;
 	}
 
+    /**
+     * Mètode per connectar-se a la BD
+     */
     public void connect() {
         try {
             Class.forName("com.mysql.jdbc.Connection");
@@ -47,7 +50,10 @@ public class ConectorDB {
 
     }
 
-    //metode per inseri dades
+    /**
+     * Mètode per inserir dades
+     * @param query
+     */
     public void insertQuery(String query){
         try {
             s =(Statement) conn.createStatement();
@@ -58,7 +64,9 @@ public class ConectorDB {
         }
     }
 
-    //metode per actualitzar dades
+    /** Mètode per actualitzar dades
+     * @param query
+     */
     public void updateQuery(String query){
     	 try {
              s =(Statement) conn.createStatement();
@@ -69,7 +77,11 @@ public class ConectorDB {
          }
     }
 
-    // metode per eleiminar tuples
+
+    /**
+     * Mètode per eliminar tuples
+     * @param query
+     */
     public void deleteQuery(String query){
     	 try {
              s =(Statement) conn.createStatement();
@@ -80,7 +92,11 @@ public class ConectorDB {
          }
     	
     }
-    
+
+    /**Mètode per obtenir objectes de la BD
+     * @param query
+     * @return
+     */
     public ResultSet selectQuery(String query){
     	ResultSet rs = null;
     	 try {
@@ -92,7 +108,10 @@ public class ConectorDB {
          }
 		return rs;
     }
-    
+
+    /**
+     * Mètode per desconnectar-se de la BD
+     */
     public void disconnect(){
     	try {
 			conn.close();

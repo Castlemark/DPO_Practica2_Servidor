@@ -3,7 +3,8 @@ package Model;
 import java.io.Serializable;
 
 /**
- * Created by Marc on 10/05/2017.
+ * Classe que conté les dades per iniciar sessió
+ * Created by Grup 6 on 05/04/2017.
  */
 public class Inicia implements Serializable{
 

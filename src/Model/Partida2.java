@@ -11,16 +11,25 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
- * Created by Grup 6 on 20/06/2017.
+ * Classe de partida de 2 jugadors
+ * Created by Grup 6 on 10/05/2017.
  */
 public class Partida2 {
+
+    //Atributs
     private ArrayList<DedicatedServer> jugadors;
     private String[] logins = new String[2];
     private int[] puntuacions = new int[2];
     private String[] posicions = new String[2];
 
 
+    /**
+     * Mètode que crea una partida de 2 jugadors
+     * @param jugadors
+     * @throws IOException
+     */
     public Partida2(ArrayList<DedicatedServer> jugadors) throws IOException{
         this.jugadors = jugadors;
         jugadors.get(0).setPartida2(this);
@@ -37,6 +46,12 @@ public class Partida2 {
         }
     }
 
+    /**
+     * Mètode que envia la serp al client
+     * @param dir
+     * @param cap
+     * @param emisor
+     */
     public void enviaSerp(int dir, Posicio cap, Socket emisor) {
         try {
             int j=-1;
@@ -60,6 +75,10 @@ public class Partida2 {
         }
     }
 
+    /**
+     * Mètode que finalitza la partida quan un jugador ha mort i reparteix els punts
+     * @param emisor
+     */
     public void haMort(Socket emisor){
         try{
             int j=-1;
@@ -86,6 +105,9 @@ public class Partida2 {
         }
     }
 
+    /**
+     * Mètode que envia els punts al client quan ha finalitzat la partida
+     */
     public void fiPartida(){
 
         Model_usuari model_usuari = new Model_usuari();

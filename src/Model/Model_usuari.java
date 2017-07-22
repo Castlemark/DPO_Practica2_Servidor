@@ -203,6 +203,12 @@ public class Model_usuari {
         return resultats;
     }
 
+    /**
+     * Mètode que agafa les dades d'un usuari de la BD per mostrar-les a la vista de gestionar
+     * @param login
+     * @return String que conté el que s'ha de mostrar
+     * @throws SQLException
+     */
     public String recuperaDadesUsuari(String login) throws SQLException {
 
         String text = "";
@@ -230,6 +236,12 @@ public class Model_usuari {
         return text;
     }
 
+    /**
+     * Mètode que comprova si l'usuari existeix a la BD
+     * @param inicia
+     * @return Login de l'usuari
+     * @throws SQLException
+     */
     public String comprovaInicia(Inicia inicia) throws SQLException {
 
         ResultSet rs;
@@ -273,6 +285,11 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Mètode que selecciona tots els usuaris de la BD
+     * @return llista d'usuaris
+     * @throws SQLException
+     */
     public ArrayList<String> recuperaLogins() throws SQLException {
 
         ArrayList<String> list = new ArrayList<String>();
@@ -307,6 +324,11 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Mètode que actuaitza la puntuació d'un usuari
+     * @param login
+     * @param punts
+     */
     public void updatePuntuacio(String login, int punts){
 
         conn.connect();
@@ -319,6 +341,14 @@ public class Model_usuari {
         conn.disconnect();
     }
 
+    /**
+     * Mètode que actualitza els controls d'un usuari
+     * @param login
+     * @param up
+     * @param down
+     * @param left
+     * @param right
+     */
     public void actualitzaControls(String login, int up, int down, int left, int right ) {
         conn.connect();
         System.out.print("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'");
@@ -328,6 +358,12 @@ public class Model_usuari {
     }
 
 
+    /**
+     * Mètode que selecciona els punts d'un usuari de la BD
+     * @param login
+     * @return punts (int)
+     * @throws SQLException
+     */
     public int getPuntsUsuari (String login) throws  SQLException{
 
         int punts;
@@ -345,6 +381,12 @@ public class Model_usuari {
         return punts;
     }
 
+    /**
+     * Mètode que selecciona a la BD l'historial de punts d'un usuari
+     * @param login
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<Integer> getHistorial(String login) throws SQLException{
 
         ResultSet resultSet;
@@ -371,6 +413,11 @@ public class Model_usuari {
         return punts;
     }
 
+    /**
+     * Mètode que selecciona els 10 jugadors amb més punts de la BD
+     * @return String amb els 10 jugadors
+     * @throws SQLException
+     */
     public String getRanquing() throws SQLException{
 
         String ranquing = "Pos  -   Nom  -   Punts";
@@ -390,6 +437,12 @@ public class Model_usuari {
         return ranquing;
     }
 
+    /**
+     * Mètode que selecciona els controls de la BD d'un usuari
+     * @param login
+     * @return Array d'int amb els codis de les tecles
+     * @throws SQLException
+     */
     public int[] getControls (String login) throws  SQLException{
 
         int[] controls = new int[4];
@@ -412,6 +465,11 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Mètode que selecciona els usuaris en ordre de punts per mostrar-los al rànquing
+     * @return
+     * @throws SQLException
+     */
     public Object [][] ompleRanquing () throws SQLException {
         ResultSet rs;
         int i = 0;

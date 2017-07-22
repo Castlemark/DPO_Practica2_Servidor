@@ -65,7 +65,7 @@ public class Graphic extends JPanel {
     }
 
     /**
-     * Carga els logins de tots els usuaris.
+     * Carrega els logins de tots els usuaris.
      * @param logins logins registrats.
      */
     public void setLlistaLogin(ArrayList<String> logins){

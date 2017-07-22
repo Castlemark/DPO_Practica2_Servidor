@@ -14,6 +14,11 @@ public class Posicio implements Serializable {
         this.x = x;
         this.y = y;
     }
+
+    /**
+     * Mètode que mou el cap segons la direcció de laserp
+     * @param dir
+     */
     public void mouCap(int dir){
         switch (dir) {
             case 1:

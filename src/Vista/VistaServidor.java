@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class VistaServidor extends JFrame {
 
     //Atributs
-    private Color blau_cel = new Color(135, 206, 250);
+    private Color blauCel = new Color(135, 206, 250);
 
     private Configuracio config;
     private Registrar reg;
@@ -60,11 +60,11 @@ public class VistaServidor extends JFrame {
         jmRanquing = new JMenuItem("Ranquing");
         jmGrafic = new JMenuItem("Gràfic");
 
-        jmRegistrar.setBackground(blau_cel);
-        jmGestionar.setBackground(blau_cel);
-        jmConfiguracio.setBackground(blau_cel);
-        jmRanquing.setBackground(blau_cel);
-        jmGrafic.setBackground(blau_cel);
+        jmRegistrar.setBackground(blauCel);
+        jmGestionar.setBackground(blauCel);
+        jmConfiguracio.setBackground(blauCel);
+        jmRanquing.setBackground(blauCel);
+        jmGrafic.setBackground(blauCel);
 
         jmbbarraMenu.add(jmRegistrar);
         jmbbarraMenu.add(jmConfiguracio);
@@ -72,7 +72,7 @@ public class VistaServidor extends JFrame {
         jmbbarraMenu.add(jmRanquing);
         jmbbarraMenu.add(jmGrafic);
 
-        jmbbarraMenu.setBackground(blau_cel);
+        jmbbarraMenu.setBackground(blauCel);
         this.setJMenuBar(jmbbarraMenu);
 
         this.getContentPane().add("CONFIGURACIO", config);
@@ -153,7 +153,7 @@ public class VistaServidor extends JFrame {
 
     }
 
-    //pestaña grafics
+    //pestanya grafics
     public void grUupdateLoginList(ArrayList<String> logins){
         graf.setLlistaLogin(logins);
     }
