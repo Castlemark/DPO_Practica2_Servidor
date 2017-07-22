@@ -38,6 +38,7 @@ public class PartidaTorneig {
             jugadors.get(i).getDoStreamO().writeObject(logins);
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
+            jugadors.get(i).setJuga(true);
             System.out.println("comença " + jugadors.get(i).getLogin());
         }
         for(int i = 0; i < 4; i++){
@@ -219,7 +220,6 @@ public class PartidaTorneig {
                        if(posicions[i].equals("1r Has guanyat el torneig!")){
                            guanyador = i;
                        }
-
                    }
                    for (int i = 0; i < jugadors.size(); i++) {
 

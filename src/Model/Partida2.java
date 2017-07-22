@@ -32,6 +32,7 @@ public class Partida2 {
             jugadors.get(i).getDoStreamO().writeObject(logins);
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
+            jugadors.get(i).setJuga(true);
             System.out.println("comença " + jugadors.get(i).getLogin() + " amb la serp " + i);
         }
     }

@@ -34,6 +34,7 @@ public class Partida4 {
             jugadors.get(i).getDoStreamO().writeObject(logins);
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
+            jugadors.get(i).setJuga(true);
             System.out.println("comença " + jugadors.get(i).getLogin());
         }
         for(int i = 0; i < 4; i++){
@@ -67,21 +68,22 @@ public class Partida4 {
         }
     }
 
-    public void haMort(Socket emisor){
+    public void haMort(int mort){
         try{
-            int j=-1;
+            /*int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
                 if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
                 }
-            }
+            }*/
             morts++;
             for (int i = 0; i < jugadors.size(); i++) {
 
-                if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
+                if (jugadors.get(i) != null && i != mort) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
-                    jugadors.get(i).getDoStreamO().writeObject(j);
+                    jugadors.get(i).getDoStreamO().writeObject(mort);
                     System.out.println("Han mort " + morts);
+                }else if(i == mort){
                     switch (morts){
                         case 1:
                             posicions[i] = "4t";
@@ -105,6 +107,7 @@ public class Partida4 {
                     for (int i = 0; i < jugadors.size() && ok; i++) {
                         if (jugadors.get(i) != null) {
                             ok = false;
+                            System.out.println("Redistribueix " + jugadors.get(i).getLogin());
                             jugadors.get(i).acabaPartida4();
                         }
                     }
@@ -128,6 +131,7 @@ public class Partida4 {
             }
             for (int i = 0; i < jugadors.size(); i++) {
                 if(jugadors.get(i) != null){
+
                     model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                     jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                     jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
@@ -159,6 +163,10 @@ public class Partida4 {
 
     public boolean isAbandona() {
         return abandona;
+    }
+
+    public int getMorts() {
+        return morts;
     }
 }
 
