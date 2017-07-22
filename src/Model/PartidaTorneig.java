@@ -273,6 +273,7 @@ public class PartidaTorneig {
                         puntuacions[i] = 20;
                         eliminats[i] = false;
                 }
+
                 ronda = 1;
                 break;
         }
