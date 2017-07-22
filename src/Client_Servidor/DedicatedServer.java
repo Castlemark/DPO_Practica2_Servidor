@@ -165,9 +165,13 @@ public class DedicatedServer extends Thread{
                            partida2 = null;
                        }
                        else if (partida4 != null){
-                           partida4.haMort(sClient);
                            gPartides.gestionaAbandona(this,4);
                            partida4 = null;
+                       }
+                       else {
+                           gPartides.gestionaAbandona(this, 0);
+                           partidaTorneig.haMort(sClient);
+                           partidaTorneig.seguentRonda();
                        }
 
                        doStreamO.writeObject("RANQUING");
@@ -181,17 +185,6 @@ public class DedicatedServer extends Thread{
            }
 
        }catch (IOException e){
-           if (partida2 != null){
-               try{
-                   Model_usuari model = new Model_usuari();
-                   model.updatePuntuacio(login, -10);
-                   gPartides.gestionaAbandona(this,2);
-                   partida2 = null;
-               }catch(IOException ex){
-
-               }
-
-           }
            dedicatedServers.remove(this);
        }catch (SQLException e){
            e.printStackTrace();
@@ -259,8 +252,16 @@ public class DedicatedServer extends Thread{
     public void acabaPartida4(){
         try{
             gPartides.acabaPartida4(this);
-        }catch (IOException ex){
-            ex.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void acabaPartidaTorneig(){
+        try{
+            gPartides.acabaPartidaTorneig(this);
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

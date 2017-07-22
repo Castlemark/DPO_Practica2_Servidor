@@ -379,7 +379,6 @@ public class Model_usuari {
         }
 
         conn.disconnect();
-        System.out.println(ranquing);
         return ranquing;
     }
 

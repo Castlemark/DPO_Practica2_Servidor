@@ -53,13 +53,13 @@ public class PartidaTorneig {
         try {
             int j=-1;
             for (int i = 0; i < jugadors.size(); i++) {
-                if (jugadors.get(i).getsClient() == emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() == emisor) {
                     j = i;
                 }
             }
             for (int i = 0; i < jugadors.size(); i++) {
 
-                if (jugadors.get(i).getsClient() != emisor) {
+                if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                     System.out.println("enviant a" + jugadors.get(i).getLogin());
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
@@ -86,7 +86,7 @@ public class PartidaTorneig {
                     morts++;
                     for (int i = 0; i < jugadors.size(); i++) {
 
-                        if (jugadors.get(i).getsClient() != emisor) {
+                        if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                             jugadors.get(i).getDoStreamO().writeObject("MORT");
                             jugadors.get(i).getDoStreamO().writeObject(j);
                             System.out.println("Han mort " + morts);
@@ -116,7 +116,7 @@ public class PartidaTorneig {
                     morts++;
                     for (int i = 0; i < jugadors.size(); i++) {
 
-                        if (jugadors.get(i).getsClient() != emisor) {
+                        if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                             jugadors.get(i).getDoStreamO().writeObject("MORT");
                             jugadors.get(i).getDoStreamO().writeObject(j);
                             System.out.println("Han mort " + morts);
@@ -143,7 +143,7 @@ public class PartidaTorneig {
                     for (int i = 0; i < jugadors.size(); i++) {
 
 
-                        if (jugadors.get(i).getsClient() != emisor) {
+                        if (jugadors.get(i) != null && jugadors.get(i).getsClient() != emisor) {
                             jugadors.get(i).getDoStreamO().writeObject("MORT");
                             jugadors.get(i).getDoStreamO().writeObject(j);
                             System.out.println("Han mort " + morts);
@@ -180,25 +180,30 @@ public class PartidaTorneig {
 
 
                    for (int i = 0; i < jugadors.size(); i++) {
-                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
-                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
-                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
+
+                       if (jugadors.get(i) != null){
+                           jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                           jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                           jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                       }
                    }
                    seguentRonda();
                    break;
                case 2:
 
                    for (int i = 0; i < jugadors.size(); i++) {
-                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
-                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
-                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
 
+                       if (jugadors.get(i) != null){
+                           jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                           jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                           jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                       }
                    }
                    int num = 0;
                    for(int k = 0; k < eliminats.length; k++){
@@ -217,14 +222,17 @@ public class PartidaTorneig {
 
                    }
                    for (int i = 0; i < jugadors.size(); i++) {
-                       model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject("PUNTS");
-                       jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                       jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
-                       jugadors.get(i).getDoStreamO().writeObject(guanyador);
-                       jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
-                       jugadors.get(i).getDoStreamO().writeObject(eliminat);
+
+                       if (jugadors.get(i) != null){
+                           model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject("PUNTS");
+                           jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
+                           jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
+                           jugadors.get(i).getDoStreamO().writeObject(guanyador);
+                           jugadors.get(i).getDoStreamO().writeObject("ELIMINAT");
+                           jugadors.get(i).getDoStreamO().writeObject(eliminat);
+                       }
                    }
                    seguentRonda();
                    break;

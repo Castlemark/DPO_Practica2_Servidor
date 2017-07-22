@@ -96,7 +96,7 @@ public class GestionarPartides {
     public void gestionaAbandona(DedicatedServer d, int tipuscua) throws IOException {
         boolean conte;
         ArrayList<DedicatedServer> aux = new ArrayList<>();
-        System.out.println("Entra un cop");
+
         if (tipuscua == 2) {
 
             for (int i = 0; i < cua2.size(); i++) {
@@ -159,31 +159,13 @@ public class GestionarPartides {
 
         } else {
 
-            for (int i = 0; i < cuaTorneig.size(); i++) {
 
-                if (cuaTorneig.get(i).contains(d)) {
 
-                    System.out.println("tamany: " + cuaTorneig.size());
-
-                    for (int j = 0; j < cuaTorneig.get(i).size(); j++) {
-                        aux.add(cuaTorneig.get(i).get(j));
-                    }
-                    cuaTorneig.remove(i);
-
-                    System.out.println("tamany: " + cuaTorneig.size());
-
-                    aux.remove(d);
-                }
-            }
-
-            for (int i = 0; i < aux.size(); i++) {
-                addCampeonat(aux.get(i));
-                System.out.println(aux.get(i).getLogin() + " afegit a una nova cua");
-            }
         }
     }
 
     public void acabaPartida4(DedicatedServer d) throws IOException {
+
         ArrayList<DedicatedServer> aux = new ArrayList<>();
 
         for (int i = 0; i < cua4.size(); i++) {
@@ -205,4 +187,30 @@ public class GestionarPartides {
         }
     }
 
+    public void acabaPartidaTorneig(DedicatedServer d) throws IOException{
+
+        ArrayList<DedicatedServer> aux = new ArrayList<>();
+
+        for (int i = 0; i < cuaTorneig.size(); i++) {
+
+            if (cuaTorneig.get(i).contains(d)) {
+
+                System.out.println("tamany: " + cuaTorneig.size());
+
+                for (int j = 0; j < cuaTorneig.get(i).size(); j++) {
+                    aux.add(cuaTorneig.get(i).get(j));
+                }
+                cuaTorneig.remove(i);
+
+                System.out.println("tamany: " + cuaTorneig.size());
+
+                aux.remove(d);
+            }
+        }
+
+        for (int i = 0; i < aux.size(); i++) {
+            addCampeonat(aux.get(i));
+            System.out.println(aux.get(i).getLogin() + " afegit a una nova cua");
+        }
+    }
 }
