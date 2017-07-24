@@ -19,7 +19,14 @@ public class ConectorDB {
 	static String url;
 	static Connection conn = null;
 	static Statement s;
-    
+
+    /**
+     * Constructor
+     * @param usr
+     * @param pass
+     * @param db
+     * @param port
+     */
 	public ConectorDB(String usr, String pass, String db, int port) {
 		ConectorDB.userName = usr;
 		ConectorDB.password = pass;
@@ -37,15 +44,12 @@ public class ConectorDB {
             Class.forName("com.mysql.jdbc.Connection");
             conn = (Connection) DriverManager.getConnection(url, userName, password);
             if (conn != null) {
-                System.out.println("Conexió a base de dades "+url+" ... Ok");
             }
         }
         catch(SQLException ex) {
-            System.out.println(ex.getMessage());
-            System.out.println("Problema al connecta-nos a la BBDD --> "+url);
+
         }
         catch(ClassNotFoundException ex) {
-            System.out.println(ex);
         }
 
     }
@@ -60,7 +64,6 @@ public class ConectorDB {
             s.executeUpdate(query);
 
         } catch (SQLException ex) {
-            System.out.println("Problema al Inserir --> " + ex.getSQLState());
         }
     }
 
@@ -73,7 +76,6 @@ public class ConectorDB {
              s.executeUpdate(query);
 
          } catch (SQLException ex) {
-             System.out.println("Problema al Modificar --> " + ex.getSQLState());
          }
     }
 
@@ -88,7 +90,6 @@ public class ConectorDB {
              s.executeUpdate(query);
              
          } catch (SQLException ex) {
-             System.out.println("Problema al Eliminar --> " + ex.getSQLState());
          }
     	
     }
@@ -104,7 +105,6 @@ public class ConectorDB {
              rs = s.executeQuery (query);
              
          } catch (SQLException ex) {
-             System.out.println("Problema al Recuperar les dades --> " + ex.getSQLState());
          }
 		return rs;
     }
@@ -116,7 +116,6 @@ public class ConectorDB {
     	try {
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("Problema al tancar la connexi� --> " + e.getSQLState());
 		}
     }
 

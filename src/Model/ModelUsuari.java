@@ -3,8 +3,6 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 
 import Model.utils.ConectorDB;
 
@@ -13,17 +11,14 @@ import Model.utils.ConectorDB;
  *
  * Created by Grup 6 on 05/04/2017.
  */
-public class Model_usuari {
-    private String login;
-    private String mail;
-    private String password;
+public class ModelUsuari {
 
-    private ConectorDB conn = new ConectorDB("root", "miauMia1", "troner", 3306);
+    private ConectorDB conn;
 
     /**
      * Constructor de la classe
      */
-    public Model_usuari(){
+    public ModelUsuari(){
 
         Arxiu arxiu = new Arxiu();
         arxiu = arxiu.llegeixDades();
@@ -135,7 +130,6 @@ public class Model_usuari {
 
         ResultSet rs;
         rs = recuperaUsuaris();
-        System.out.println("recuperat");
 
         while (rs.next()) {
             id_jugador = rs.getLong(1);
@@ -165,8 +159,6 @@ public class Model_usuari {
 
         if (comprovaDadesInsercio(nomUsuari, correu, contrasenya) && comprovaDadesFormat(nomUsuari, correu, contrasenya, contrasenya2)) {
 
-            System.out.println("inserint");
-            System.out.println("INSERT INTO usuari (login, mail, contrasenya,  punts, data_registre, data_ultimacces ,up , down, left, right) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE(), 87, 83, 65, 68" + ")");
             conn.insertQuery("INSERT INTO usuari (login, mail, contrasenya,  punts, data_registre, data_ultimacces ,tecla_up , tecla_down, tecla_left, tecla_right) VALUES (" + "'" + nomUsuari + "'" + "," + "'" + correu + "'" + "," + "'" + contrasenya + "'" + "," + "0, CURDATE(), CURDATE(), 87, 83, 65, 68" + ")");
 
 
@@ -179,11 +171,14 @@ public class Model_usuari {
 
     }
 
+    /**
+     * Métode que actualitza la data de l'últim accès
+     * @param login
+     */
     public void actualitzaData(String login){
 
         conn.connect();
 
-        System.out.println("UPDATE usuari SET data_ultimacces = " + "CURDATE() WHERE login = '" + login +"';");
         conn.updateQuery("UPDATE usuari SET data_ultimacces = " + "CURDATE() WHERE login = '" + login +"';" );
 
         conn.disconnect();
@@ -252,9 +247,8 @@ public class Model_usuari {
         if (inicia.getOpcio() == 1) {
 
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
-            System.out.println("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE login =" + "'" + inicia.getNom() + "'");
             if (!rs.next()) {
-                return "error a Model_usuari.comprovaInicia";
+                return "error a ModelUsuari.comprovaInicia";
             }
             login = rs.getString(2);
 
@@ -265,10 +259,9 @@ public class Model_usuari {
             }
 
             conn.disconnect();
-            return "error a Model_usuari.comprovaInicia";
+            return "error a ModelUsuari.comprovaInicia";
         } else {
 
-            System.out.println("Hola opcio2");
             rs = conn.selectQuery("SELECT id_jugador, login, mail, contrasenya, punts, data_registre, data_ultimacces FROM usuari WHERE mail =" + "'" + inicia.getNom() + "'");
             rs.next();
             login = rs.getString(2);
@@ -280,7 +273,7 @@ public class Model_usuari {
             }
 
             conn.disconnect();
-            return "error a Model_usuari.comprovaInicia";
+            return "error a ModelUsuari.comprovaInicia";
         }
 
     }
@@ -317,7 +310,7 @@ public class Model_usuari {
     public void eliminaUsuari(String nomUsuari) throws SQLException {
         conn.connect();
 
-        System.out.println("DELETE FROM usuari WHERE login =" + "'" + nomUsuari + "'");
+        conn.deleteQuery("DELETE FROM puntuacio WHERE id_jugador = (SELECT id_jugador FROM usuari WHERE login='" + nomUsuari + "')");
         conn.deleteQuery("DELETE FROM usuari WHERE login =" + "'" + nomUsuari + "'");
 
         conn.disconnect();
@@ -333,9 +326,7 @@ public class Model_usuari {
 
         conn.connect();
 
-        System.out.println("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
         conn.updateQuery("UPDATE usuari SET punts = punts + " + punts + " WHERE login = '" + login + "';");
-        System.out.println("INSERT INTO puntuacio(id_jugador, puntuacio) VALUES ((SELECT id_jugador FROM Usuari WHERE login = '"+ login + "'), " + punts + ");");
         conn.insertQuery("INSERT INTO puntuacio(id_jugador, puntuacio) VALUES ((SELECT id_jugador FROM Usuari WHERE login = '"+ login + "'), " + punts + ");");
 
         conn.disconnect();
@@ -351,7 +342,6 @@ public class Model_usuari {
      */
     public void actualitzaControls(String login, int up, int down, int left, int right ) {
         conn.connect();
-        System.out.print("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'");
         conn.updateQuery("UPDATE usuari SET tecla_up =" + up + ", tecla_down = " + down + ", tecla_left =" + left + ", tecla_right = " + right + " WHERE login =" + "'" + login + "'"); //Shan d'actualitzar els controls
         conn.disconnect();
 
@@ -397,7 +387,6 @@ public class Model_usuari {
 
         conn.connect();
 
-        System.out.println("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
         resultSet = conn.selectQuery("SELECT id_puntuacio, puntuacio FROM puntuacio WHERE puntuacio.id_jugador = (SELECT id_jugador FROM Usuari WHERE login = '" + login + "') ORDER BY id_puntuacio ASC");
 
         punts.add(0); //Inicialitzem partida 0
@@ -467,7 +456,7 @@ public class Model_usuari {
 
     /**
      * Mètode que selecciona els usuaris en ordre de punts per mostrar-los al rànquing
-     * @return
+     * @return usuaris en ordre de punts
      * @throws SQLException
      */
     public Object [][] ompleRanquing () throws SQLException {

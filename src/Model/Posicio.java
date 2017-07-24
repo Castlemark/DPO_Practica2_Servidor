@@ -10,6 +10,12 @@ import java.io.Serializable;
 public class Posicio implements Serializable {
     private int x;
     private int y;
+
+    /**
+     * Constructor
+     * @param x
+     * @param y
+     */
     public Posicio(int x, int y){
         this.x = x;
         this.y = y;

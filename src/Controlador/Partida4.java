@@ -1,6 +1,8 @@
-package Model;
+package Controlador;
 
 import Client_Servidor.DedicatedServer;
+import Model.ModelUsuari;
+import Model.Posicio;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -20,7 +22,7 @@ public class Partida4 {
     private boolean abandona;
 
     /**
-     * Mètode que crea una partida de 4 jugadors
+     * Constructor que crea una partida de 4 jugadors
      * @param jugadors
      * @throws IOException
      */
@@ -41,7 +43,6 @@ public class Partida4 {
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
             jugadors.get(i).setJuga(true);
-            System.out.println("comença " + jugadors.get(i).getLogin());
         }
         for(int i = 0; i < 4; i++){
             posicions[i] = "1r";
@@ -67,7 +68,6 @@ public class Partida4 {
             for (int i = 0; i < jugadors.size(); i++) {
 
                 if (jugadors.get(i) != null &&jugadors.get(i).getsClient() != emisor) {
-                    System.out.println("enviant a" + jugadors.get(i).getLogin());
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     jugadors.get(i).getDoStreamO().writeObject(dir);
@@ -97,7 +97,6 @@ public class Partida4 {
                 if (jugadors.get(i) != null && i != mort) {
                     jugadors.get(i).getDoStreamO().writeObject("MORT");
                     jugadors.get(i).getDoStreamO().writeObject(mort);
-                    System.out.println("Han mort " + morts);
                 }else if(i == mort){
                     switch (morts){
                         case 1:
@@ -122,7 +121,6 @@ public class Partida4 {
                     for (int i = 0; i < jugadors.size() && ok; i++) {
                         if (jugadors.get(i) != null) {
                             ok = false;
-                            System.out.println("Redistribueix " + jugadors.get(i).getLogin());
                             jugadors.get(i).acabaPartida4();
                         }
                     }
@@ -138,7 +136,7 @@ public class Partida4 {
      */
     public void fiPartida() {
 
-        Model_usuari model_usuari = new Model_usuari();
+        ModelUsuari modelUsuari = new ModelUsuari();
 
         try {
             int guanyador = -1;
@@ -149,11 +147,11 @@ public class Partida4 {
             }
             for (int i = 0; i < jugadors.size(); i++) {
                 if(jugadors.get(i) != null){
-                    model_usuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
+                    modelUsuari.updatePuntuacio(jugadors.get(i).getLogin(), puntuacions[i]);
                     jugadors.get(i).getDoStreamO().writeObject("PUNTS");
                     jugadors.get(i).getDoStreamO().writeObject(posicions[i]);
                     jugadors.get(i).getDoStreamO().writeObject(puntuacions[i]);
-                    jugadors.get(i).getDoStreamO().writeObject(model_usuari.getPuntsUsuari(jugadors.get(i).getLogin()));
+                    jugadors.get(i).getDoStreamO().writeObject(modelUsuari.getPuntsUsuari(jugadors.get(i).getLogin()));
                     jugadors.get(i).getDoStreamO().writeObject(guanyador);
                 }
 
@@ -166,6 +164,9 @@ public class Partida4 {
         }
     }
 
+    /**
+     * Mètpde que reinicia els paràmetres de la partida
+     */
     public void reinicia(){
         morts = 0;
         for(int i = 0; i < 4; i++){
@@ -178,12 +179,12 @@ public class Partida4 {
         this.abandona = abandona;
     }
 
-    public boolean isAbandona() {
-        return abandona;
-    }
-
     public int getMorts() {
         return morts;
+    }
+
+    public String[] getPosicions() {
+        return posicions;
     }
 }
 

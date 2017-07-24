@@ -21,7 +21,9 @@ public class Ranquing extends JPanel {
     private int rows;
     private JScrollPane jsRanquing;
 
-    //Constructor
+    /**
+     * Constructor
+     */
     public Ranquing () {
 
         this.setSize (350, 200);

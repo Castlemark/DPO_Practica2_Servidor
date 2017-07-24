@@ -1,7 +1,6 @@
 package Vista;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -22,7 +21,9 @@ public class Configuracio extends JPanel {
     private JButton jbIniciar;
     private JButton jbAturar;
 
-    //Constructors
+    /**
+     * Constructor
+     */
     public Configuracio () {
 
         this.setSize (350,350);

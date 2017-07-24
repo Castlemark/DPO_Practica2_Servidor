@@ -29,7 +29,10 @@ public class GraficUsuari extends JPanel {
     private int divisions = 0;
     private List<Integer> punts;
 
-    //Constructors
+    /**
+     * Constructor
+     * @param punts
+     */
     public GraficUsuari(List<Integer> punts) {
         this.punts = punts;
     }

@@ -24,7 +24,9 @@ public class TableRanquing extends DefaultTableModel {
     // Les dades que es mostraran a la taula, una llista d'objectes de tipus Object
     private Object[][] dades;
 
-    //Constructor
+    /**
+     * Constructor
+      */
     public TableRanquing(){
         dades = new Object[0][4];
     }

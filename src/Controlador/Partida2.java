@@ -1,12 +1,10 @@
-package Model;
+package Controlador;
 
 import Client_Servidor.DedicatedServer;
-import Controlador.ThreadClient;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import Model.ModelUsuari;
+import Model.Posicio;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class Partida2 {
 
 
     /**
-     * Mètode que crea una partida de 2 jugadors
+     * Constructor que crea una partida de 2 jugadors
      * @param jugadors
      * @throws IOException
      */
@@ -42,7 +40,6 @@ public class Partida2 {
             jugadors.get(i).getDoStreamO().writeObject(jugadors.get(i).getNum());
             jugadors.get(i).getDoStreamO().writeObject("COMENÇA");
             jugadors.get(i).setJuga(true);
-            System.out.println("comença " + jugadors.get(i).getLogin() + " amb la serp " + i);
         }
     }
 
@@ -63,7 +60,6 @@ public class Partida2 {
             for (int i = 0; i < jugadors.size(); i++) {
 
                 if (jugadors.get(i).getsClient() != emisor) {
-                    System.out.println("enviant a" + jugadors.get(i).getLogin() + " amb serp " + i);
                     jugadors.get(i).getDoStreamO().writeObject("MOU");
                     jugadors.get(i).getDoStreamO().writeObject(j);
                     jugadors.get(i).getDoStreamO().writeObject(dir);
@@ -110,7 +106,7 @@ public class Partida2 {
      */
     public void fiPartida(){
 
-        Model_usuari model_usuari = new Model_usuari();
+        ModelUsuari model_usuari = new ModelUsuari();
 
         try{
             int guanyador = -1;

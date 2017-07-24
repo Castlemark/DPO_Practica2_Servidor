@@ -31,7 +31,9 @@ public class Gest extends JPanel {
     private JPanel hSpacer2;
     private JButton button1;
 
-
+    /**
+     * Constructor
+     */
     public Gest() {
 
         label6 = new JLabel();
@@ -97,14 +99,13 @@ public class Gest extends JPanel {
 
     }
 
-
-
-
-
-
     private void button1ActionPerformed(ActionEvent e) {
     }
 
+    /**
+     * Registra el controlador
+     * @param c
+     */
     public void registerController(Controlador c){
         button1.setActionCommand("ELIMINA");
         comboBox1.setActionCommand("TRIA");

@@ -1,7 +1,7 @@
 package Controlador;
 
 import Client_Servidor.Server;
-import Model.Model_usuari;
+import Model.ModelUsuari;
 import Vista.VistaServidor;
 
 import javax.swing.*;
@@ -21,13 +21,18 @@ public class Controlador implements ActionListener{
 
     //Atributs
     private VistaServidor vista;
-    private Model_usuari model;
+    private ModelUsuari model;
     private Server server;
     private final GestionarPartides gPartides;
     private boolean connectat = false;
 
-    //Constructor
-    public Controlador(VistaServidor vista, Model_usuari model) throws IOException{
+    /**
+     * Constructor
+     * @param vista
+     * @param model
+     * @throws IOException
+     */
+    public Controlador(VistaServidor vista, ModelUsuari model) throws IOException{
 
         this.vista = vista;
         this.model = model;
@@ -40,53 +45,50 @@ public class Controlador implements ActionListener{
     }
 
     //Metodes
+
+    /**
+     * Mètode que s'activa quan s'ha fet alguna acció en un Listener
+     * @param event
+     */
     @Override
     public void actionPerformed(ActionEvent event){
 
         try {
-
-            if (event.getSource() instanceof JMenuItem){
-
-                if (event.getActionCommand().equals("GEST")){
+            switch (event.getActionCommand()){
+                case "GEST":
                     vista.gsUpdateList(model.recuperaLogins());
                     vista.changePanel(event.getActionCommand());
+                    break;
 
-
-                }
-                else if (event.getActionCommand().equals("GRAFIC")){
+                case "GRAFIC":
                     vista.grUupdateLoginList(model.recuperaLogins());
                     vista.changePanel(event.getActionCommand());
-                }
-                else if (event.getActionCommand().equals("RANQUING")){
-                        vista.rankingUpdateList(model.ompleRanquing());
-                        vista.changePanel(event.getActionCommand());
+                    break;
 
-
-                }
-                else {
+                case "RANQUING":
+                    vista.rankingUpdateList(model.ompleRanquing());
                     vista.changePanel(event.getActionCommand());
-                }
+                    break;
 
-            }
-            else if (event.getSource() instanceof JButton){
-
-                if (event.getActionCommand().equals("REGISTRAR BOTO")){
+                case "REGISTRAR BOTO":
                     vista.showMessage(model.registraUsuari(vista.getLogin(), vista.getMail(), vista.getPassword(), vista.getPassword2()));
+                    break;
 
-                }
-                else if (event.getActionCommand().equals("ELIMINA")){
+                case "ELIMINA":
                     model.eliminaUsuari(vista.gsGetSelectedLogin());
                     vista.gsUpdateList(model.recuperaLogins());
-                }
-                else if (event.getActionCommand().equals("INICIAR")){
+                    break;
+
+                case "INICIAR":
                     if (!connectat){
                         server.startServer();
                         connectat = true;
                     }
                     Arxiu arxiu = new Arxiu();
                     arxiu.escriuPort(vista.getPort());
-                }
-                else if (event.getActionCommand().equals("ATURAR")){
+                    break;
+
+                case "ATURAR":
                     if (connectat){
 
                         connectat = false;
@@ -94,15 +96,13 @@ public class Controlador implements ActionListener{
                         server.getsSocket().close();
                         server = new Server(vista.getPort(), gPartides);
                     }
-                }
+                    break;
 
-            }
-            else if (event.getSource() instanceof JComboBox){
-
-                if (event.getActionCommand().equals("TRIA")){
+                case "TRIA":
                     vista.gsUpdateInfo(model.recuperaDadesUsuari(vista.gsGetSelectedLogin()));
-                } else if (event.getActionCommand().equals("LOGIN")) {
-                    System.out.println("login "+ vista.getGraficLogin());
+                    break;
+
+                case "LOGIN":
                     ArrayList<Integer> punts = model.getHistorial(vista.getGraficLogin());
 
                     if (punts.size() != 1) {
@@ -111,7 +111,11 @@ public class Controlador implements ActionListener{
                     else {
                         JOptionPane.showMessageDialog(null, "Aquest jugador no ha jugat cap partida!");
                     }
-                }
+                    break;
+
+                default:
+                    vista.changePanel(event.getActionCommand());
+                    break;
             }
 
         }

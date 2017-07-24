@@ -22,7 +22,9 @@ public class Graphic extends JPanel {
     private JComboBox jcLogin;
     private GraficUsuari gu;
 
-    //Constructors
+    /**
+     * Constructor
+     */
     public Graphic() {
 
         this.setSize (350,350);

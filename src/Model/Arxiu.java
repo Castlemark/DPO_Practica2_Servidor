@@ -8,8 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 
-
-
 /**
  * Classe encarregada de guardar la configuracio en un json
  * Created by Grup 6 on 10/05/2017.
@@ -134,7 +132,6 @@ public class Arxiu {
             System.err.println("Hi ha hagut un problema escrivint al fitxer config.json");
 
         }
-        System.out.println("S'ha guardat el arxiu");
 
     }
 

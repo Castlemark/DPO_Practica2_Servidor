@@ -4,11 +4,7 @@ import Controlador.Controlador;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.FileSystemLoopException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 /**
  * Classe de la vista del menú principal del servidor
@@ -106,6 +102,11 @@ public class VistaServidor extends JFrame {
     }
 
     //Metodes
+
+    /**
+     * Mètode que canvia el panel en funció del que volguem veure
+     * @param which
+     */
     public void changePanel(String which){
         layout.show(this.getContentPane(), which);
     }
@@ -162,6 +163,10 @@ public class VistaServidor extends JFrame {
         return graf.getLogin();
     }
 
+    /**
+     * Métode que crida a crear el gràfic
+     * @param dades
+     */
     public void creaGrafic(ArrayList<Integer> dades){
         graf.creaGrafic(dades);
     }
@@ -181,12 +186,20 @@ public class VistaServidor extends JFrame {
         return gs.getSelectedLogin();
     }
 
+    /**
+     * Métode que actualitza el port
+     * @param port
+     */
     public void actualitzaPort(int port){
         config.actualitzaPort(port);
     }
 
     //ranqing
 
+    /**
+     * Actualitza el rànquing
+     * @param data
+     */
     public  void rankingUpdateList(Object[][] data){
         rank.updateList(data);
     }

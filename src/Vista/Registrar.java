@@ -30,7 +30,9 @@ public class Registrar extends JPanel {
     private JTextField jtMail;
     private JButton jbRegistrar;
 
-    //Constructor
+    /**
+     * Constructor
+      */
     public Registrar () {
 
         this.setSize (350, 350);

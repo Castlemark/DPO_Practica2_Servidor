@@ -14,6 +14,10 @@ public class Serp implements Serializable{
     private Posicio cap;
     private int dir = 1;
 
+    /**
+     * Constructor que crea la serp en funció de quin número tingui
+     * @param i
+     */
     public Serp(int i){
         posicions = new ArrayList<>();
         switch (i){
@@ -67,7 +71,6 @@ public class Serp implements Serializable{
             dir = 4;
             posicions.add(new Posicio(cap.getX(), cap.getY()));
         }
-        System.out.println("canvia direccio");
     }
     /**
      * Getter de la posició

@@ -1,21 +1,14 @@
 package Controlador;
 
-import Client_Servidor.Server;
-import Model.Arxiu;
-import Model.Model_usuari;
+import Model.ModelUsuari;
 
 import java.net.InetAddress;
-import java.sql.SQLException;
 
 import Vista.*;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import javax.swing.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
-import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
@@ -35,7 +28,7 @@ public class Main {
 
                    VistaServidor vista = new VistaServidor();
                    System.out.println(InetAddress.getLocalHost());
-                   Model_usuari model = new Model_usuari();
+                   ModelUsuari model = new ModelUsuari();
                    Controlador controlador = new Controlador(vista, model);
 
 

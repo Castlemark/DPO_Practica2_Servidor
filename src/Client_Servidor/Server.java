@@ -2,15 +2,10 @@ package Client_Servidor;
 
 import Controlador.GestionarPartides;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Classe del thread general per establir connexió
@@ -31,6 +26,11 @@ public class Server extends Thread{
 
     //Mètodes
 
+    /**
+     * Constructor
+     * @param port
+     * @param gestionarPartides
+     */
     public Server (int port, GestionarPartides gestionarPartides){
         this.port = port;
         this.gestionarPartides = gestionarPartides;
@@ -44,11 +44,13 @@ public class Server extends Thread{
     public void startServer () throws IOException{
 
         sSocket = new ServerSocket(11111);
-        System.out.println("servidor conectat");
         running = true;
         start();
     }
 
+    /**
+     * Mètode que atura el servidor
+     */
     public void stopServer(){
         running = false;
     }
@@ -69,7 +71,6 @@ public class Server extends Thread{
             dedicatedServers.add(dServer);
 
         }catch (IOException e){
-            System.out.println("Servidor aturat");
         }
     }
 
