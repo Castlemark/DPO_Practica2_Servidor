@@ -2,7 +2,7 @@
 
 Proyecto de creación de una versión online del juego Troner, inspirado por la pelicula Tron.
 
-Este el el servidor del juego, se encarga de gestionar los usuarios, ranquings i demastares de administrador.
+Este el el servidor del juego, se encarga de gestionar los usuarios, ranquings i demas tareas de administrador.
 
 Permite crear eliminar y modificar usuarios.
 
